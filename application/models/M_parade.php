@@ -62,22 +62,5 @@ public function delete($id=''){
   return $this->db-> delete($this->table1);
 }
 
-//nilai kriteria parade
-public function NilaiKriteria($total)
-{
-  // Logika perhitungan nilai kriteria
-  if ($total >= 77 && $total <= 90) {
-  $nilai = 3;
-   } elseif ($total >= 74 && $total <= 76) {
-    $nilai = 2;
-      } elseif ($total >= 70 && $total <= 73) {
-      $nilai = 1;
-        } else {
-         $nilai = 0; // Nilai default jika berat badan tidak masuk ke dalam rentang yang ditentukan
-          }
-
-          return $nilai;
-      }
-
 
 }

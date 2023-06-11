@@ -118,7 +118,7 @@ if($aksi == "lihat"):
                         <?= $total ?>
                     </td>
                     <td>
-                        <?= $kriteria = $this->m_pbb->NilaiKriteria($total) ?>
+                        <?= $kriteria = $this->m_kriteria->NilaiKriteriaPBB($total) ?>
                         <input type="hidden" name="id_peserta[]" value="<?= $nilai['id_peserta'] ?>">
                         <input type="hidden" name="hasil[]" value="<?= $total ?>">
                         <input type="hidden" name="nilai_kriteria[]" value="<?= $kriteria ?>">

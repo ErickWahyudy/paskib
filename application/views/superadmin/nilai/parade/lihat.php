@@ -133,7 +133,7 @@ if($aksi == "lihat"):
                         <?= $total ?>
                     </td>
                     <td>
-                        <?= $kriteria = $this->m_parade->NilaiKriteria($total) ?>
+                        <?= $kriteria = $this->m_kriteria->NilaiKriteriaParade($total) ?>
                         <input type="hidden" name="id_peserta[]" value="<?= $nilai['id_peserta'] ?>">
                         <input type="hidden" name="hasil[]" value="<?= $total ?>">
                         <input type="hidden" name="nilai_kriteria[]" value="<?= $kriteria ?>">

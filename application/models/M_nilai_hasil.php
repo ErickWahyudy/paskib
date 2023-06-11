@@ -24,6 +24,13 @@ public function view_nilai($id_peserta='')
   return $this->db->get();
 }
 
+public function view_nilaihasil()
+{
+  $this->db->select('*');
+  $this->db->from($this->table1);
+  return $this->db->get();
+}
+
 
 public function view_peserta()
 {

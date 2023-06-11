@@ -100,7 +100,7 @@
                             <tr>
                                 <td>
                                     <input type="number" name="bobot" value="<?= $kriteria['bobot'] ?>"
-                                        class="form-control" autocomplete="off" required="">
+                                        class="form-control" autocomplete="off" required="" min="1" max="100">
                                 </td>
                             </tr>
                             <tr>

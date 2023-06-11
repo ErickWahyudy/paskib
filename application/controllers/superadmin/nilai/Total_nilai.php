@@ -22,6 +22,7 @@ class Total_nilai extends CI_controller
    $this->load->model('m_pengguna');
    $this->load->model('m_kriteria');
    $this->load->model('m_nilai_hasil');
+   $this->load->model('m_moora');
    $this->load->model('m_pengaturan');
 	}
 
@@ -31,18 +32,65 @@ class Total_nilai extends CI_controller
       $peserta      = $this->m_nilai_hasil->view_peserta()->result_array();
       $nilai        = $this->m_nilai_hasil->view_nilai()->result_array();
       $kriteria     = $this->m_nilai_hasil->view_kriteria()->result_array();
+      
+        //Perhitungan Moora
+        $criteria = $this->m_kriteria->view()->result_array();
+        $criteria = array_column($criteria, 'kriteria'); // Menggunakan kolom kriteria sebagai kriteria
+        $weights = $this->m_kriteria->view()->result_array();
+        $weights = array_column($weights, 'bobot'); // Menggunakan kolom bobot sebagai bobot
+
+        // Data matriks nilai
+        $matrix = [];
+        foreach ($peserta as $p) {
+            $nilai = $this->m_nilai_hasil->view_nilai($p['id_peserta']); // Misalnya, mengambil data nilai dari model
+            $tinggi_bb = $this->NilaiKriteriaTinggiBB($p['tinggi_bb']);
+            $berat_bb =  $this->NilaiKriteriaBeratBB($p['berat_bb']);
+
+            $nilai_kriteria = [];
+            $nilai_kriteria[] = $tinggi_bb;
+            $nilai_kriteria[] = $berat_bb;
+
+            foreach ($nilai->result_array() as $n) {
+                $nilai_kriteria[] = $n['nilai_kriteria'];
+            }
+
+            $matrix[] = $nilai_kriteria;
+        }
+
+        // Hitung jumlah kriteria dan alternatif
+        $numCriteria = count($criteria);
+        $numAlternatives = count($peserta);
+
+        // Normalisasi bobot
+        $sumWeights = array_sum($weights);
+        $normalizedWeights = [];
+        foreach ($weights as $weight) {
+            $normalizedWeights[] = $weight / $sumWeights;
+        }
+
+        
+        // Hitung nilai Moora
+        $results = [];
+        for ($i = 0; $i < $numAlternatives; $i++) {
+            $result = 0;
+            for ($j = 0; $j < $numCriteria; $j++) {
+                $result += $matrix[$i][$j] * $normalizedWeights[$j];
+            }
+            $results[] = $result;
+        }
 
       $view['judul']                ='Nilai Semua Kriteria';
       $view['nama_peserta']         =$peserta;
-      $view['kriteria_peserta']     =$peserta;
       $view['view_kriteria']        =$kriteria;
       $view['data']                 =$nilai;
       $view['nilai_peserta']        =$nilai;
-      
-      foreach ($view['kriteria_peserta'] as &$row){
-        $row['tinggi_bb'] = $this->NilaiKriteriaTinggiBB($row['tinggi_bb']);
-        $row['berat_bb'] = $this->NilaiKriteriaBeratBB($row['berat_bb']);
-    }
+       // Tampilkan hasil ke view
+       $view['peserta'] = $peserta;
+       $view['criteria'] = $criteria;
+       $view['weights'] = $weights;
+       $view['matrix'] = $matrix;
+       $view['alternatives'] = array_column($peserta, 'nama_peserta'); // Menggunakan kolom nama_peserta sebagai alternatif
+       $view['results'] = $results; // Hasil perhitungan metode Moora
                  
       $this->load->view('superadmin/nilai/total_nilai/lihat',$view);
     }
@@ -155,7 +203,7 @@ class Total_nilai extends CI_controller
             $hasil            =$ahasil[$i];
             $nilai_kriteria   =$anilai[$i];
             $id_nilai         =$this->id_nilai_hasil_urut();
-            $id_kriteria      ='K004BNDjht';
+            $id_kriteria      ='K003BNDjht';
             $SQLinsert        =array(
                                     'id_nilai'      =>$id_nilai,
                                     'id_peserta'    =>$id_peserta,
@@ -275,7 +323,7 @@ class Total_nilai extends CI_controller
             $hasil              =$ahasil[$i];
             $nilai_kriteria     =$anilai[$i];
             $id_nilai           =$this->id_nilai_hasil_urut();
-            $id_kriteria        ='K003RHwS3n';
+            $id_kriteria        ='K004RHwS3n';
             $SQLinsert          =array(
                                       'id_nilai'      =>$id_nilai,
                                       'id_peserta'    =>$id_peserta,

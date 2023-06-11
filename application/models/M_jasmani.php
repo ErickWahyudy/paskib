@@ -40,7 +40,6 @@ public function view_peserta()
   return $this->db->get();
 }
 
-
 //mengambil id dokter urut terakhir
 public function id_urut($value='')
 { 
@@ -62,21 +61,7 @@ public function delete($id=''){
   return $this->db-> delete($this->table1);
 }
 
-public function NilaiKriteria($total)
-    {
-        // Logika perhitungan nilai kriteria
-        if ($total >= 77 && $total <= 90) {
-            $nilai = 3;
-        } elseif ($total >= 71 && $total <= 76) {
-            $nilai = 2;
-        } elseif ($total >= 65 && $total <= 70) {
-            $nilai = 1;
-        } else {
-            $nilai = 0; // Nilai default jika berat badan tidak masuk ke dalam rentang yang ditentukan
-        }
-
-        return $nilai;
-    }
+ 
 
 
 
