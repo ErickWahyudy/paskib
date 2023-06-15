@@ -15,7 +15,7 @@ class Informasi extends CI_controller
       $this->load->library('form_validation');
       
 	 // error_reporting(0);
-	 if($this->session->userdata('admin') != TRUE){
+	 if($this->session->userdata('superadmin') != TRUE){
      redirect(base_url(''));
      exit;
 	};
@@ -27,7 +27,7 @@ class Informasi extends CI_controller
     {
      $view = array('judul'     =>'Informasi',
                    'data'      =>$this->m_informasi->view(),);
-      $this->load->view('admin/informasi/form',$view);
+      $this->load->view('superadmin/informasi/form',$view);
     }
 
 
@@ -102,7 +102,7 @@ class Informasi extends CI_controller
       if (!$this->upload->do_upload('file')) {
         $error = array('error' => $this->upload->display_errors());
         $this->session->set_flashdata('error', $error['error']);
-        redirect('admin/informasi');
+        redirect('superadmin/informasi');
       } else {
         $data = array('upload_data' => $this->upload->data());
         $this->compress($data['upload_data']['full_path'], $data['upload_data']['full_path'], 40);

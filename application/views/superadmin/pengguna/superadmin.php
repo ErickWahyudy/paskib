@@ -39,9 +39,6 @@ if($aksi == "superadmin"):
                 <td>
                     <a href="" class="btn btn-warning" data-toggle="modal"
                         data-target="#edit<?= $pengguna['id_pengguna'] ?>"><i class="fa fa-edit"></i> Edit</a>
-                    <a href="" class="btn btn-info" data-toggle="modal"
-                        data-target="#ganti_password<?= $pengguna['id_pengguna'] ?>"><i class="fa fa-key"></i> Ganti
-                        Password</a>
                 </td>
             </tr>
             <?php $no++; endforeach; ?>
@@ -85,15 +82,6 @@ if($aksi == "superadmin"):
                             <tr>
                                 <td>
                                     <input type="email" name="email" class="form-control" placeholder="email"
-                                        autocomplete="off" required="">
-                                </td>
-                            </tr>
-                            <tr>
-                                <th>Password</th>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <input type="password" name="password" class="form-control" placeholder="password"
                                         autocomplete="off" required="">
                                 </td>
                             </tr>
@@ -178,16 +166,6 @@ if($aksi == "superadmin"):
                                 </td>
                             </tr>
                             <tr>
-                                <th>Password</th>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <a href="" class="btn btn-info" data-toggle="modal"
-                                        data-target="#ganti_password<?= $pengguna['id_pengguna'] ?>"><i
-                                            class="fa fa-key"></i> Ganti Password</a>
-                                </td>
-                            </tr>
-                            <tr>
                                 <th>Level</th>
                             </tr>
                             <tr>
@@ -224,61 +202,6 @@ if($aksi == "superadmin"):
     </div>
     <?php endforeach; ?>
     <!-- End Modal -->
-
-    <!-- Modal ganti password  -->
-    <?php foreach($data as $pengguna): ?>
-    <div class="modal fade" id="ganti_password<?= $pengguna['id_pengguna'] ?>" tabindex="-1" role="dialog"
-        aria-labelledby="myModalLabel">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header bg-purple">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                            aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="myModalLabel">Ganti Password</h4>
-                </div>
-                <div class="modal-body table-responsive">
-                    <table class="table table-bordered table-striped">
-                        <form id="gantipassword" method="post">
-                            <input type="hidden" name="id_pengguna" value="<?= $pengguna['id_pengguna'] ?>"
-                                class="form-control" readonly>
-                            <tr>
-                                <th>Masukkan Password Baru</th>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <input type="password" id="password" name="password" class="form-control"
-                                        required="">
-                                    <input type="checkbox" onclick="viewPassword()"> Lihat Password
-                                </td>
-                            </tr>
-                            <tr>
-                                <th>
-                                    <button type="button" class="btn btn-default" data-dismiss="modal">Kembali</button>
-                                    &nbsp;&nbsp;
-                                    <input type="submit" name="kirim" value="Simpan" class="btn btn-success">
-                                </th>
-                            </tr>
-                        </form>
-                    </table>
-                </div>
-            </div>
-        </div>
-    </div>
-    <?php endforeach; ?>
-    <!-- End Modal -->
-
-
-    <script type="text/javascript">
-    //view password
-    function viewPassword() {
-        var x = document.getElementById("password");
-        if (x.type === "password") {
-            x.type = "text";
-        } else {
-            x.type = "password";
-        }
-    }
-    </script>
 
     <script>
     //add data
@@ -326,47 +249,6 @@ if($aksi == "superadmin"):
             //memanggil swall ketika berhasil
             success: function(data) {
                 $('#edit' + form_data.get('id_pengguna'));
-                swal({
-                    title: "Berhasil",
-                    text: "Data Berhasil Diubah",
-                    type: "success",
-                    showConfirmButton: true,
-                    confirmButtonText: "OKEE",
-                }).then(function() {
-                    location.reload();
-                });
-            },
-            //memanggil swall ketika gagal
-            error: function(data) {
-                swal({
-                    title: "Gagal",
-                    text: "Data Gagal Diubah",
-                    type: "error",
-                    showConfirmButton: true,
-                    confirmButtonText: "OKEE",
-                }).then(function() {
-                    location.reload();
-                });
-            }
-        });
-    });
-
-    //ganti password
-    $(document).on('submit', '#gantipassword', function(e) {
-        e.preventDefault();
-        var form_data = new FormData(this);
-
-        $.ajax({
-            type: "POST",
-            url: "<?php echo site_url('superadmin/pengguna/api_password/') ?>" + form_data.get(
-                'id_pengguna'),
-            dataType: "json",
-            data: form_data,
-            processData: false,
-            contentType: false,
-            //memanggil swall ketika berhasil
-            success: function(data) {
-                $('#gantipassword' + form_data.get('id_pengguna'));
                 swal({
                     title: "Berhasil",
                     text: "Data Berhasil Diubah",

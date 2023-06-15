@@ -2,7 +2,14 @@
 
 <?php 
 if($aksi == "lihat"):
-?>
+    $nilai = $this->m_pbb->view(); 
+    if ($nilai->num_rows() == 0): 
+    ?>
+    <h1 class="text-center">Belum Ada Nilai Yang Diinputkan</h1>
+    
+    <?php else: ?>
+        <a href="javascript:void(0)" onclick="hapusnilai()" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i> Hapus
+    Semua Nilai</a>
 <div class="table-responsive">
     <table id="" class="table table-bordered  table-striped">
         <thead>
@@ -63,7 +70,11 @@ if($aksi == "lihat"):
                     $nilai = $this->m_pbb->view_nilai($peserta['id_peserta']);
                     $total1 = 0;
                     foreach ($nilai->result_array() as $nilai) {
-                        $total1 += $nilai['nilai_sk'];
+                        if ($nilai['nilai_sk'] == NULL) {
+                            $nilai['nilai_sk'] = 0;
+                        } else {
+                            $total1 += $nilai['nilai_sk'];
+                        }
                     }
                         $total1 = $total1 / $juri = $this->m_pbb->view_juri()->num_rows();
                         $total1 = number_format($total1, 2);
@@ -75,8 +86,11 @@ if($aksi == "lihat"):
                     $nilai = $this->m_pbb->view_nilai($peserta['id_peserta']);
                     $total2 = 0;
                     foreach ($nilai->result_array() as $nilai) {
-                        $total2 += $nilai['nilai_gb'];
-                    }
+                        if ($nilai['nilai_gb'] == NULL) {
+                            $nilai['nilai_gb'] = 0;
+                        } else {
+                            $total2 += $nilai['nilai_gb'];
+                        }                    }
                         $total2 = $total2 / $juri = $this->m_pbb->view_juri()->num_rows();
                         $total2 = number_format($total2, 2);
                     ?>
@@ -87,7 +101,11 @@ if($aksi == "lihat"):
                     $nilai = $this->m_pbb->view_nilai($peserta['id_peserta']);
                     $total3 = 0;
                     foreach ($nilai->result_array() as $nilai) {
-                        $total3 += $nilai['nilai_gd'];
+                        if ($nilai['nilai_gd'] == NULL) {
+                            $nilai['nilai_gd'] = 0;
+                        } else {
+                            $total3 += $nilai['nilai_gd'];
+                        }
                     }
                         $total3 = $total3 / $juri = $this->m_pbb->view_juri()->num_rows();
                         $total3 = number_format($total3, 2);
@@ -99,7 +117,11 @@ if($aksi == "lihat"):
                     $nilai = $this->m_pbb->view_nilai($peserta['id_peserta']);
                     $total4 = 0;
                     foreach ($nilai->result_array() as $nilai) {
-                        $total4 += $nilai['nilai_ab'];
+                        if ($nilai['nilai_ab'] == NULL) {
+                            $nilai['nilai_ab'] = 0;
+                        } else {
+                            $total4 += $nilai['nilai_ab'];
+                        }
                     }
                         $total4 = $total4 / $juri = $this->m_pbb->view_juri()->num_rows();
                         $total4 = number_format($total4, 2);
@@ -135,6 +157,7 @@ if($aksi == "lihat"):
         </tbody>
     </table>
 </div>
+<?php endif; ?>
 <?php
     endif;
     ?>
@@ -145,7 +168,7 @@ $(document).ready(function() {
     $('#add').submit(function(e) {
         e.preventDefault();
         $.ajax({
-            url: "<?= site_url('superadmin/nilai/total_nilai/api_add_pbb') ?>",
+            url: "<?= site_url('superadmin/nilai/matriks/api_add_pbb') ?>",
             type: "POST",
             data: new FormData(this),
             processData: false,
@@ -167,6 +190,51 @@ $(document).ready(function() {
         });
     });
 });
+
+//ajax hapus
+function hapusnilai() {
+    swal({
+        title: "Apakah Anda Yakin?",
+        text: "Data Akan Dihapus",
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#DD6B55",
+        confirmButtonText: "Ya, Hapus!",
+        cancelButtonText: "Tidak, Batalkan!",
+        closeOnConfirm: false,
+        closeOnCancel: true // Set this to true to close the dialog when the cancel button is clicked
+    }).then(function(result) {
+        if (result.value) { // Only delete the data if the user clicked on the confirm button
+            $.ajax({
+                type: "POST",
+                url: "<?php echo site_url('superadmin/nilai/pbb/api_empty_table/') ?>",
+                dataType: "json",
+            }).done(function() {
+                swal({
+                    title: "Berhasil",
+                    text: "Data Berhasil Dihapus",
+                    type: "success",
+                    showConfirmButton: true,
+                    confirmButtonText: "OKEE"
+                }).then(function() {
+                    location.reload();
+                });
+            }).fail(function() {
+                swal({
+                    title: "Gagal",
+                    text: "Data Gagal Dihapus",
+                    type: "error",
+                    showConfirmButton: true,
+                    confirmButtonText: "OKEE"
+                }).then(function() {
+                    location.reload();
+                });
+            });
+        } else { // If the user clicked on the cancel button, show a message indicating that the deletion was cancelled
+            swal("Batal hapus", "Data Tidak Jadi Dihapus", "error");
+        }
+    });
+}
 </script>
 
 <?php $this->load->view('template/footer'); ?>

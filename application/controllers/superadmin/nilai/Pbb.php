@@ -28,7 +28,7 @@ class Pbb extends CI_controller
     //view nnilai
     public function lihat($id_pengguna='', $id_peserta='')
     {
-      $data = $this->m_kriteria->view_id('K003RHwS3n')->row_array();
+      $data = $this->m_kriteria->view_id('K004RHwS3n')->row_array();
       $peserta  = $this->m_pbb->view_peserta()->result_array();
       $nilai    = $this->m_pbb->view_nilai()->result_array();
       $juri     = $this->m_pbb->view_juri()->result_array();
@@ -50,7 +50,7 @@ class Pbb extends CI_controller
     //add nilai
 public function input()
 {
-  $data = $this->m_kriteria->view_id('K003RHwS3n')->row_array();
+  $data = $this->m_kriteria->view_id('K004RHwS3n')->row_array();
  $view = array('judul'          =>'Buat Nilai '.$data['kriteria'],
                'aksi'           =>'add',
                'pilih_juri'     =>$this->m_pengguna->viewJuri()->result_array(),
@@ -67,7 +67,7 @@ public function input()
 //view nnilai
 public function edit($id_pengguna='', $id_peserta='')
 {
-  $data = $this->m_kriteria->view_id('K003RHwS3n')->row_array();
+  $data = $this->m_kriteria->view_id('K004RHwS3n')->row_array();
   $peserta  = $this->m_pbb->view_peserta()->result_array();
   $nilai    = $this->m_pbb->view_nilai()->result_array();
   $juri     = $this->m_pbb->view_juri()->result_array();
@@ -120,64 +120,55 @@ $newID = "b"."00".$tambah.$karakter;
 }
 
 
-//API add jasmani
+//API add pbb
 public function api_add($value='')
 {
-$rules = array(
-  array(
-    'field' => 'nilai_sk',
-    'label' => 'nilai_sk',
-    'rules' => 'required'
-  ),
-  array(
-    'field' => 'nilai_gb',
-    'label' => 'nilai_gb',
-    'rules' => 'required'
-  ),
-  array(
-    'field' => 'nilai_gd',
-    'label' => 'nilai_gd',
-    'rules' => 'required'
-  ),
-  array(
-    'field' => 'nilai_ab',
-    'label' => 'nilai_ab',
-    'rules' => 'required'
-  ),
-);
-$this->form_validation->set_rules($rules);
-if ($this->form_validation->run() == FALSE) {
-  $response = [
-    'status' => false,
-    'message' => 'Tidak ada data'
-  ];
-} else {
-  $SQLinsert = [
-    'id_pbb'          =>$this->id_pbb_urut(),
-    'id_pengguna'     =>$this->input->post('id_pengguna'),
-    'id_peserta'      =>$this->input->post('id_peserta'),
-    'nilai_sk'        =>$this->input->post('nilai_sk'),
-    'nilai_gb'        =>$this->input->post('nilai_gb'),
-    'nilai_gd'        =>$this->input->post('nilai_gd'),
-    'nilai_ab'        =>$this->input->post('nilai_ab'),
-  ];
-  if ($this->m_pbb->add($SQLinsert)) {
-    $response = [
-      'status' => true,
-      'message' => 'Berhasil menambahkan data'
-    ];
-  } else {
+  $rules = array(
+    array(
+      'field' => 'id_pengguna',
+      'label' => 'id_pengguna',
+      'rules' => 'required'
+    ),
+    array(
+      'field' => 'id_peserta[]',
+      'label' => 'id_peserta',
+      'rules' => 'required'
+    ),
+  );
+  $this->form_validation->set_rules($rules);
+  if ($this->form_validation->run() == FALSE) {
     $response = [
       'status' => false,
-      'message' => 'Gagal menambahkan data'
+      'message' => 'Tidak ada data'
     ];
-  }
-}
+  } else {
+    $aid        =$this->input->post('id_peserta');
+    $apengguna  =$this->input->post('id_pengguna');
 
-$this->output
-  ->set_content_type('application/json')
-  ->set_output(json_encode($response));
-}
+    if(!empty($aid)){
+      for ($i=0; $i < count($aid); $i++) { 
+        $id_peserta = $aid[$i];
+        $id_pbb = $this->id_pbb_urut();
+        $SQLinsert = [
+          'id_pbb'      => $id_pbb,
+          'id_pengguna'     => $apengguna,
+          'id_peserta'      => $id_peserta
+        ];
+        $this->m_pbb->add($SQLinsert);
+      }
+      $pesan=array(
+        'status'  =>TRUE,
+        'pesan'   =>'Berhasil menambahkan data');
+      echo json_encode($pesan);
+      }else{
+          $pesan=array(
+              'status'  =>FALSE,
+              'pesan'   =>'Tidak ada data yang di kirim');
+          echo json_encode($pesan);
+          }
+      }
+  }
+
 
  //API edit dokter
  public function api_edit($id='', $SQLupdate='')
@@ -234,30 +225,23 @@ $this->output
      ->set_output(json_encode($response));
  }
 
- //API hapus dokter
- public function api_hapus($id='')
- {
-   if(empty($id)){
-     $response = [
-       'status' => false,
-       'message' => 'Data kosong'
-     ];
-   }else{
-     if ($this->m_pbb->delete($id)) {
-       $response = [
-         'status' => true,
-         'message' => 'Berhasil menghapus data'
-       ];
-     } else {
-       $response = [
-         'status' => false,
-         'message' => 'Gagal menghapus data'
-       ];
-     }
-   }
-   $this->output
-     ->set_content_type('application/json')
-     ->set_output(json_encode($response));
- }
+  //API hapus
+  public function api_empty_table($value='')
+  {
+    if ($this->m_pbb->delete_semua_data()) {
+      $response = [
+        'status' => true,
+        'message' => 'Berhasil menghapus data'
+      ];
+    } else {
+      $response = [
+        'status' => false,
+        'message' => 'Gagal menghapus data'
+      ];
+    }
+    $this->output
+        ->set_content_type('application/json')
+        ->set_output(json_encode($response));
+  }
 	
 }

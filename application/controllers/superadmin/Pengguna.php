@@ -216,42 +216,6 @@ class Pengguna extends CI_controller
           ->set_output(json_encode($response));
       }
 
-       //API edit password
-      public function api_password($id='', $SQLupdate='')
-      {
-        $rules = array(
-          array(
-            'field' => 'password',
-            'label' => 'password',
-            'rules' => 'required'
-          )
-        );
-        $this->form_validation->set_rules($rules);
-        if ($this->form_validation->run() == FALSE) {
-          $response = [
-            'status' => false,
-            'message' => 'Tidak ada data'
-          ];
-        } else {
-          $SQLupdate = [
-            'password'        => md5($this->input->post('password'))
-          ];
-          if ($this->m_pengguna->update($id, $SQLupdate)) {
-            $response = [
-              'status' => true,
-              'message' => 'Berhasil mengubah data'
-            ];
-          } else {
-            $response = [
-              'status' => false,
-              'message' => 'Gagal mengubah data'
-            ];
-          }
-        }
-        $this->output
-          ->set_content_type('application/json')
-          ->set_output(json_encode($response));
-      }
       
       //API hapus dokter
       public function api_hapus($id='')

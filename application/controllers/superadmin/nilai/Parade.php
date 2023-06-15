@@ -122,33 +122,18 @@ class Parade extends CI_controller
     }
 
 
-  //API add jasmani
+  //API add parade
   public function api_add($value='')
   {
     $rules = array(
       array(
-        'field' => 'nilai_wjh',
-        'label' => 'nilai_wjh',
+        'field' => 'id_pengguna',
+        'label' => 'id_pengguna',
         'rules' => 'required'
       ),
       array(
-        'field' => 'nilai_bdn',
-        'label' => 'nilai_bdn',
-        'rules' => 'required'
-      ),
-      array(
-        'field' => 'nilai_bp',
-        'label' => 'nilai_bp',
-        'rules' => 'required'
-      ),
-      array(
-        'field' => 'nilai_tgn',
-        'label' => 'nilai_tgn',
-        'rules' => 'required'
-      ),
-      array(
-        'field' => 'nilai_kk',
-        'label' => 'nilai_kk',
+        'field' => 'id_peserta[]',
+        'label' => 'id_peserta',
         'rules' => 'required'
       ),
     );
@@ -159,33 +144,33 @@ class Parade extends CI_controller
         'message' => 'Tidak ada data'
       ];
     } else {
-      $SQLinsert = [
-        'id_parade'      =>$this->id_parade_urut(),
-        'id_pengguna'     =>$this->input->post('id_pengguna'),
-        'id_peserta'      =>$this->input->post('id_peserta'),
-        'nilai_wjh'       =>$this->input->post('nilai_wjh'),
-        'nilai_bdn'       =>$this->input->post('nilai_bdn'),
-        'nilai_bp'        =>$this->input->post('nilai_bp'),
-        'nilai_tgn'       =>$this->input->post('nilai_tgn'),
-        'nilai_kk'        =>$this->input->post('nilai_kk')
-      ];
-      if ($this->m_parade->add($SQLinsert)) {
-        $response = [
-          'status' => true,
-          'message' => 'Berhasil menambahkan data'
-        ];
-      } else {
-        $response = [
-          'status' => false,
-          'message' => 'Gagal menambahkan data'
-        ];
-      }
-  }
-  
-  $this->output
-      ->set_content_type('application/json')
-      ->set_output(json_encode($response));
-}
+      $aid        =$this->input->post('id_peserta');
+      $apengguna  =$this->input->post('id_pengguna');
+
+      if(!empty($aid)){
+        for ($i=0; $i < count($aid); $i++) { 
+          $id_peserta = $aid[$i];
+          $id_parade = $this->id_parade_urut();
+          $SQLinsert = [
+            'id_parade'      => $id_parade,
+            'id_pengguna'     => $apengguna,
+            'id_peserta'      => $id_peserta
+          ];
+          $this->m_parade->add($SQLinsert);
+        }
+        $pesan=array(
+          'status'  =>TRUE,
+          'pesan'   =>'Berhasil menambahkan data');
+        echo json_encode($pesan);
+        }else{
+            $pesan=array(
+                'status'  =>FALSE,
+                'pesan'   =>'Tidak ada data yang di kirim');
+            echo json_encode($pesan);
+            }
+        }
+    }
+
 
      //API edit
      public function api_edit($id='', $SQLupdate='')
@@ -248,30 +233,23 @@ class Parade extends CI_controller
          ->set_output(json_encode($response));
      }
 
-     //API hapus
-     public function api_hapus($id='')
-     {
-       if(empty($id)){
-         $response = [
-           'status' => false,
-           'message' => 'Data kosong'
-         ];
-       }else{
-         if ($this->m_parade->delete($id)) {
-           $response = [
-             'status' => true,
-             'message' => 'Berhasil menghapus data'
-           ];
-         } else {
-           $response = [
-             'status' => false,
-             'message' => 'Gagal menghapus data'
-           ];
-         }
-       }
-       $this->output
-         ->set_content_type('application/json')
-         ->set_output(json_encode($response));
-     }
+      //API hapus
+      public function api_empty_table($value='')
+      {
+        if ($this->m_parade->delete_semua_data()) {
+          $response = [
+            'status' => true,
+            'message' => 'Berhasil menghapus data'
+          ];
+        } else {
+          $response = [
+            'status' => false,
+            'message' => 'Gagal menghapus data'
+          ];
+        }
+        $this->output
+            ->set_content_type('application/json')
+            ->set_output(json_encode($response));
+      }
 	
 }

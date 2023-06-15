@@ -7,8 +7,6 @@
             <tr>
                 <th>No</th>
                 <th>Kriteria</th>
-                <th>Nilai Minimal</th>
-                <th>Nilai Maksimal</th>
                 <th>Bobot</th>
                 <th>Nama Sub Kriteria 1</th>
                 <th>Nama Sub Kriteria 2</th>
@@ -23,8 +21,6 @@
             <tr>
                 <td><?= $no ?></td>
                 <td><?= $kriteria['kriteria'] ?></td>
-                <td><?= $kriteria['min_nilai'] ?></td>
-                <td><?= $kriteria['max_nilai'] ?></td>
                 <td><?= $kriteria['bobot'] ?> %</td>
                 <td><?= $kriteria['nama_nilai1'] ?></td>
                 <td><?= $kriteria['nama_nilai2'] ?></td>
@@ -70,24 +66,6 @@
                             <tr>
                                 <td>
                                     <input type="text" name="kriteria" value="<?= $kriteria['kriteria'] ?>"
-                                        class="form-control" autocomplete="off" required="">
-                                </td>
-                            </tr>
-                            <tr>
-                                <th> Minimal nilai</th>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <input type="number" name="min_nilai" value="<?= $kriteria['min_nilai'] ?>"
-                                        class="form-control" autocomplete="off" required="">
-                                </td>
-                            </tr>
-                            <tr>
-                                <th> Maksimal nilai</th>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <input type="number" name="max_nilai" value="<?= $kriteria['max_nilai'] ?>"
                                         class="form-control" autocomplete="off" required="">
                                 </td>
                             </tr>

@@ -14,7 +14,7 @@ class Profile extends CI_controller
    $this->load->library('session');
     $this->load->library('form_validation');
 	 // error_reporting(0);
-	 if($this->session->userdata('admin') != TRUE){
+	 if($this->session->userdata('superadmin') != TRUE){
     redirect(base_url(''));
      exit;
 	};
@@ -25,20 +25,20 @@ class Profile extends CI_controller
   public function index($id='')
   {
 
-  $data=$this->m_admin->view_id_admin($id)->row_array();
+  $data=$this->m_admin->view_id_pengguna($id)->row_array();
   $x = array(
     'aksi'            =>'lihat',
     'judul'           =>'Data Akun Profile',
-    'id_admin'       =>$data['id_admin'],
+    'id_pengguna'     =>$data['id_pengguna'],
     'nama'            =>$data['nama'],
-    'no_hp'           =>$data['no_hp'],
+    'keterangan'      =>$data['keterangan'],
     'email'           =>$data['email'],
     'password'        =>$data['password'],
   );
-    $this->load->view('admin/user/profile',$x);
+    $this->load->view('superadmin/user/profile',$x);
   }
 
-  //API edit admin
+  //API edit superadmin
   public function api_edit($id='', $SQLupdate='')
   {
     $rules = array(
@@ -62,7 +62,7 @@ class Profile extends CI_controller
     } else {
       $SQLupdate = [
         'nama'            => $this->input->post('nama'),
-        'no_hp'           => $this->input->post('no_hp'),
+        'keterangan'      => $this->input->post('keterangan'),
         'email'           => $this->input->post('email')
       ];
       if ($this->m_admin->update($id, $SQLupdate)) {

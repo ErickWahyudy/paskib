@@ -46,22 +46,6 @@ class Kriteria extends CI_controller
             ),
           ),
           array(
-            'field' => 'min_nilai',
-            'label' => 'Min nilai',
-            'rules' => 'required',
-            'errors' => array(
-                'required' => 'Min nilai tidak boleh kosong',
-            ),
-          ),
-          array(
-            'field' => 'max_nilai',
-            'label' => 'Max nilai',
-            'rules' => 'required',
-            'errors' => array(
-                'required' => 'Max nilai tidak boleh kosong',
-            ),
-          ),
-          array(
             'field' => 'bobot',
             'label' => 'Botot nilai',
             'rules' => 'required',
@@ -79,8 +63,6 @@ class Kriteria extends CI_controller
         } else {
           $SQLupdate = [
             'kriteria'           => $this->input->post('kriteria'),
-            'min_nilai'          => $this->input->post('min_nilai'),
-            'max_nilai'          => $this->input->post('max_nilai'),
             'bobot'              => $this->input->post('bobot'),
             'nama_nilai1'        => $this->input->post('nama_nilai1'),
             'nama_nilai2'        => $this->input->post('nama_nilai2'),

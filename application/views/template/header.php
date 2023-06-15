@@ -237,7 +237,19 @@ if($this->session->userdata('level') =="1"){
                   <li><a href="<?= base_url('superadmin/nilai/jasmani/lihat') ?>" class="active"><i class="fa fa-circle-o"></i>Jasmani</a></li>
                   <li><a href="<?= base_url('superadmin/nilai/parade/lihat') ?>" class="active"><i class="fa fa-circle-o"></i>Parade</a></li>
                   <li><a href="<?= base_url('superadmin/nilai/pbb/lihat') ?>" class="active"><i class="fa fa-circle-o"></i>PBB</a></li>
-                  <li><a href="<?= base_url('superadmin/nilai/total_nilai') ?>" class="active"><i class="fa fa-circle-o"></i>Total Nilai Peserta</a></li>
+                  </ul>
+              </li>
+              <li class="treeview">
+                  <a href="#">
+                    <i class="fa fa-calculator"></i> <span>Perhitungan Nilai</span>
+                    <span class="pull-right-container">
+                      <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                  </a>
+                  <ul class="treeview-menu active">
+                  <li><a href="<?= base_url('superadmin/nilai/matriks') ?>" class="active"><i class="fa fa-circle-o"></i>Matriks Normalisasi</a></li>
+                  <li><a href="<?= base_url('superadmin/nilai/matriks') ?>" class="active"><i class="fa fa-circle-o"></i>Optimasi</a></li>
+                  <li><a href="<?= base_url('superadmin/nilai/matriks') ?>" class="active"><i class="fa fa-circle-o"></i>Hasil Akhir</a></li>
                   </ul>
               </li>
               <li class="treeview">
@@ -315,24 +327,68 @@ if($this->session->userdata('level') =="1"){
 
    <?php }elseif($this->session->userdata('level') == "3"){ ?>
 
-<li class="">
-        <a href="<?= base_url('pasien/home') ?>">
-          <i class="fa fa-dashboard"></i> <span>Dasboard</span>
-          <span class="pull-right-container">
-            <small class="label pull-right bg-green">Home</small>
-          </span>
-        </a>
+    <li class="">
+          <a href="<?= base_url('juri/home') ?>">
+            <i class="fa fa-dashboard"></i> <span>Dasboard</span>
+            <span class="pull-right-container">
+              <small class="label pull-right bg-green">Home</small>
+            </span>
+          </a>
+        </li>
+        <li class="header">OLAH DATA</li>
+      <li class="treeview">
+          <a href="#">
+            <i class="fa fa-star"></i> <span>Data Nilai</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu active">
+              <li class="treeview">
+                  <a href="#">
+                    <i class="fa fa-eye"></i> <span>Lihat Nilai</span>
+                    <span class="pull-right-container">
+                      <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                  </a>
+                  <ul class="treeview-menu active">
+                  <li><a href="<?= base_url('juri/nilai/jasmani/lihat') ?>" class="active"><i class="fa fa-circle-o"></i>Jasmani</a></li>
+                  <li><a href="<?= base_url('juri/nilai/parade/lihat') ?>" class="active"><i class="fa fa-circle-o"></i>Parade</a></li>
+                  <li><a href="<?= base_url('juri/nilai/pbb/lihat') ?>" class="active"><i class="fa fa-circle-o"></i>PBB</a></li>
+                  </ul>
+              </li>
+              <li class="treeview">
+                  <a href="#">
+                    <i class="fa fa-calculator"></i> <span>Perhitungan Nilai</span>
+                    <span class="pull-right-container">
+                      <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                  </a>
+                  <ul class="treeview-menu active">
+                  <li><a href="<?= base_url('juri/nilai/matriks') ?>" class="active"><i class="fa fa-circle-o"></i>Matriks Normalisasi</a></li>
+                  <li><a href="<?= base_url('juri/nilai/matriks') ?>" class="active"><i class="fa fa-circle-o"></i>Optimasi</a></li>
+                  <li><a href="<?= base_url('juri/nilai/matriks') ?>" class="active"><i class="fa fa-circle-o"></i>Hasil Akhir</a></li>
+                  </ul>
+              </li>
+              <li class="treeview">
+                  <a href="#">
+                    <i class="fa fa-pencil"></i> <span>Input Nilai</span>
+                    <span class="pull-right-container">
+                      <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                  </a>
+                  <ul class="treeview-menu active">
+                  <li><a href="<?= base_url('juri/nilai/jasmani/input') ?>" class="active"><i class="fa fa-circle-o"></i>Jasmani</a></li>
+                  <li><a href="<?= base_url('juri/nilai/parade/input') ?>" class="active"><i class="fa fa-circle-o"></i>Parade</a></li>
+                  <li><a href="<?= base_url('juri/nilai/pbb/input') ?>" class="active"><i class="fa fa-circle-o"></i>PBB</a></li>
+                  </ul>
+              </li>
+          </ul>
       </li>
-      <li class="header">OLAH DATA</li>
-<li class="treeview"> 
-    <li><a href="<?= base_url('pasien/periksa/buat_jadwal'); ?>"><i class="fa fa-calendar"></i> <span>Buat Jadwal</span></a></li>
-    <li><a href="<?= base_url('pasien/periksa/riwayat'); ?>"><i class="fa fa-stethoscope"></i> <span>Data Riwayat</span></a></li>
-    <li><a href="<?= base_url('pasien/profile'); ?>"><i class="fa fa-user"></i> <span>Data Profile </span></a>
-    
-</li> 
-<li class="header">OTHER</li>
-    <li><a href="<?= base_url('pasien/informasi'); ?>"><i class="fa fa-bullhorn"></i> <span>Layanan Informasi </span></a></li>
- </li> 
+      <li><a href="<?= base_url('juri/peserta'); ?>"><i class="fa fa-users"></i> <span>Data Peserta</span></a></li>
+ 
+      <li class="header">OTHER</li>
+      <li><a href="<?= base_url('juri/profile'); ?>"><i class="fa fa-user"></i> <span>Akun Profile</span></a></li>
   
 <?php } ?>
   <!-- logout -->

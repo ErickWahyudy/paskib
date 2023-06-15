@@ -14,9 +14,9 @@ if($aksi == "lihat"):
             </td>
         </tr>
         <tr>
-            <th>No HP</th>
+            <th>Keterangan</th>
             <td>
-                : <?= $no_hp ?>
+                : <?= $keterangan ?>
             </td>
         </tr>
         <tr>
@@ -36,7 +36,7 @@ if($aksi == "lihat"):
         <tr>
             <td></td>
             <td>
-                <a href="../admin/home" class="btn btn-primary">Kembali</a> &nbsp;&nbsp;
+                <a href="../superadmin/home" class="btn btn-primary">Kembali</a> &nbsp;&nbsp;
                 <a href="" class="btn btn-warning" data-toggle="modal" data-target="#editAkun"><i
                         class="fa fa-edit"></i> Perbarui Data</a>
             </td>
@@ -57,7 +57,7 @@ if($aksi == "lihat"):
             <div class="modal-body table-responsive">
                 <table class="table table-bordered table-striped">
                     <form id="edit" method="post">
-                        <input type="hidden" name="id_admin" value="<?= $id_admin ?>" class="form-control" readonly>
+                        <input type="hidden" name="id_pengguna" value="<?= $id_pengguna ?>" class="form-control" readonly>
                         <tr>
                             <th>Nama</th>
                         </tr>
@@ -68,11 +68,11 @@ if($aksi == "lihat"):
                             </td>
                         </tr>
                         <tr>
-                            <th>No HP</th>
+                            <th>Keterangan</th>
                         </tr>
                         <tr>
                             <td>
-                                <input type="text" name="no_hp" value="<?= $no_hp ?>" class="form-control"
+                                <input type="text" name="keterangan" value="<?= $keterangan ?>" class="form-control"
                                     autocomplete="off" required>
                             </td>
                         </tr>
@@ -123,7 +123,7 @@ if($aksi == "lihat"):
             <div class="modal-body table-responsive">
                 <table class="table table-bordered table-striped">
                     <form id="gantipassword" method="post">
-                        <input type="hidden" name="id_admin" value="<?= $id_admin ?>" class="form-control" readonly>
+                        <input type="hidden" name="id_pengguna" value="<?= $id_pengguna ?>" class="form-control" readonly>
                         <tr>
                             <th>Masukkan Password Baru</th>
                         </tr>
@@ -171,14 +171,14 @@ $(document).on('submit', '#edit', function(e) {
 
     $.ajax({
         type: "POST",
-        url: "<?php echo site_url('admin/profile/api_edit/') ?>" + form_data.get('id_admin'),
+        url: "<?php echo site_url('superadmin/profile/api_edit/') ?>" + form_data.get('id_pengguna'),
         dataType: "json",
         data: form_data,
         processData: false,
         contentType: false,
         //memanggil swall ketika berhasil
         success: function(data) {
-            $('#edit' + form_data.get('id_admin'));
+            $('#edit' + form_data.get('id_pengguna'));
             swal({
                 title: "Berhasil",
                 text: "Data Berhasil Diubah",
@@ -211,14 +211,14 @@ $(document).on('submit', '#gantipassword', function(e) {
 
     $.ajax({
         type: "POST",
-        url: "<?php echo site_url('admin/profile/api_password/') ?>" + form_data.get('id_admin'),
+        url: "<?php echo site_url('superadmin/profile/api_password/') ?>" + form_data.get('id_pengguna'),
         dataType: "json",
         data: form_data,
         processData: false,
         contentType: false,
         //memanggil swall ketika berhasil
         success: function(data) {
-            $('#gantipassword' + form_data.get('id_admin'));
+            $('#gantipassword' + form_data.get('id_pengguna'));
             swal({
                 title: "Berhasil",
                 text: "Data Berhasil Diubah",

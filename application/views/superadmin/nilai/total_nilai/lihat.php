@@ -1,12 +1,12 @@
 <?php $this->load->view('template/header'); ?>
 
 <div class="table-responsive">
-    <a href="javascript:void(0)" onclick="hapusnilai()" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i> Hapus
-        Semua Nilai</a> <br>
-        <?php $nilai = $this->m_nilai_hasil->view_nilaihasil(); ?>
+        <?php $nilai = $this->m_matriks->view_nilaihasil(); ?>
         <?php if ($nilai->num_rows() == 0): ?>
         <h1 class="text-center">Belum Ada Nilai Yang Diinputkan</h1>
         <?php else: ?>
+            <a href="javascript:void(0)" onclick="hapusnilai()" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i> Hapus
+        Semua Nilai</a> <br>
     <table id="example1" class="table table-bordered  table-striped">
         <thead>
             <tr>
@@ -29,7 +29,7 @@
                     $no=1; 
                     $peserta_sorted = array(); // Array untuk menyimpan peserta dan nilai total
                     foreach($nama_peserta as $peserta): 
-                        $nilai = $this->m_nilai_hasil->view_nilai($peserta['id_peserta']);
+                        $nilai = $this->m_matriks->view_nilai($peserta['id_peserta']);
                         $total = 0;
 
                         foreach ($nilai->result_array() as $nilai) {
@@ -57,7 +57,7 @@
                 <td><?= $peserta['asal_sekolah'] ?></td>
                 <td><?= $peserta['tinggi_bb'] ?> cm </td>
                 <td><?= $peserta['berat_bb'] ?> kg </td>
-                <?php $nilai = $this->m_nilai_hasil->view_nilai($peserta['id_peserta']); ?>
+                <?php $nilai = $this->m_matriks->view_nilai($peserta['id_peserta']); ?>
                 <?php foreach($nilai->result_array() as $nilai): ?>
                 <td>
                     <?= $nilai['hasil'] ?>
@@ -67,7 +67,7 @@
                 <td>
                     
                     <?php
-                    $nilai = $this->m_nilai_hasil->view_nilai($peserta['id_peserta']);
+                    $nilai = $this->m_matriks->view_nilai($peserta['id_peserta']);
                     $total = 0;
                     foreach ($nilai->result_array() as $nilai) {
                         $total += ($nilai['hasil']);
@@ -95,11 +95,12 @@
             <table id="example1" class="table table-bordered table-striped">
                 <thead>
                     <tr>
-                        <th rowspan="2" style="vertical-align: middle;">Ranking</th>
+                        <th rowspan="2" style="vertical-align: middle;">No</th>
                         <th rowspan="2" style="vertical-align: middle;">Nama Peserta</th>
                         <th rowspan="2" style="vertical-align: middle;">Asal Sekolah</th>
                         <th colspan="5" style="text-align: center;"><?= $judul ?></th>
-                        <th rowspan="2" style="vertical-align: middle;">Total Nilai</th>
+                        <th rowspan="2" style="vertical-align: middle;">Hasil Normalisasi</th>
+                        <th rowspan="2" style="vertical-align: middle;">Hasil Optimasi</th>
                     </tr>
                     <tr>
                         <?php foreach($criteria as $kriteria): ?>
@@ -116,7 +117,7 @@
                     arsort($results);
 
                     
-                    foreach ($results as $key => $value): 
+                    foreach ($results as $key => $normalisasi): 
                         $peserta = $nama_peserta[$key];
                 ?>
                     <tr>
@@ -126,7 +127,11 @@
                         <?php foreach ($matrix[$key] as $nilai_kriteria): ?>
                         <td><?= $nilai_kriteria ?></td>
                         <?php endforeach; ?>
-                        <td><?= $value ?></td>
+                        <td><?= $matrix[$key][$normalisasi] ?></td>
+                        <td>
+                            <?php $normalisasi = number_format($normalisasi, 2, '.', ''); ?>
+                            <?= $normalisasi ?>
+                        </td>
                     </tr>
                     <?php 
                     $no++; 
@@ -151,7 +156,7 @@
 
 
 <script>
-//ajax hapus pengeluaran
+//ajax hapus
 function hapusnilai() {
     swal({
         title: "Apakah Anda Yakin?",
@@ -167,7 +172,7 @@ function hapusnilai() {
         if (result.value) { // Only delete the data if the user clicked on the confirm button
             $.ajax({
                 type: "POST",
-                url: "<?php echo site_url('superadmin/nilai/total_nilai/api_empty_table/') ?>",
+                url: "<?php echo site_url('superadmin/nilai/matriks/api_empty_table/') ?>",
                 dataType: "json",
             }).done(function() {
                 swal({

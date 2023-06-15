@@ -4,115 +4,69 @@
 if($aksi == "add"):
 ?>
 
-<table class="table table-striped">
+<table class="table">
     <form id="add" method="post">
         <tr>
-            <th class="col-md-2">Juri</th>
-            <td>
+            <th class="col-sm-2 control-label">Juri</th>
+            <td class="col-sm-10">
                 <select name="id_pengguna" class="form-control" required="">
                     <option value="">--Pilih Juri--</option>
                     <?php foreach($pilih_juri as $juri): ?>
                     <option value="<?= $juri['id_pengguna'] ?>">
-                        <?= ucfirst( $juri['nama']) ?>
+                        <?= ucfirst($juri['nama']) ?>
                     </option>
                     <?php endforeach; ?>
                 </select>
             </td>
         </tr>
-        <tr>
-            <th>Nama</th>
-            <td>
-                <div class="dropdown">
-                    <button class=" dropdown-toggle form-control" type="button" id="dropdownMenuButton"
-                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        --Pilih Peserta--
-                    </button>
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <input type="text" id="search_peserta" class="form-control" placeholder="Cari Peserta"
-                            autocomplete="off">
-                        <?php foreach ($pilih_peserta as $peserta): ?>
-                        <a class="dropdown-item form-control" href="#"
-                            data-value="<?= $peserta['id_peserta'] ?>"><?= ucfirst($peserta['nama_peserta']) ?></a>
-                        <?php endforeach; ?>
-                    </div>
-                </div>
-                <input type="hidden" name="id_peserta" id="selected_peserta">
-            </td>
-        </tr>
-        <tr>
-            <th>Nilai <?= $nama_nilai1 ?></th>
-            <td>
-                <input type="number" name="nilai_lari" class="form-control" required="" autocomplete="off">
-            </td>
-        </tr>
-        <tr>
-            <th>Nilai <?= $nama_nilai2 ?></th>
-            <td>
-                <input type="number" name="nilai_pushUp" class="form-control" required="" autocomplete="off">
-            </td>
-        </tr>
-        <tr>
-            <th>Nilai <?= $nama_nilai3 ?></th>
-            <td>
-                <input type="number" name="nilai_sitUp" class="form-control" required="" autocomplete="off">
-            </td>
-        </tr>
-
-        <tr>
-            <td></td>
-            <td>
-                <a href="<?= site_url('superadmin/home') ?>" class="btn btn-warning">Kembali</a> &nbsp; &nbsp;
-                <input type="submit" name="kirim" value="Simpan" class="btn btn-success">
-        </tr>
-
-    </form>
 </table>
 
+<div class="table-responsive">
+    <table id="" class="table table-bordered  table-striped">
+        <thead>
+            <tr>
+                <th>No</th>
+                <th>Nama</th>
+                <th>Asal Sekolah</th>
+                <th>
+                    Aksi
+                    <input type="button" value="Centang Semua" id="checkAllButton" onclick="toggleCheckboxes()" class="btn btn-primary btn-xs">
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+        <?php $no=1; foreach($pilih_peserta as $peserta): ?>
+            <tr>
+                <td><?= $no ?></td>
+                <td><?= $peserta['nama_peserta'] ?></td>
+                <td><?= $peserta['asal_sekolah'] ?></td>
+                <td>
+                    <input type="checkbox" name="id_peserta[]" value="<?= $peserta['id_peserta'] ?>">
+                </td>
+            </tr>
+            <?php $no++; endforeach; ?>
+        </tbody>
+    </table>
+    
+    <input type="submit" name="kirim" value="Simpan peserta" class="btn btn-success">
+    </form>
+</div>
+
 <script>
-// Mendapatkan elemen dropdown dan input pencarian
-var dropdownButton = document.getElementById('dropdownMenuButton');
-var searchInput = document.getElementById('search_peserta');
-var dropdownItems = document.getElementsByClassName('dropdown-item');
-var selectedPeserta = document.getElementById('selected_peserta');
-
-// Menambahkan event listener saat dropdown di klik
-dropdownButton.addEventListener('click', function() {
-    searchInput.value = ''; // Mengosongkan input pencarian saat dropdown di klik
-    searchInput.focus(); // Fokuskan ke input pencarian
-    filterDropdownOptions(''); // Menampilkan semua opsi saat dropdown di klik
-});
-
-// Menambahkan event listener untuk input pencarian
-searchInput.addEventListener('input', function(event) {
-    var searchValue = event.target.value.toLowerCase();
-    filterDropdownOptions(searchValue);
-});
-
-// Menambahkan event listener saat opsi dropdown di klik
-for (var i = 0; i < dropdownItems.length; i++) {
-    var dropdownItem = dropdownItems[i];
-    dropdownItem.addEventListener('click', function(event) {
-        var selectedValue = event.target.getAttribute('data-value');
-        var selectedText = event.target.innerText;
-
-        dropdownButton.innerText = selectedText; // Mengganti teks dropdown dengan opsi yang dipilih
-        selectedPeserta.value = selectedValue; // Menyimpan nilai opsi yang dipilih pada input tersembunyi
-    });
-}
-
-// Fungsi untuk memfilter opsi dropdown berdasarkan nilai pencarian
-function filterDropdownOptions(searchValue) {
-    for (var i = 0; i < dropdownItems.length; i++) {
-        var dropdownItem = dropdownItems[i];
-        var optionText = dropdownItem.innerText.toLowerCase();
-
-        if (optionText.indexOf(searchValue) !== -1) {
-            dropdownItem.style.display = 'block'; // Tampilkan opsi
+   function toggleCheckboxes() {
+        var checkboxes = document.getElementsByName('id_peserta[]');
+        var checkAllButton = document.getElementById('checkAllButton');
+        
+        for (var i = 0; i < checkboxes.length; i++) {
+            checkboxes[i].checked = !checkboxes[i].checked;
+        }
+        
+        if (checkAllButton.innerHTML === 'Centang Semua') {
+            checkAllButton.innerHTML = 'Batal Checklist Semua';
         } else {
-            dropdownItem.style.display = 'none'; // Sembunyikan opsi
+            checkAllButton.innerHTML = 'Centang Semua';
         }
     }
-}
 
 //add data
 $(document).ready(function() {
@@ -155,25 +109,20 @@ elseif($aksi == "edit"):
                 <th rowspan="3" style="vertical-align: middle;">Asal Sekolah</th>
                 <th rowspan="3" style="vertical-align: middle;">Tinggi Badan</th>
                 <th rowspan="3" style="vertical-align: middle;">Berat Badan</th>
-                <th colspan="9" style="text-align: center;"><?= $judul ?></th>
+                <th colspan="3" style="text-align: center;"><?= $judul ?></th>
                 <th rowspan="3" style="vertical-align: middle;">Total Nilai <?= $nama_nilai1 ?></th>
                 <th rowspan="3" style="vertical-align: middle;">Total Nilai <?= $nama_nilai2 ?></th>
                 <th rowspan="3" style="vertical-align: middle;">Total Nilai <?= $nama_nilai3 ?></th>
             </tr>
             <tr>
-                <?php $no=1; foreach($view_juri as $juri): ?>
                 <th colspan="3" style="text-align: center;">
-                    Penilai <?= $no ?> /
-                    <?= $juri['nama'] ?> &nbsp; &nbsp;
+                    Penilai 1
                 </th>
-                <?php $no++; endforeach; ?>
             </tr>
             <tr>
-                <?php foreach($view_juri as $juri): ?>
                 <th><?= $nama_nilai1 ?></th>
                 <th><?= $nama_nilai2 ?></th>
                 <th><?= $nama_nilai3 ?></th>
-                <?php endforeach; ?>
             </tr>
         </thead>
         <tbody>

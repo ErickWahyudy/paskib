@@ -26,32 +26,32 @@ class Jasmani extends CI_controller
    $this->load->model('m_pengaturan');
 	}
 
-    //view nnilai
-    public function lihat($id_pengguna='', $id_peserta='')
-    {
-      $data = $this->m_kriteria->view_id('K004BNDjht')->row_array();
-      $peserta  = $this->m_jasmani->view_peserta()->result_array();
-      $nilai    = $this->m_jasmani->view_nilai()->result_array();
-      $juri     = $this->m_jasmani->view_juri()->result_array();
-
-     $view = array('judul'          =>'Data '.$data['kriteria'],
-                   'aksi'           =>'lihat',
-                   'view_juri'      =>$juri,
-                   'nama_peserta'   =>$peserta,
-                   'data'           =>$nilai,
-                   'nama_nilai1'    =>$data['nama_nilai1'],
-                   'nama_nilai2'    =>$data['nama_nilai2'],
-                   'nama_nilai3'    =>$data['nama_nilai3'],
-                   'nama_nilai4'    =>$data['nama_nilai4'],
-                   'nama_nilai5'    =>$data['nama_nilai5'],
-                  );
-      $this->load->view('superadmin/nilai/jasmani/lihat',$view);
-    }
+     //view nnilai
+     public function lihat($id_pengguna='', $id_peserta='')
+     {
+       $data = $this->m_kriteria->view_id('K003BNDjht')->row_array();
+       $peserta  = $this->m_jasmani->view_peserta()->result_array();
+       $nilai    = $this->m_jasmani->view_nilai()->result_array();
+       $juri     = $this->db->limit(1)->get_where('tb_pengguna', ['id_level' => '3'])->result_array();
+ 
+      $view = array('judul'          =>'Data '.$data['kriteria'],
+                    'aksi'           =>'lihat',
+                    'view_juri'      =>$juri,
+                    'nama_peserta'   =>$peserta,
+                    'data'           =>$nilai,
+                    'nama_nilai1'    =>$data['nama_nilai1'],
+                    'nama_nilai2'    =>$data['nama_nilai2'],
+                    'nama_nilai3'    =>$data['nama_nilai3'],
+                    'nama_nilai4'    =>$data['nama_nilai4'],
+                    'nama_nilai5'    =>$data['nama_nilai5'],
+                   );
+       $this->load->view('superadmin/nilai/jasmani/lihat',$view);
+     }
 
     //add nilai
     public function input()
     {
-      $data = $this->m_kriteria->view_id('K004BNDjht')->row_array();
+      $data = $this->m_kriteria->view_id('K003BNDjht')->row_array();
      $view = array('judul'          =>'Buat Nilai '.$data['kriteria'],
                    'aksi'           =>'add',
                    'pilih_juri'     =>$this->m_pengguna->viewJuri()->result_array(),
@@ -69,7 +69,7 @@ class Jasmani extends CI_controller
     //view nnilai
     public function edit($id_pengguna='', $id_peserta='')
     {
-      $data = $this->m_kriteria->view_id('K004BNDjht')->row_array();
+      $data = $this->m_kriteria->view_id('K003BNDjht')->row_array();
       $peserta  = $this->m_jasmani->view_peserta()->result_array();
       $nilai    = $this->m_jasmani->view_nilai()->result_array();
       $juri     = $this->m_jasmani->view_juri()->result_array();
@@ -127,18 +127,13 @@ class Jasmani extends CI_controller
   {
     $rules = array(
       array(
-        'field' => 'nilai_lari',
-        'label' => 'nilai_lari',
+        'field' => 'id_pengguna',
+        'label' => 'id_pengguna',
         'rules' => 'required'
       ),
       array(
-        'field' => 'nilai_pushUp',
-        'label' => 'nilai_pushUp',
-        'rules' => 'required'
-      ),
-      array(
-        'field' => 'nilai_sitUp',
-        'label' => 'nilai_sitUp',
+        'field' => 'id_peserta[]',
+        'label' => 'id_peserta',
         'rules' => 'required'
       ),
     );
@@ -149,31 +144,32 @@ class Jasmani extends CI_controller
         'message' => 'Tidak ada data'
       ];
     } else {
-      $SQLinsert = [
-        'id_jasmani'      =>$this->id_jasmani_urut(),
-        'id_pengguna'     =>$this->input->post('id_pengguna'),
-        'id_peserta'      =>$this->input->post('id_peserta'),
-        'nilai_lari'      =>$this->input->post('nilai_lari'),
-        'nilai_pushUp'    =>$this->input->post('nilai_pushUp'),
-        'nilai_sitUp'     =>$this->input->post('nilai_sitUp')
-      ];
-      if ($this->m_jasmani->add($SQLinsert)) {
-        $response = [
-          'status' => true,
-          'message' => 'Berhasil menambahkan data'
-        ];
-      } else {
-        $response = [
-          'status' => false,
-          'message' => 'Gagal menambahkan data'
-        ];
-      }
-  }
-  
-  $this->output
-      ->set_content_type('application/json')
-      ->set_output(json_encode($response));
-}
+      $aid        =$this->input->post('id_peserta');
+      $apengguna  =$this->input->post('id_pengguna');
+
+      if(!empty($aid)){
+        for ($i=0; $i < count($aid); $i++) { 
+          $id_peserta = $aid[$i];
+          $id_jasmani = $this->id_jasmani_urut();
+          $SQLinsert = [
+            'id_jasmani'      => $id_jasmani,
+            'id_pengguna'     => $apengguna,
+            'id_peserta'      => $id_peserta
+          ];
+          $this->m_jasmani->add($SQLinsert);
+        }
+        $pesan=array(
+          'status'  =>TRUE,
+          'pesan'   =>'Berhasil menambahkan data');
+        echo json_encode($pesan);
+        }else{
+            $pesan=array(
+                'status'  =>FALSE,
+                'pesan'   =>'Tidak ada data yang di kirim');
+            echo json_encode($pesan);
+            }
+        }
+    }
 
      //API edit
      public function api_edit($id='', $SQLupdate='')
@@ -225,29 +221,22 @@ class Jasmani extends CI_controller
      }
 
      //API hapus
-     public function api_hapus($id='')
+     public function api_empty_table($value='')
      {
-       if(empty($id)){
+       if ($this->m_jasmani->delete_semua_data()) {
+         $response = [
+           'status' => true,
+           'message' => 'Berhasil menghapus data'
+         ];
+       } else {
          $response = [
            'status' => false,
-           'message' => 'Data kosong'
+           'message' => 'Gagal menghapus data'
          ];
-       }else{
-         if ($this->m_jasmani->delete($id)) {
-           $response = [
-             'status' => true,
-             'message' => 'Berhasil menghapus data'
-           ];
-         } else {
-           $response = [
-             'status' => false,
-             'message' => 'Gagal menghapus data'
-           ];
-         }
        }
        $this->output
-         ->set_content_type('application/json')
-         ->set_output(json_encode($response));
+           ->set_content_type('application/json')
+           ->set_output(json_encode($response));
      }
      
 	
