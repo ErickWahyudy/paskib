@@ -247,9 +247,9 @@ if($this->session->userdata('level') =="1"){
                     </span>
                   </a>
                   <ul class="treeview-menu active">
-                  <li><a href="<?= base_url('superadmin/nilai/matriks') ?>" class="active"><i class="fa fa-circle-o"></i>Matriks Normalisasi</a></li>
-                  <li><a href="<?= base_url('superadmin/nilai/matriks') ?>" class="active"><i class="fa fa-circle-o"></i>Optimasi</a></li>
-                  <li><a href="<?= base_url('superadmin/nilai/matriks') ?>" class="active"><i class="fa fa-circle-o"></i>Hasil Akhir</a></li>
+                  <li><a href="<?= base_url('superadmin/nilai/matriks/kriteria') ?>" class="active"><i class="fa fa-circle-o"></i>Kriteria</a></li>
+                  <li><a href="<?= base_url('superadmin/nilai/matriks/matriks') ?>" class="active"><i class="fa fa-circle-o"></i>Matriks</a></li>
+                  <li><a href="<?= base_url('superadmin/nilai/nilai_hasil') ?>" class="active"><i class="fa fa-circle-o"></i>Hasil Akhir</a></li>
                   </ul>
               </li>
               <li class="treeview">

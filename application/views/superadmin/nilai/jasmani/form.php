@@ -7,7 +7,7 @@ if($aksi == "add"):
 <table class="table">
     <form id="add" method="post">
         <tr>
-            <th class="col-sm-2 control-label">Juri</th>
+            <th class="col-sm-1 control-label">Juri</th>
             <td class="col-sm-10">
                 <select name="id_pengguna" class="form-control" required="">
                     <option value="">--Pilih Juri--</option>

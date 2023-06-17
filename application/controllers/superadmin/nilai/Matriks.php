@@ -22,20 +22,18 @@ class Matriks extends CI_controller
    $this->load->model('m_pengguna');
    $this->load->model('m_kriteria');
    $this->load->model('m_matriks');
+   $this->load->model('m_nilai_hasil');
    $this->load->model('m_pengaturan');
 	}
 
     //view nilai
-    public function index($id_pengguna='', $id_peserta='')
+    public function kriteria($id_pengguna='', $id_peserta='')
     {
       
       $peserta      = $this->m_matriks->view_peserta()->result_array();
       $nilai        = $this->m_matriks->view_nilai()->result_array();
       $kriteria     = $this->m_matriks->view_kriteria()->result_array();
       
-      
-       
-
         //Perhitungan Moora
         $criteria = $this->m_kriteria->view()->result_array();
         $criteria = array_column($criteria, 'kriteria'); // Menggunakan kolom kriteria sebagai kriteria
@@ -68,11 +66,19 @@ class Matriks extends CI_controller
           $view['pesan'] = 'Tidak ada data';
         } else {
   
-        
 
         // Hitung jumlah kriteria dan alternatif
         $numCriteria = count($criteria);
         $numAlternatives = count($peserta);
+
+         // Normalisasi matriks kriteria (Xij / √∑Xij^2) 
+         $normalizedMatrix = [];
+         for ($i = 0; $i < $numAlternatives; $i++) {
+             $normalizedMatrix[$i] = [];
+             for ($j = 0; $j < $numCriteria; $j++) {
+                 $normalizedMatrix[$i][$j] = $matrix[$i][$j] / sqrt(array_sum(array_column($matrix, $j)));
+             }
+         }
 
         // Normalisasi bobot
         $sumWeights = array_sum($weights);
@@ -82,14 +88,13 @@ class Matriks extends CI_controller
         }
        
 
-        // Hitung nilai Moora
+        // optimasi nilai (Hasil Optimasi = ∑Wj * Xij) dari matriks normalisasi dan bobot kriteria
         $results = [];
         for ($i = 0; $i < $numAlternatives; $i++) {
-            $result = 0;
+            $results[$i] = 0;
             for ($j = 0; $j < $numCriteria; $j++) {
-                $result += $matrix[$i][$j] * $normalizedWeights[$j];
+                $results[$i] += $normalizedWeights[$j] * $normalizedMatrix[$i][$j];
             }
-            $results[] = $result;
         }
         
       // Tampilkan hasil moora ke view
@@ -97,21 +102,117 @@ class Matriks extends CI_controller
       $view['criteria'] = $criteria;
       $view['weights'] = $weights;
       $view['matrix'] = $matrix;
+      $view['normalizedMatrix'] = $normalizedMatrix;
       $view['alternatives'] = array_column($peserta, 'nama_peserta'); // Menggunakan kolom nama_peserta sebagai alternatif
       $view['results'] = $results; // Hasil perhitungan metode Moora
       }
  
       //view
-      $view['judul']                ='Nilai Matriks';
+      $view['judul']                ='Nilai Kriteria';
+      $view['judul2']               ='Data Alternatif';
       $view['nama_peserta']         =$peserta;
       $view['view_kriteria']        =$kriteria;
       $view['data']                 =$nilai;
       $view['nilai_peserta']        =$nilai;
       
                  
-      $this->load->view('superadmin/nilai/total_nilai/lihat',$view);
+      $this->load->view('superadmin/nilai/total_nilai/kriteria',$view);
     }
+
+    //view nilai
+    public function matriks($id_pengguna='', $id_peserta='')
+    {
+      
+      $peserta      = $this->m_matriks->view_peserta()->result_array();
+      $nilai        = $this->m_matriks->view_nilai()->result_array();
+      $kriteria     = $this->m_matriks->view_kriteria()->result_array();
+      
+        //Perhitungan Moora
+        $criteria = $this->m_kriteria->view()->result_array();
+        $criteria = array_column($criteria, 'kriteria'); // Menggunakan kolom kriteria sebagai kriteria
+        $weights = $this->m_kriteria->view()->result_array();
+        $weights = array_column($weights, 'bobot'); // Menggunakan kolom bobot sebagai bobot
+        
+        
+        // Data matriks nilai
+        $matrix = [];
+        foreach ($peserta as $p) {
+            $nilai = $this->m_matriks->view_nilai($p['id_peserta']); // Misalnya, mengambil data nilai dari model
+            $tinggi_bb = $this->NilaiKriteriaTinggiBB($p['tinggi_bb']);
+            $berat_bb =  $this->NilaiKriteriaBeratBB($p['berat_bb']);
+
+            $nilai_kriteria = [];
+            $nilai_kriteria[] = $tinggi_bb;
+            $nilai_kriteria[] = $berat_bb;
+
+            foreach ($nilai->result_array() as $n) {
+                $nilai_kriteria[] = $n['nilai_kriteria'];
+            }
+
+            $matrix[] = $nilai_kriteria;
+        }
+
+        //jika database kosong maka tampilkan pesan tidak ada data
+        if (empty($nilai)) {
+          $view['pesan'] = 'Tidak ada data';
+        } elseif ($nilai->num_rows() == 0) {
+          $view['pesan'] = 'Tidak ada data';
+        } else {
+  
+
+        // Hitung jumlah kriteria dan alternatif
+        $numCriteria = count($criteria);
+        $numAlternatives = count($peserta);
+
+
+        // Normalisasi bobot
+        $sumWeights = array_sum($weights);
+        $normalizedWeights = [];
+        foreach ($weights as $weight) {
+            $normalizedWeights[] = $weight / $sumWeights;
+        }
+
+         // Normalisasi matriks kriteria (Xij / √∑Xij^2)
+          $normalizedMatrix = [];
+          for ($i = 0; $i < $numAlternatives; $i++) {
+              $normalizedMatrix[$i] = [];
+              for ($j = 0; $j < $numCriteria; $j++) {
+                  $normalizedMatrix[$i][$j] = $matrix[$i][$j] / sqrt(array_sum(array_column($matrix, $j)));
+              }
+          }
+       
+
+        // optimasi nilai (Hasil Optimasi = ∑Wj * Xij) dari matriks normalisasi dan bobot kriteria
+        $results = [];
+        for ($i = 0; $i < $numAlternatives; $i++) {
+            $results[$i] = 0;
+            for ($j = 0; $j < $numCriteria; $j++) {
+                $results[$i] += $normalizedWeights[$j] * $normalizedMatrix[$i][$j];
+            }
+        }
+        
+      // Tampilkan hasil moora ke view
+      $view['peserta'] = $peserta;
+      $view['criteria'] = $criteria;
+      $view['weights'] = $weights;
+      $view['matrix'] = $matrix;
+      $view['normalizedMatrix'] = $normalizedMatrix;
+      $view['alternatives'] = array_column($peserta, 'nama_peserta'); // Menggunakan kolom nama_peserta sebagai alternatif
+      $view['results'] = $results; // Hasil perhitungan metode Moora
+      }
  
+      //view
+      $view['judul']                ='Nilai Matriks';
+      $view['judul2']               ='Data Alternatif';
+      $view['nama_peserta']         =$peserta;
+      $view['view_kriteria']        =$kriteria;
+      $view['data']                 =$nilai;
+      $view['nilai_peserta']        =$nilai;
+      
+                 
+      $this->load->view('superadmin/nilai/total_nilai/matriks',$view);
+    }
+
 
       //nilai kriteria tinggi bb
       public function NilaiKriteriaTinggiBB($tinggi_bb)
@@ -167,7 +268,7 @@ class Matriks extends CI_controller
     $this->m_matriks->id_urut();
     $query   = $this->db->get();
     $data    = $query->row_array();
-    $id      = $data['id_nilai'];
+    $id      = $data['id_matriks'];
     $karakter= $this->acak_id(5);
     $urut    = substr($id, 1, 3);
     $tambah  = (int) $urut + 1;
@@ -219,10 +320,10 @@ class Matriks extends CI_controller
             $id_peserta       =$aid[$i];
             $hasil            =$ahasil[$i];
             $nilai_kriteria   =$anilai[$i];
-            $id_nilai         =$this->id_matriks();
+            $id_matriks         =$this->id_matriks();
             $id_kriteria      ='K003BNDjht';
             $SQLinsert        =array(
-                                    'id_nilai'      =>$id_nilai,
+                                    'id_matriks'      =>$id_matriks,
                                     'id_peserta'    =>$id_peserta,
                                     'id_kriteria'   =>$id_kriteria,
                                     'hasil'         =>$hasil,
@@ -279,10 +380,10 @@ class Matriks extends CI_controller
             $id_peserta         =$aid[$i];
             $hasil              =$ahasil[$i];
             $nilai_kriteria     =$anilai[$i];
-            $id_nilai           =$this->id_matriks();
+            $id_matriks           =$this->id_matriks();
             $id_kriteria        ='K005ndLkXQ';
             $SQLinsert          =array(
-                                      'id_nilai'    =>$id_nilai,
+                                      'id_matriks'    =>$id_matriks,
                                       'id_peserta'  =>$id_peserta,
                                       'id_kriteria' =>$id_kriteria,
                                       'hasil'       =>$hasil,
@@ -339,10 +440,10 @@ class Matriks extends CI_controller
             $id_peserta         =$aid[$i];
             $hasil              =$ahasil[$i];
             $nilai_kriteria     =$anilai[$i];
-            $id_nilai           =$this->id_matriks();
+            $id_matriks           =$this->id_matriks();
             $id_kriteria        ='K004RHwS3n';
             $SQLinsert          =array(
-                                      'id_nilai'      =>$id_nilai,
+                                      'id_matriks'      =>$id_matriks,
                                       'id_peserta'    =>$id_peserta,
                                       'id_kriteria'   =>$id_kriteria,
                                       'hasil'         =>$hasil,

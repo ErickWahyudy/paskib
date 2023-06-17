@@ -52,7 +52,7 @@ public function view_kriteria($value='')
 //mengambil id urut terakhir
 public function id_urut($value='')
 { 
-  $this->db->select_max('id_nilai');
+  $this->db->select_max('id_matriks');
   $this->db->from ($this->table1);
 }
 
@@ -61,7 +61,7 @@ public function add($SQLinsert){
 }
 
 public function update($id='',$SQLupdate){
-  $this->db->where('id_nilai', $id);
+  $this->db->where('id_matriks', $id);
   return $this->db-> update($this->table1, $SQLupdate);
 }
 
