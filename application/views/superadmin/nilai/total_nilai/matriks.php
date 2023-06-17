@@ -75,7 +75,7 @@
                     <?php 
                         $no = 1;
                         // Mengurutkan array berdasarkan nilai $results secara descending
-                        arsort($results);
+                        // arsort($results);
 
                         foreach ($results as $key => $normalisasi): 
                             $peserta = $nama_peserta[$key];
