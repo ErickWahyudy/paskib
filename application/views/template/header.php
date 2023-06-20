@@ -75,7 +75,7 @@ if($this->session->userdata('level') =="1"){
 }elseif($this->session->userdata('level') == "3"){
   $id  = $this->session->userdata('id_pengguna');
   $data= $this->db->get_where('tb_pengguna',array('id_pengguna'=>$id))->row_array();
- }
+}
 ?>
 
 

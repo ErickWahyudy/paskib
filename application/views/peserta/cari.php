@@ -49,20 +49,19 @@
 		<!-- /.login-logo -->
 		<div class="login-box-body">
 			<center>
-				<img src="<?= base_url('themes/foto_logo/'.$logo) ?>" width="80%" class="img-circle">
 				<h4>
-            Login <br>
+            Lihat Hasil Nilai <br>
 						<?= $nama_judul ?>
 				</h4> <br>
         				
 			</center>
     <form action="" method="post">
       <div class="form-group has-feedback">
-        <input type="text" class="form-control" name="email" placeholder="Email / Nama" required="" >
+        <input type="text" class="form-control" name="nama_peserta" placeholder="Nama yang terdaftar" required="" >
         <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
       </div>
       <div class="form-group has-feedback">
-        <input type="password" class="form-control" name="password" placeholder="Password" required="" autocomplete="off">
+        <input type="date" class="form-control" name="tgl_lahir" placeholder="Password" required="" autocomplete="off">
         <span class="glyphicon glyphicon-lock form-control-feedback"></span>
       </div>
       <div class="row">
@@ -70,15 +69,7 @@
         <div class="box-footer">
 						<button type="submit" class="btn btn-primary btn-block" name="login" title="Masuk Sistem">
 							<b>LOGIN</b>
-						</button>
-          <div class="checkbox icheck">
-            <!-- <label>
-              lupa password? <a href="<?= base_url('reset_password') ?>">klik disini</a>
-            </label><br> -->
-            <label>
-              Lihat hasil nilai ? <a href="<?= base_url('peserta/cari') ?>">klik disini</a>
-            </label>
-          </div>
+						</button> <br>
         		<center>
 							<strong>Copyright &copy; <?php echo date('Y'); ?>
               <?php  $nama_judul = $this->db->get('tb_pengaturan')->row_array(); ?>

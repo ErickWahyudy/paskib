@@ -45,4 +45,14 @@ public function delete_semua_data()
   $this->db->empty_table($this->table1);
 }
 
+/// get_by_nama
+public function get_by_nama($nama, $tgl_lahir)
+{
+    $this->db->select('*');
+    $this->db->from ($this->table1);
+    $this->db->join ($this->table2, 'tb_nilai_hasil.id_peserta = tb_peserta.id_peserta');
+    $this->db->order_by('hasil', 'DESC');
+    return $this->db->get();
+}
+
 }
