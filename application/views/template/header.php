@@ -127,9 +127,9 @@ if($this->session->userdata('level') =="1"){
                         <?php if($this->session->userdata('level') == "1"){ ?>
                         <span>Administrator</span>
                           <?php }elseif($this->session->userdata('level') == "2"){ ?>
-                          <span>Dokter</span> 
+                          <span>Admin</span> 
                           <?php }elseif($this->session->userdata('level') == "3"){ ?>
-                            <span>Pasien</span>                 
+                            <span>Juri</span>                 
                         <?php } ?> 
                   </small>
                   </span>
@@ -142,7 +142,7 @@ if($this->session->userdata('level') =="1"){
                   <a href="<?= base_url('admin/user_admin') ?>" class="btn btn-default btn-flat">Profile</a>
                 </div>
                 <div class="pull-right">
-                <a href="javascript:void(0)" onclick="keluar()" class="btn btn-default btn-flat">Sign out</a>
+                <a href="javascript:void(0)" onclick="keluar()" class="btn btn-default btn-flat">Keluar</a>
                 </div>
               </li>
               <?php }elseif($this->session->userdata('level') == "2"){ ?>
@@ -151,7 +151,7 @@ if($this->session->userdata('level') =="1"){
                   <a href="<?= base_url('dokter/profile') ?>" class="btn btn-default btn-flat">Profile</a>
                 </div>
                 <div class="pull-right">
-                <a href="javascript:void(0)" onclick="keluar()" class="btn btn-default btn-flat">Sign out</a>
+                <a href="javascript:void(0)" onclick="keluar()" class="btn btn-default btn-flat">Keluar</a>
                 </div>
               </li>
               <?php }elseif($this->session->userdata('level') == "3"){ ?>
@@ -160,7 +160,7 @@ if($this->session->userdata('level') =="1"){
                   <a href="<?= base_url('pasien/profile') ?>" class="btn btn-default btn-flat">Profile</a>
                 </div>
                 <div class="pull-right">
-                <a href="javascript:void(0)" onclick="keluar()" class="btn btn-default btn-flat">Sign out</a>
+                <a href="javascript:void(0)" onclick="keluar()" class="btn btn-default btn-flat">Keluar</a>
                 </div>
               </li>
               <?php } ?>
@@ -195,9 +195,9 @@ if($this->session->userdata('level') =="1"){
                 <?php if($this->session->userdata('level') == "1"){ ?>
                 <span>Administrator</span>
                   <?php }elseif($this->session->userdata('level') == "2"){ ?>
-                  <span>Dokter</span>     
+                  <span>Admin</span>     
                   <?php }elseif($this->session->userdata('level') == "3"){ ?>
-                    <span>Pasien</span>             
+                    <span>Juri</span>             
               <?php } ?> 
         </small>
         </span>
@@ -392,7 +392,7 @@ if($this->session->userdata('level') =="1"){
   
 <?php } ?>
   <!-- logout -->
-  <li> <a href="javascript:void(0)" onclick="keluar()"><i class="fa fa-sign-out"></i> <span>Sign out</span></a></li>
+  <li> <a href="javascript:void(0)" onclick="keluar()"><i class="fa fa-sign-out"></i> <span>Keluar</span></a></li>
   <li class="header">END MAIN NAVIGATION</li>
       </ul>
     </section>

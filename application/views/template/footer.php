@@ -9,8 +9,8 @@
     //ajax keluar dari halaman admin
     function keluar() {
         swal({
-            title: "Keluar Dari Halaman <?php echo $this->session->userdata('level'); ?> ?",
-            text: "Anda Akan Keluar Dari Halaman <?php echo $this->session->userdata('level'); ?>, <?php echo $this->session->userdata('nama'); ?> ?",
+            title: "Keluar Dari Halaman ?",
+            text: "Anda Akan Keluar Dari Halaman <?php echo $this->session->userdata('nama'); ?> ?",
             type: "warning",
             showCancelButton: true,
             confirmButtonColor: "#3CB371",
@@ -27,7 +27,7 @@
                 }).done(function() {
                     swal({
                         title: "Berhasil",
-                        text: "Anda Telah Keluar Dari Halaman <?php echo $this->session->userdata('level'); ?>, <?php echo $this->session->userdata('nama'); ?>",
+                        text: "Anda Telah Keluar Dari Halaman <?php echo $this->session->userdata('nama'); ?>",
                         type: "success",
                         showConfirmButton: true,
                         confirmButtonText: "OKEE"
@@ -37,7 +37,7 @@
                 }).fail(function() {
                     swal({
                         title: "Gagal",
-                        text: "Anda Gagal Keluar Dari Halaman <?php echo $this->session->userdata('level'); ?>, <?php echo $this->session->userdata('nama'); ?>",
+                        text: "Anda Gagal Keluar Dari Halaman <?php echo $this->session->userdata('nama'); ?>",
                         type: "error",
                         showConfirmButton: true,
                         confirmButtonText: "OKEE"
@@ -46,7 +46,7 @@
                     });
                 });
             } else { // If the user clicked on the cancel button, show a message indicating that the deletion was cancelled
-                swal("Batal Keluar", "Anda Batal Keluar Dari Halaman <?php echo $this->session->userdata('level'); ?>, <?php echo $this->session->userdata('nama'); ?>", "error");
+                swal("Batal Keluar", "Anda Batal Keluar Dari Halaman <?php echo $this->session->userdata('nama'); ?>", "error");
             }
         });
     }

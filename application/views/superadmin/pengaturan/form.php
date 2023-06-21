@@ -159,7 +159,7 @@
 
         $.ajax({
             type: "POST",
-            url: "<?php echo site_url('admin/pengaturan/api_edit/') ?>" + form_data.get(
+            url: "<?php echo site_url('superadmin/pengaturan/api_edit/') ?>" + form_data.get(
                 'id_pengaturan'),
             dataType: "json",
             data: form_data,
@@ -200,7 +200,7 @@
 
         $.ajax({
             type: "POST",
-            url: "<?php echo site_url('admin/pengaturan/api_upload/') ?>" + form_data.get(
+            url: "<?php echo site_url('superadmin/pengaturan/api_upload/') ?>" + form_data.get(
                 'id_pengaturan'),
             dataType: "json",
             data: form_data,
@@ -251,7 +251,7 @@
             if (result.value) { // Only delete the data if the user clicked on the confirm button
                 $.ajax({
                     type: "POST",
-                    url: "<?php echo site_url('admin/pengaturan/api_hapus/') ?>" + id_pengaturan,
+                    url: "<?php echo site_url('superadmin/pengaturan/api_hapus/') ?>" + id_pengaturan,
                     dataType: "json",
                 }).done(function() {
                     swal({

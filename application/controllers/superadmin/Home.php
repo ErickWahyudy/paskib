@@ -38,6 +38,7 @@ class Home extends CI_controller
 		'superadmin'        => $this->db->get_where('tb_pengguna', ['id_level' => '1'])->num_rows(),
         'admin'          	=> $this->db->get_where('tb_pengguna', ['id_level' => '2'])->num_rows(),
         'juri'          	=> $this->db->get_where('tb_pengguna', ['id_level' => '3'])->num_rows(),
+		'peserta'          	=> $this->db->get_where('tb_peserta')->num_rows(),
 
      );
 	 $this->load->view('superadmin/home',$view);

@@ -103,7 +103,7 @@ class Login extends CI_controller
               'logo'              =>$data['logo'],
             );
   
-  $this->load->view('login',$x);
+  $this->load->view('landingpage/login',$x);
 
 }
 

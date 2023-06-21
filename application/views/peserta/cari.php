@@ -42,7 +42,7 @@
     <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/sweetalert2@7.12.15/dist/sweetalert2.min.css'>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@7.12.15/dist/sweetalert2.all.min.js"></script>
 
-<body class="hold-transition" background="<?= base_url('themes/landingpage') ?>/img/img/bgmember.jpg" style="background-size: cover; background-attachment: fixed;">
+<body class="hold-transition" background="<?= base_url('themes/admin/dist') ?>/home1.jpg" style="background-size: cover; background-attachment: fixed;">
 <div class="login-box">
    
 <?= $this->session->flashdata('pesan') ?>
@@ -57,18 +57,18 @@
 			</center>
     <form action="" method="post">
       <div class="form-group has-feedback">
-        <input type="text" class="form-control" name="nama_peserta" placeholder="Nama yang terdaftar" required="" >
+        <input type="text" class="form-control" name="nama_peserta" placeholder="Nama yang terdaftar" required="" autocomplete="off">
         <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
       </div>
       <div class="form-group has-feedback">
-        <input type="date" class="form-control" name="tgl_lahir" placeholder="Password" required="" autocomplete="off">
+        <input type="date" class="form-control" name="tgl_lahir" placeholder="tgl lahir" required="" autocomplete="off" value="<?= date('Y-m-d') ?>">
         <span class="glyphicon glyphicon-lock form-control-feedback"></span>
       </div>
       <div class="row">
         <!-- /.col -->
         <div class="box-footer">
 						<button type="submit" class="btn btn-primary btn-block" name="login" title="Masuk Sistem">
-							<b>LOGIN</b>
+							<b>Lihat Nilai</b>
 						</button> <br>
         		<center>
 							<strong>Copyright &copy; <?php echo date('Y'); ?>

@@ -114,7 +114,7 @@ if($this->session->userdata('level') =="peserta"){
               
                 <li class="user-footer">
                 <div class="pull-right">
-                <a href="javascript:void(0)" onclick="keluar()" class="btn btn-default btn-flat">Sign out</a>
+                <a href="javascript:void(0)" onclick="keluar()" class="btn btn-default btn-flat">Keluar</a>
                 </div>
               </li>
             </ul>
@@ -163,7 +163,7 @@ if($this->session->userdata('level') =="peserta"){
   
 <?php } ?>
   <!-- logout -->
-  <li> <a href="javascript:void(0)" onclick="keluar()"><i class="fa fa-sign-out"></i> <span>Sign out</span></a></li>
+  <li> <a href="javascript:void(0)" onclick="keluar()"><i class="fa fa-sign-out"></i> <span>Keluar</span></a></li>
   <li class="header">END MAIN NAVIGATION</li>
       </ul>
     </section>

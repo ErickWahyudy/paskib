@@ -33,7 +33,7 @@ class Cari extends CI_controller
         $DataPeserta=$peserta->row_array();
         $sessionPeserta = array(
             'peserta'           => TRUE,
-        	'id_peserta'        => $DataPeserta['id_peserta'],
+        	  'id_peserta'        => $DataPeserta['id_peserta'],
             'nama_peserta'      => $DataPeserta['nama_peserta'],
             'tgl_lahir'         => $DataPeserta['tgl_lahir'],
             'asal_sekolah'      => $DataPeserta['asal_sekolah'],
@@ -46,7 +46,7 @@ class Cari extends CI_controller
      }else{
           $pesan='<script>
                   swal({
-                      title: "Nama / Tgl Lahir Salah Atau Akun Anda Tidak Ada",
+                      title: "Nama / Tgl Lahir Salah Atau Data Anda Tidak Ada",
                       type: "error",
                       showConfirmButton: true,
                       confirmButtonText: "OKEE"
