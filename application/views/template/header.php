@@ -295,7 +295,7 @@ if($this->session->userdata('level') =="1"){
 <?php }elseif($this->session->userdata('level') == "2"){ ?>
 
   <li class="">
-          <a href="<?= base_url('dokter/home') ?>">
+          <a href="<?= base_url('admin/home') ?>">
             <i class="fa fa-dashboard"></i> <span>Dasboard</span>
             <span class="pull-right-container">
               <small class="label pull-right bg-green">Home</small>
@@ -303,27 +303,47 @@ if($this->session->userdata('level') =="1"){
           </a>
         </li>
         <li class="header">OLAH DATA</li>
- <li class="treeview"> 
       <li class="treeview">
           <a href="#">
-            <i class="fa fa-stethoscope"></i> <span>Data Periksa</span>
+            <i class="fa fa-star"></i> <span>Data Nilai</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
           </a>
           <ul class="treeview-menu active">
-          <li><a href="<?= base_url('dokter/periksa/antrian') ?>" class="active"><i class="fa fa-clock-o"></i> <span>Antrian Periksa </span></a></li>
-          <li><a href="<?= base_url('dokter/periksa/sudah') ?>"><i class="fa fa-check-square-o"></i> <span>Sudah Diperiksa </span></a></li>
-          <li><a href="<?= base_url('dokter/periksa/batal') ?>"><i class="fa fa-ban"></i> <span>Batal Diperiksa </span></a></li>
+              <li class="treeview">
+                  <a href="#">
+                    <i class="fa fa-eye"></i> <span>Lihat Nilai</span>
+                    <span class="pull-right-container">
+                      <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                  </a>
+                  <ul class="treeview-menu active">
+                  <li><a href="<?= base_url('admin/nilai/jasmani/lihat') ?>" class="active"><i class="fa fa-circle-o"></i>Jasmani</a></li>
+                  <li><a href="<?= base_url('admin/nilai/parade/lihat') ?>" class="active"><i class="fa fa-circle-o"></i>Parade</a></li>
+                  <li><a href="<?= base_url('admin/nilai/pbb/lihat') ?>" class="active"><i class="fa fa-circle-o"></i>PBB</a></li>
+                  </ul>
+              </li>
+              <li class="treeview">
+                  <a href="#">
+                    <i class="fa fa-calculator"></i> <span>Perhitungan Nilai</span>
+                    <span class="pull-right-container">
+                      <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                  </a>
+                  <ul class="treeview-menu active">
+                  <li><a href="<?= base_url('admin/nilai/matriks/kriteria') ?>" class="active"><i class="fa fa-circle-o"></i>Kriteria</a></li>
+                  <li><a href="<?= base_url('admin/nilai/matriks/matriks') ?>" class="active"><i class="fa fa-circle-o"></i>Matriks</a></li>
+                  <li><a href="<?= base_url('admin/nilai/nilai_hasil') ?>" class="active"><i class="fa fa-circle-o"></i>Hasil Akhir</a></li>
+                  </ul>
+              </li>            
           </ul>
       </li>
-      <li><a href="<?= base_url('dokter/pasien'); ?>"><i class="fa fa-users"></i> <span>Data Pasien</span></a></li>
-      
-  </li> 
-  <li class="header">OTHER</li>
-      <li><a href="<?= base_url('dokter/informasi'); ?>"><i class="fa fa-bullhorn"></i> <span>Layanan Informasi </span></a></li>
-      <li><a href="<?= base_url('dokter/profile'); ?>"><i class="fa fa-user"></i> <span>Data Profile </span></a></li>
-   </li> 
+      <li><a href="<?= base_url('admin/peserta'); ?>"><i class="fa fa-users"></i> <span>Data Peserta</span></a></li>
+      <li><a href="<?= base_url('admin/pengguna/juri'); ?>"><i class="fa fa-user"></i> <span>Data Juri</span></a></li>
+ 
+      <li class="header">OTHER</li>
+      <li><a href="<?= base_url('admin/profile'); ?>"><i class="fa fa-user"></i> <span>Akun Profile</span></a></li>
 
    <?php }elseif($this->session->userdata('level') == "3"){ ?>
 

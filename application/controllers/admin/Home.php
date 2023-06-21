@@ -23,7 +23,7 @@ class Home extends CI_controller
       $this->load->library('session');
       
 	 // error_reporting(0);
-	 if($this->session->userdata('superadmin') != TRUE){
+	 if($this->session->userdata('admin') != TRUE){
      redirect(base_url(''));
      exit;
 	};
@@ -41,7 +41,7 @@ class Home extends CI_controller
 		'peserta'          	=> $this->db->get_where('tb_peserta')->num_rows(),
 
      );
-	 $this->load->view('superadmin/home',$view);
+	 $this->load->view('admin/home',$view);
 	}
 	
 }
