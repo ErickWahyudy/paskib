@@ -35,20 +35,10 @@ class Home extends CI_controller
 	{
 	 $view = array(
         'judul'            	=>'Halaman Administrator',
-        'juri'          	=> $this->db->get_where('tb_pengguna', ['id_level' => '3'])->num_rows(),
-		'peserta'          	=> $this->db->get_where('tb_peserta')->num_rows(),
 
      );
-	 $this->load->view('juri/home',$view);
+	 $this->load->view('template/home',$view);
 	}
-
-public function keluar($value='')
-{
-
-$this->session->sess_destroy();
-echo "<script>alert('Anda Telah Keluar Dari Halaman Administrator')</script>";;
-redirect(base_url(''));
-}
 
 	
 }

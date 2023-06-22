@@ -63,6 +63,7 @@ class Peserta extends CI_controller
               };
        return $newID;
      }
+     
 
   //API add peserta
   public function api_add($value='')

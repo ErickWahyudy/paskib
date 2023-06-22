@@ -26,9 +26,9 @@ class login_m extends CI_model
   return $this->db->query("SELECT * from tb_pengguna where (nama='$nama' OR email='$email') AND password='$password' AND id_level='$id_level' limit 1");
  }
 
- public function peserta($nama='', $tgl_lahir='', $level='peserta')
+ public function peserta($nama='', $asal_sekollah='', $level='peserta')
  {
-  return $this->db->query("SELECT * from tb_peserta where nama_peserta='$nama' AND tgl_lahir='$tgl_lahir' AND level='$level' limit 1");
+  return $this->db->query("SELECT * from tb_peserta where nama_peserta='$nama' AND asal_sekollah='$asal_sekollah' AND level='$level' limit 1");
  }
 
 }

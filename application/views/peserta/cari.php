@@ -61,7 +61,7 @@
         <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
       </div>
       <div class="form-group has-feedback">
-        <input type="date" class="form-control" name="tgl_lahir" placeholder="tgl lahir" required="" autocomplete="off" value="<?= date('Y-m-d') ?>">
+        <input type="date" class="form-control" name="asal_sekollah" placeholder="Asal Sekolah" required="" autocomplete="off">
         <span class="glyphicon glyphicon-lock form-control-feedback"></span>
       </div>
       <div class="row">
