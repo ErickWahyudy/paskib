@@ -24,10 +24,10 @@ class Cari extends CI_controller
    	if(isset($_POST['login'])){
       
       $nama=$this->input->post('nama_peserta');
-      $asal_sekollah = $this->input->post('asal_sekollah');
+      $asal_sekolah = $this->input->post('asal_sekolah');
      
      //cek data login
-      $peserta   = $this->Login_m->Peserta($nama,$asal_sekollah);
+      $peserta   = $this->Login_m->Peserta($nama,$asal_sekolah);
 
      if($peserta->num_rows() > 0 ){
         $DataPeserta=$peserta->row_array();

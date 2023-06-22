@@ -118,144 +118,39 @@ class Nilai_hasil extends CI_controller
       $this->load->view('peserta/nilai_hasil',$view);
     } 
 
-    //nilai kriteria tinggi bb
-    public function NilaiKriteriaTinggiBB($tinggi_bb)
-    {
-        // Logika perhitungan nilai kriteria
-        if ($tinggi_bb >= 165 && $tinggi_bb <= 171) {
-            $nilai = 3;
-        } elseif ($tinggi_bb >= 172 && $tinggi_bb <= 175) {
-            $nilai = 2;
-        } elseif ($tinggi_bb >= 176 && $tinggi_bb <= 190) {
-            $nilai = 1;
-        } else {
-            $nilai = 0; // Nilai default jika berat badan tidak masuk ke dalam rentang yang ditentukan
-        }
-
-        return $nilai;
-    }
-
-    //nilai kriteria berat bb
-    public function NilaiKriteriaBeratBB($berat_bb)
-    {
-        // Logika perhitungan nilai kriteria
-        if ($berat_bb >= 50 && $berat_bb <= 65) {
-            $nilai = 3;
-        } elseif ($berat_bb >= 66 && $berat_bb <= 75) {
-            $nilai = 2;
-        } elseif ($berat_bb >= 76 && $berat_bb <= 90) {
-            $nilai = 1;
-        } else {
-            $nilai = 0; // Nilai default jika berat badan tidak masuk ke dalam rentang yang ditentukan
-        }
-
-        return $nilai;
-    }
-
-    
-    private function acak_id($panjang)
-    {
-        $karakter = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890';
-        $string = '';
-        for ($i = 0; $i < $panjang; $i++) {
-            $pos = rand(0, strlen($karakter) - 1);
-            $string .= $karakter{$pos};
-        }
-        return $string;
-    }
-   
-
-    //mengambil id antrian urut terakhir dan acak 5 digit
-    private function id_nilai($value='')
-    {
-    $this->m_nilai_hasil->id_urut();
-    $query   = $this->db->get();
-    $data    = $query->row_array();
-    $id      = $data['id_nilai'];
-    $karakter= $this->acak_id(5);
-    $urut    = substr($id, 1, 3);
-    $tambah  = (int) $urut + 1;
-    
-    if (strlen($tambah) == 1){
-    $newID = "H"."00".$tambah.$karakter;
-        }else if (strlen($tambah) == 2){
-        $newID = "H"."0".$tambah.$karakter;
-            }else (strlen($tambah) == 3){
-            $newID = "H".$tambah.$karakter
-            };
-        return $newID;
-    }
-
-
-  //API add jasmani
-  public function api_add($value='')
-  {
-    $rules = array(
-      array(
-        'field' => 'id_peserta[]',
-        'label' => 'id_peserta',
-        'rules' => 'required'
-      ),
-      array(
-        'field' => 'hasil[]',
-        'label' => 'hasil',
-        'rules' => 'required'
-      ),
-    );
-    $this->form_validation->set_rules($rules);
-    if ($this->form_validation->run() == FALSE) {
-      $pesan=array(
-        'status'  =>FALSE,
-        'pesan'   =>'Tidak ada data yang di kirim');
-      echo json_encode($pesan);
-    }else{
-        $aid        =$this->input->post('id_peserta');
-        $ahasil     =$this->input->post('hasil');
-
-        if(!empty($aid)){
-          for ($i=0; $i < count($aid); $i++) { 
-            $id_peserta       =$aid[$i];
-            $hasil            =$ahasil[$i];
-            $id_nilai         =$this->id_nilai();
-            $SQLinsert        =array(
-                                    'id_nilai'    =>$id_nilai,
-                                    'id_peserta'    =>$id_peserta,
-                                    'hasil'         =>$hasil,
-                                  );
-            $this->m_nilai_hasil->add($SQLinsert);
+        //nilai kriteria tinggi bb
+        public function NilaiKriteriaTinggiBB($tinggi_bb)
+        {
+            // Logika perhitungan nilai kriteria
+            if ($tinggi_bb >= 165 && $tinggi_bb <= 171.9) {
+                $nilai = 1;
+            } elseif ($tinggi_bb >= 172 && $tinggi_bb <= 175.9) {
+                $nilai = 2;
+            } elseif ($tinggi_bb >= 176 && $tinggi_bb <= 190) {
+                $nilai = 3;
+            } else {
+                $nilai = 0; // Nilai default jika berat badan tidak masuk ke dalam rentang yang ditentukan
             }
-            $pesan=array(
-              'status'  =>TRUE,
-              'pesan'   =>'Berhasil menambahkan data');
-            echo json_encode($pesan);
-            }else{
-                $pesan=array(
-                    'status'  =>FALSE,
-                    'pesan'   =>'Tidak ada data yang di kirim');
-                echo json_encode($pesan);
-                }
-            }
+  
+            return $nilai;
         }
-
-
-     //API hapus
-     public function api_empty_table($value='')
-     {
-       if ($this->m_nilai_hasil->delete_semua_data()) {
-         $response = [
-           'status' => true,
-           'message' => 'Berhasil menghapus data'
-         ];
-       } else {
-         $response = [
-           'status' => false,
-           'message' => 'Gagal menghapus data'
-         ];
-       }
-       $this->output
-           ->set_content_type('application/json')
-           ->set_output(json_encode($response));
-     }
+  
+        //nilai kriteria berat bb
+        public function NilaiKriteriaBeratBB($berat_bb)
+        {
+            // Logika perhitungan nilai kriteria
+            if ($berat_bb >= 50 && $berat_bb <= 65) {
+                $nilai = 3;
+            } elseif ($berat_bb >= 64.9 && $berat_bb <= 75) {
+                $nilai = 2;
+            } elseif ($berat_bb >= 74.9 && $berat_bb <= 90) {
+                $nilai = 1;
+            } else {
+                $nilai = 0; // Nilai default jika berat badan tidak masuk ke dalam rentang yang ditentukan
+            }
+  
+            return $nilai;
+        }
      
 	
 }

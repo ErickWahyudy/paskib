@@ -61,8 +61,15 @@
         <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
       </div>
       <div class="form-group has-feedback">
-        <input type="date" class="form-control" name="asal_sekollah" placeholder="Asal Sekolah" required="" autocomplete="off">
-        <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+        <select name="asal_sekolah" class="form-control" required="">
+          <option value="">--Pilih Sekolah--</option>
+          <?php $sekolah = $this->db->get('tb_peserta')->result_array(); ?>
+           <?php foreach($sekolah as $sklh): ?>
+            <option value="<?= $sklh['asal_sekolah'] ?>">
+             <?= ucfirst($sklh['asal_sekolah']) ?>
+            </option>
+           <?php endforeach; ?>	
+        </select>
       </div>
       <div class="row">
         <!-- /.col -->

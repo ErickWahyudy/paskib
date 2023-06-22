@@ -22,6 +22,7 @@ class Matriks extends CI_controller
    $this->load->model('m_pengguna');
    $this->load->model('m_kriteria');
    $this->load->model('m_matriks');
+   $this->load->model('m_nilai_hasil');
    $this->load->model('m_pengaturan');
 	}
 
@@ -31,9 +32,9 @@ class Matriks extends CI_controller
       
       $peserta      = $this->m_matriks->view_peserta()->result_array();
       $nilai        = $this->m_matriks->view_nilai()->result_array();
-      $kriteria     = $this->m_matriks->view_kriteria()->result_array();     
-       
-
+      $kriteria     = $this->m_matriks->view_kriteria()->result_array();
+      $view['data'] = $this->m_nilai_hasil->view()->result_array();
+      
         //Perhitungan Moora
         $criteria = $this->m_kriteria->view()->result_array();
         $criteria = array_column($criteria, 'kriteria'); // Menggunakan kolom kriteria sebagai kriteria
@@ -66,11 +67,11 @@ class Matriks extends CI_controller
           $view['pesan'] = 'Tidak ada data';
         } else {
   
-        
 
         // Hitung jumlah kriteria dan alternatif
         $numCriteria = count($criteria);
         $numAlternatives = count($peserta);
+
 
         // Normalisasi bobot
         $sumWeights = array_sum($weights);
@@ -78,16 +79,24 @@ class Matriks extends CI_controller
         foreach ($weights as $weight) {
             $normalizedWeights[] = $weight / $sumWeights;
         }
+
+         // Normalisasi matriks kriteria (Xij / √∑Xij^2)
+          $normalizedMatrix = [];
+          for ($i = 0; $i < $numAlternatives; $i++) {
+              $normalizedMatrix[$i] = [];
+              for ($j = 0; $j < $numCriteria; $j++) {
+                  $normalizedMatrix[$i][$j] = $matrix[$i][$j] / sqrt(array_sum(array_column($matrix, $j)));
+              }
+          }
        
 
-        // Hitung nilai Moora
+        // optimasi nilai (Hasil Optimasi = ∑Wj * Xij) dari matriks normalisasi dan bobot kriteria
         $results = [];
         for ($i = 0; $i < $numAlternatives; $i++) {
-            $result = 0;
+            $results[$i] = 0;
             for ($j = 0; $j < $numCriteria; $j++) {
-                $result += $matrix[$i][$j] * $normalizedWeights[$j];
+                $results[$i] += $normalizedWeights[$j] * $normalizedMatrix[$i][$j];
             }
-            $results[] = $result;
         }
         
       // Tampilkan hasil moora ke view
@@ -95,56 +104,55 @@ class Matriks extends CI_controller
       $view['criteria'] = $criteria;
       $view['weights'] = $weights;
       $view['matrix'] = $matrix;
+      $view['normalizedMatrix'] = $normalizedMatrix;
       $view['alternatives'] = array_column($peserta, 'nama_peserta'); // Menggunakan kolom nama_peserta sebagai alternatif
       $view['results'] = $results; // Hasil perhitungan metode Moora
       }
  
       //view
-      $view['judul']                ='Nilai Matriks';
+      $view['judul']                ='Data Hasil Nilai';
+      $view['judul2']               ='Data Alternatif';
       $view['nama_peserta']         =$peserta;
       $view['view_kriteria']        =$kriteria;
-      $view['data']                 =$nilai;
       $view['nilai_peserta']        =$nilai;
       
                  
-      $this->load->view('juri/nilai/total_nilai/lihat',$view);
+      $this->load->view('juri/nilai/total_nilai/hasil',$view);
     }
  
 
-      //nilai kriteria tinggi bb
+     //nilai kriteria tinggi bb
       public function NilaiKriteriaTinggiBB($tinggi_bb)
       {
           // Logika perhitungan nilai kriteria
-          if ($tinggi_bb >= 165 && $tinggi_bb <= 171) {
-              $nilai = 3;
-          } elseif ($tinggi_bb >= 172 && $tinggi_bb <= 175) {
+          if ($tinggi_bb >= 165 && $tinggi_bb <= 171.9) {
+              $nilai = 1;
+          } elseif ($tinggi_bb >= 172 && $tinggi_bb <= 175.9) {
               $nilai = 2;
           } elseif ($tinggi_bb >= 176 && $tinggi_bb <= 190) {
-              $nilai = 1;
+              $nilai = 3;
           } else {
               $nilai = 0; // Nilai default jika berat badan tidak masuk ke dalam rentang yang ditentukan
           }
-  
+
           return $nilai;
       }
-  
+
       //nilai kriteria berat bb
       public function NilaiKriteriaBeratBB($berat_bb)
       {
           // Logika perhitungan nilai kriteria
           if ($berat_bb >= 50 && $berat_bb <= 65) {
               $nilai = 3;
-          } elseif ($berat_bb >= 66 && $berat_bb <= 75) {
+          } elseif ($berat_bb >= 64.9 && $berat_bb <= 75) {
               $nilai = 2;
-          } elseif ($berat_bb >= 76 && $berat_bb <= 90) {
+          } elseif ($berat_bb >= 74.9 && $berat_bb <= 90) {
               $nilai = 1;
           } else {
               $nilai = 0; // Nilai default jika berat badan tidak masuk ke dalam rentang yang ditentukan
           }
-  
-          return $nilai;
-      } 
 
-    
+          return $nilai;
+      }   
 
 }

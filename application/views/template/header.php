@@ -235,8 +235,8 @@ if($this->session->userdata('level') =="1"){
                   </a>
                   <ul class="treeview-menu active">
                   <li><a href="<?= base_url('superadmin/nilai/jasmani/lihat') ?>" class="active"><i class="fa fa-circle-o"></i>Jasmani</a></li>
-                  <li><a href="<?= base_url('superadmin/nilai/parade/lihat') ?>" class="active"><i class="fa fa-circle-o"></i>Parade</a></li>
                   <li><a href="<?= base_url('superadmin/nilai/pbb/lihat') ?>" class="active"><i class="fa fa-circle-o"></i>PBB</a></li>
+                  <li><a href="<?= base_url('superadmin/nilai/parade/lihat') ?>" class="active"><i class="fa fa-circle-o"></i>Parade</a></li>
                   </ul>
               </li>
               <li class="treeview">
@@ -320,8 +320,8 @@ if($this->session->userdata('level') =="1"){
                   </a>
                   <ul class="treeview-menu active">
                   <li><a href="<?= base_url('admin/nilai/jasmani/lihat') ?>" class="active"><i class="fa fa-circle-o"></i>Jasmani</a></li>
-                  <li><a href="<?= base_url('admin/nilai/parade/lihat') ?>" class="active"><i class="fa fa-circle-o"></i>Parade</a></li>
                   <li><a href="<?= base_url('admin/nilai/pbb/lihat') ?>" class="active"><i class="fa fa-circle-o"></i>PBB</a></li>
+                  <li><a href="<?= base_url('admin/nilai/parade/lihat') ?>" class="active"><i class="fa fa-circle-o"></i>Parade</a></li>
                   </ul>
               </li>
               <li class="treeview">
@@ -373,23 +373,11 @@ if($this->session->userdata('level') =="1"){
                   </a>
                   <ul class="treeview-menu active">
                   <li><a href="<?= base_url('juri/nilai/jasmani/lihat') ?>" class="active"><i class="fa fa-circle-o"></i>Jasmani</a></li>
-                  <li><a href="<?= base_url('juri/nilai/parade/lihat') ?>" class="active"><i class="fa fa-circle-o"></i>Parade</a></li>
                   <li><a href="<?= base_url('juri/nilai/pbb/lihat') ?>" class="active"><i class="fa fa-circle-o"></i>PBB</a></li>
+                  <li><a href="<?= base_url('juri/nilai/parade/lihat') ?>" class="active"><i class="fa fa-circle-o"></i>Parade</a></li>
                   </ul>
               </li>
-              <li class="treeview">
-                  <a href="#">
-                    <i class="fa fa-calculator"></i> <span>Perhitungan Nilai</span>
-                    <span class="pull-right-container">
-                      <i class="fa fa-angle-left pull-right"></i>
-                    </span>
-                  </a>
-                  <ul class="treeview-menu active">
-                  <li><a href="<?= base_url('juri/nilai/matriks') ?>" class="active"><i class="fa fa-circle-o"></i>Matriks Normalisasi</a></li>
-                  <li><a href="<?= base_url('juri/nilai/matriks') ?>" class="active"><i class="fa fa-circle-o"></i>Optimasi</a></li>
-                  <li><a href="<?= base_url('juri/nilai/matriks') ?>" class="active"><i class="fa fa-circle-o"></i>Hasil Akhir</a></li>
-                  </ul>
-              </li>
+              <li><a href="<?= base_url('juri/nilai/nilai_hasil'); ?>"><i class="fa fa-calculator"></i> <span>Hasil Nilai Total</span></a></li>
               <li class="treeview">
                   <a href="#">
                     <i class="fa fa-pencil"></i> <span>Input Nilai</span>

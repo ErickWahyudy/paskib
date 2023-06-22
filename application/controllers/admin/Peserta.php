@@ -96,7 +96,6 @@ class Peserta extends CI_controller
       $SQLinsert = [
         'id_peserta'            =>$this->id_peserta_urut(),
         'nama_peserta'          =>$this->input->post('nama_peserta'),
-        'tgl_lahir'             =>$this->input->post('tgl_lahir'),
         'asal_sekolah'          =>$this->input->post('asal_sekolah'),
         'tinggi_bb'             =>$this->input->post('tinggi_bb'),
         'berat_bb'              =>$this->input->post('berat_bb'),
@@ -151,7 +150,6 @@ class Peserta extends CI_controller
         } else {
           $SQLupdate = [
             'nama_peserta'        => $this->input->post('nama_peserta'),
-            'tgl_lahir'           => $this->input->post('tgl_lahir'),
             'asal_sekolah'        => $this->input->post('asal_sekolah'),
             'tinggi_bb'           => $this->input->post('tinggi_bb'),
             'berat_bb'            => $this->input->post('berat_bb')

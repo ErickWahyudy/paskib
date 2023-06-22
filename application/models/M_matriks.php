@@ -8,19 +8,16 @@ class M_matriks extends CI_model
 
 private $table1 = 'tb_matriks';
 private $table2 = 'tb_peserta';
-private $table3 = 'tb_pengguna';
-private $table4 = 'tb_kriteria';
+private $table3 = 'tb_kriteria';
 
 //dokter
 public function view_nilai($id_peserta='')
 {
   $this->db->select ('*');
-  $this->db->from ($this->table4);
+  $this->db->from ($this->table3);
   $this->db->join ($this->table1, 'tb_matriks.id_kriteria = tb_kriteria.id_kriteria');
   $this->db->join ($this->table2, 'tb_matriks.id_peserta = tb_peserta.id_peserta');
   $this->db->where('tb_matriks.id_peserta', $id_peserta);
-  $this->db->where('tb_peserta.id_peserta', $id_peserta);
-  $this->db->order_by('tb_matriks.hasil', 'ASC');
   return $this->db->get();
 }
 
@@ -43,7 +40,7 @@ public function view_peserta()
 public function view_kriteria($value='')
 {
   $this->db->select('*');
-  $this->db->from($this->table4);
+  $this->db->from($this->table3);
   $this->db->order_by('id_kriteria', 'ASC');
   return $this->db->get();
 }

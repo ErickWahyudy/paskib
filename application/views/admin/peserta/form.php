@@ -10,8 +10,6 @@
             <tr>
                 <th>No</th>
                 <th>Nama</th>
-                <th>Tgl Lahir</th>
-                <th>Usia</th>
                 <th>Asal Sekolah</th>
                 <th>Tinggi Badan</th>
                 <th>Berat Badan</th>
@@ -23,8 +21,6 @@
             <tr>
                 <td><?= $no ?></td>
                 <td><?= $peserta['nama_peserta'] ?></td>
-                <td><?= tgl_indo($peserta['tgl_lahir']) ?></td>
-                <td><?= hitung_usia($peserta['tgl_lahir']) ?> Tahun</td>
                 <td><?= $peserta['asal_sekolah'] ?></td>
                 <td><?= $peserta['tinggi_bb'] ?> cm</td>
                 <td><?= $peserta['berat_bb'] ?> kg</td>
@@ -58,24 +54,6 @@
                                 <td>
                                     <input type="text" name="nama_peserta" class="form-control" placeholder="nama"
                                         autocomplete="off" required="">
-                                </td>
-                            </tr>
-                            <tr>
-                                <th>Tgl Lahir</th>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <input type="date" name="tgl_lahir" id="tanggal-lahir" class="form-control"
-                                        value="<?= date('Y-m-d') ?>" required="">
-                                </td>
-                            </tr>
-                            <tr>
-                                <th>Usia</th>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <input type="number" id="umur" class="form-control" placeholder="umur"
-                                        autocomplete="off" required="" readonly>
                                 </td>
                             </tr>
                             <tr>
@@ -126,7 +104,7 @@
     </div>
     <!-- End Modal -->
 
-    <script>
+    <!-- <script>
     //mengambil data umur dari hasil inputan tgl lahir
     const tanggalLahirInput = document.getElementById("tanggal-lahir");
     const umurInput = document.getElementById("umur");
@@ -138,7 +116,7 @@
 
         umurInput.value = selisihTahun;
     });
-    </script>
+    </script> -->
 
     <!-- Modal edit data peserta-->
     <?php foreach($data as $peserta): ?>
@@ -169,15 +147,6 @@
                             <tr>
                                 <td>
                                     <input type="text" name="nama_peserta" value="<?= $peserta['nama_peserta'] ?>"
-                                        class="form-control" required="" autocomplete="off">
-                                </td>
-                            </tr>
-                            <tr>
-                                <th>Tgl Lahir</th>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <input type="date" name="tgl_lahir" value="<?= $peserta['tgl_lahir'] ?>"
                                         class="form-control" required="" autocomplete="off">
                                 </td>
                             </tr>
@@ -352,42 +321,3 @@
     </script>
 
     <?php $this->load->view('template/footer'); ?>
-
-    <?php 
-
-function hitung_usia($tanggal_lahir){
-    list($year,$month,$day) = explode("-",$tanggal_lahir);
-    $year_diff  = date("Y") - $year;
-    $month_diff = date("m") - $month;
-    $day_diff   = date("d") - $day;
-    if ($month_diff < 0) {
-        $year_diff--;
-    } elseif (($month_diff==0) && ($day_diff < 0)) {
-        $year_diff--;
-    }
-    return $year_diff;
-}
-
-//format hanya menampilkan tanggal bulan dan tahun
-function tgl_indo($tanggal){
-    $tgl = substr($tanggal, 8, 2);
-      $bln = array (
-          1 =>   'Januari',
-          2 =>   'Februari',
-          3 =>   'Maret',
-          4 =>   'April',
-          5 =>   'Mei',
-          6 =>   'Juni',
-          7 =>   'Juli',
-          8 =>   'Agustus',
-          9 =>   'September',
-          10 =>   'Oktober',
-          11 =>   'November',
-          12 =>   'Desember'
-      );
-      $bulan = $bln[(int)substr($tanggal, 5, 2)];
-      $tahun = substr($tanggal, 0, 4);
-      return $tgl.' '.$bulan.' '.$tahun;
-  }
-  
-?>

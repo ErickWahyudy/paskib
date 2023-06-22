@@ -46,19 +46,18 @@ public function delete($id=''){
 //nilai kriteria tinggi bb
 public function NilaiKriteriaTinggiBB($tinggi_bb)
 {
-    // Logika perhitungan nilai kriteria
-    if ($tinggi_bb >= 165 && $tinggi_bb <= 172) {
-        $nilai = 3;
-    } elseif ($tinggi_bb >= 172 && $tinggi_bb <= 176) {
-        $nilai = 2;
-    } elseif ($tinggi_bb >= 176 && $tinggi_bb <= 190) {
-        $nilai = 1;
-    } else {
-        $nilai = 0; // Nilai default jika berat badan tidak masuk ke dalam rentang yang ditentukan
-    }
-
-    return $nilai;
-}
+  // Logika perhitungan nilai kriteria
+  if ($tinggi_bb >= 165 && $tinggi_bb <= 171.9) {
+      $nilai = 1;
+    } elseif ($tinggi_bb >= 172 && $tinggi_bb <= 175.9) {
+       $nilai = 2;
+     } elseif ($tinggi_bb >= 176 && $tinggi_bb <= 190) {
+       $nilai = 3;
+      } else {
+       $nilai = 0; // Nilai default jika berat badan tidak masuk ke dalam rentang yang ditentukan
+       }
+      return $nilai;
+      }
 
 //nilai kriteria berat bb
 public function NilaiKriteriaBeratBB($berat_bb)
@@ -66,9 +65,9 @@ public function NilaiKriteriaBeratBB($berat_bb)
     // Logika perhitungan nilai kriteria
     if ($berat_bb >= 50 && $berat_bb <= 65) {
         $nilai = 3;
-    } elseif ($berat_bb >= 65 && $berat_bb <= 75) {
+    } elseif ($berat_bb >= 64.9 && $berat_bb <= 75) {
         $nilai = 2;
-    } elseif ($berat_bb >= 75 && $berat_bb <= 90) {
+    } elseif ($berat_bb >= 74.9 && $berat_bb <= 90) {
         $nilai = 1;
     } else {
         $nilai = 0; // Nilai default jika berat badan tidak masuk ke dalam rentang yang ditentukan
@@ -83,9 +82,9 @@ public function NilaiKriteriaJasmani($total)
         // Logika perhitungan nilai kriteria
         if ($total >= 77 && $total <= 90) {
             $nilai = 3;
-        } elseif ($total >= 71 && $total <= 77) {
+        } elseif ($total >= 71 && $total <= 76.9) {
             $nilai = 2;
-        } elseif ($total >= 65 && $total <= 71) {
+        } elseif ($total >= 65 && $total <= 70.9) {
             $nilai = 1;
         } else {
             $nilai = 0; // Nilai default jika berat badan tidak masuk ke dalam rentang yang ditentukan
@@ -100,9 +99,9 @@ public function NilaiKriteriaParade($total)
   // Logika perhitungan nilai kriteria
   if ($total >= 77 && $total <= 90) {
   $nilai = 3;
-   } elseif ($total >= 74 && $total <= 77) {
+   } elseif ($total >= 74 && $total <= 76.9) {
     $nilai = 2;
-      } elseif ($total >= 70 && $total <= 74) {
+      } elseif ($total >= 70 && $total <= 73.9) {
       $nilai = 1;
         } else {
          $nilai = 0; // Nilai default jika berat badan tidak masuk ke dalam rentang yang ditentukan
@@ -117,9 +116,9 @@ public function NilaiKriteriaPBB($total)
     // Logika perhitungan nilai kriteria
     if ($total >= 77 && $total <= 90) {
         $nilai = 3;
-    } elseif ($total >= 74 && $total <= 77) {
+    } elseif ($total >= 74 && $total <= 76.9) {
         $nilai = 2;
-    } elseif ($total >= 70 && $total <= 74) {
+    } elseif ($total >= 70 && $total <= 73.9) {
         $nilai = 1;
     } else {
         $nilai = 0; // Nilai default jika berat badan tidak masuk ke dalam rentang yang ditentukan
