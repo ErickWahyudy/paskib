@@ -77,7 +77,7 @@ if($aksi == "lihat"):
                         }
                     }
                         $total1 = $total1 / $juri = $this->m_pbb->view_juri()->num_rows();
-                        $total1 = number_format($total1, 2);
+                        $total1 = number_format($total1, 0);
                     ?>
                     <?= $total1 ?>
                 </td>
@@ -92,7 +92,7 @@ if($aksi == "lihat"):
                             $total2 += $nilai['nilai_gb'];
                         }                    }
                         $total2 = $total2 / $juri = $this->m_pbb->view_juri()->num_rows();
-                        $total2 = number_format($total2, 2);
+                        $total2 = number_format($total2, 0);
                     ?>
                     <?= $total2 ?>
                 </td>
@@ -108,7 +108,7 @@ if($aksi == "lihat"):
                         }
                     }
                         $total3 = $total3 / $juri = $this->m_pbb->view_juri()->num_rows();
-                        $total3 = number_format($total3, 2);
+                        $total3 = number_format($total3, 0);
                     ?>
                     <?= $total3 ?>
                 </td>
@@ -124,7 +124,7 @@ if($aksi == "lihat"):
                         }
                     }
                         $total4 = $total4 / $juri = $this->m_pbb->view_juri()->num_rows();
-                        $total4 = number_format($total4, 2);
+                        $total4 = number_format($total4, 0);
                     ?>
                     <?= $total4 ?>
                 </td>
@@ -135,9 +135,7 @@ if($aksi == "lihat"):
                         $total = 0;
                         $total = $total1 + $total2 + $total3;
                         $total = $total / 3;
-                        $total = number_format($total, 2);
-                        //membulatkan nilai ke atas jika koma >= 5
-                        $total = ceil($total);
+                        $total = number_format($total, 0);
                     ?>
                         <?= $total ?>
                     </td>
