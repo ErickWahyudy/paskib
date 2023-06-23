@@ -116,6 +116,8 @@ if ($nilai->num_rows() == 0):
                         $total = $total1 + $total2 + $total3;
                         $total = $total / 3;
                         $total = number_format($total, 2);
+                        //membulatkan nilai ke atas jika koma >= 5
+                        $total = ceil($total);
                     ?>
                         <?= $total ?>
                     </td>

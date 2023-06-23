@@ -1,13 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.0
+-- version 4.8.5
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 21 Jun 2023 pada 16.21
--- Versi server: 10.4.19-MariaDB
--- Versi PHP: 7.3.28
+-- Waktu pembuatan: 23 Jun 2023 pada 05.39
+-- Versi server: 10.1.38-MariaDB
+-- Versi PHP: 5.6.40
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -41,11 +42,11 @@ CREATE TABLE `tb_jasmani` (
 --
 
 INSERT INTO `tb_jasmani` (`id_jasmani`, `id_pengguna`, `id_peserta`, `nilai_lari`, `nilai_pushUp`, `nilai_sitUp`) VALUES
-('j001b7kQy', 'A0032wpbq0', 'P001mQGYDT', '65', '77', '78'),
-('j002rCGqG', 'A0032wpbq0', 'P0053jRgzz', '67', '76', '77'),
-('j003ikour', 'A004oJreti', 'P003FBBKNz', '77', '78', '79'),
-('j004PDAuh', 'A004oJreti', 'P0044kTXLz', '80', '78', '77'),
-('j005y8U9u', 'A005Wxb6fq', 'P002c86ZkE', '76', '80', '77');
+('j001vwnu5', 'A0032wpbq0', 'P0053jRgzz', '74', '79', '80'),
+('j002sGIkd', 'A0032wpbq0', 'P002c86ZkE', '70', '80', '79'),
+('j003T5mD3', 'A0032wpbq0', 'P0044kTXLz', '72', '65', '68'),
+('j004wW540', 'A0032wpbq0', 'P003FBBKNz', '72', '74', '75'),
+('j005oB7O1', 'A0032wpbq0', 'P001mQGYDT', '78', '73', '77');
 
 -- --------------------------------------------------------
 
@@ -69,7 +70,7 @@ CREATE TABLE `tb_kriteria` (
 --
 
 INSERT INTO `tb_kriteria` (`id_kriteria`, `kriteria`, `bobot`, `nama_nilai1`, `nama_nilai2`, `nama_nilai3`, `nama_nilai4`, `nama_nilai5`) VALUES
-('K001ZfwKoY', 'Tinggi Badan', '1', '', '', '', '', ''),
+('K001ZfwKoY', 'Tinggi Badan', '30', '', '', '', '', ''),
 ('K002nfYbXS', 'Berat Badan', '20', '', '', '', '', ''),
 ('K003BNDjht', 'Jasmani', '10', 'Lari', 'Push Up', 'Sit Up', '', ''),
 ('K004RHwS3n', 'PBB', '20', 'Sikap', 'Gerak Badan', 'Gerak Dasar', 'Aba- Aba', ''),
@@ -114,21 +115,21 @@ CREATE TABLE `tb_matriks` (
 --
 
 INSERT INTO `tb_matriks` (`id_matriks`, `id_peserta`, `id_kriteria`, `hasil`, `nilai_kriteria`) VALUES
-('T001fNjoZ', 'P001mQGYDT', 'K003BNDjht', '73.33', '2'),
-('T002QTcBl', 'P0053jRgzz', 'K003BNDjht', '73.33', '2'),
-('T0039buf9', 'P003FBBKNz', 'K003BNDjht', '78.00', '3'),
-('T004HA2rb', 'P0044kTXLz', 'K003BNDjht', '78.33', '3'),
-('T0050NaKI', 'P002c86ZkE', 'K003BNDjht', '77.67', '3'),
-('T006R4SWp', 'P001mQGYDT', 'K005ndLkXQ', '72.56', '1'),
-('T007ahIrh', 'P0053jRgzz', 'K005ndLkXQ', '76.67', '2'),
-('T008csU3E', 'P003FBBKNz', 'K005ndLkXQ', '72.78', '1'),
-('T009t4jRG', 'P0044kTXLz', 'K005ndLkXQ', '75.11', '2'),
-('T010yi3sg', 'P002c86ZkE', 'K005ndLkXQ', '73.11', '1'),
-('T0119lFL7', 'P001mQGYDT', 'K004RHwS3n', '73.00', '1'),
-('T0123v6x4', 'P0053jRgzz', 'K004RHwS3n', '74.56', '2'),
-('T013AourN', 'P003FBBKNz', 'K004RHwS3n', '75.11', '2'),
-('T014XhKEm', 'P0044kTXLz', 'K004RHwS3n', '73.67', '1'),
-('T015pKyso', 'P002c86ZkE', 'K004RHwS3n', '75.44', '2');
+('T001Rs1Tb', 'P0053jRgzz', 'K003BNDjht', '78', '3'),
+('T002kKvut', 'P002c86ZkE', 'K003BNDjht', '76', '2'),
+('T003O4v1X', 'P0044kTXLz', 'K003BNDjht', '68', '1'),
+('T004LmKbk', 'P003FBBKNz', 'K003BNDjht', '74', '2'),
+('T0053Zwkn', 'P001mQGYDT', 'K003BNDjht', '76', '2'),
+('T006xOJeB', 'P0053jRgzz', 'K004RHwS3n', '76', '2'),
+('T007JuiVX', 'P002c86ZkE', 'K004RHwS3n', '77', '3'),
+('T008UYbOY', 'P0044kTXLz', 'K004RHwS3n', '77', '3'),
+('T009Hjk3T', 'P003FBBKNz', 'K004RHwS3n', '75', '2'),
+('T010awREO', 'P001mQGYDT', 'K004RHwS3n', '77', '3'),
+('T0114kuo0', 'P0053jRgzz', 'K005ndLkXQ', '74', '2'),
+('T0126WBhJ', 'P002c86ZkE', 'K005ndLkXQ', '76', '2'),
+('T01393h1U', 'P0044kTXLz', 'K005ndLkXQ', '77', '3'),
+('T014iaGn6', 'P003FBBKNz', 'K005ndLkXQ', '77', '3'),
+('T015MhmTT', 'P001mQGYDT', 'K005ndLkXQ', '78', '3');
 
 -- --------------------------------------------------------
 
@@ -141,17 +142,6 @@ CREATE TABLE `tb_nilai_hasil` (
   `id_peserta` varchar(15) NOT NULL,
   `hasil` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data untuk tabel `tb_nilai_hasil`
---
-
-INSERT INTO `tb_nilai_hasil` (`id_nilai`, `id_peserta`, `hasil`) VALUES
-('H001fPvJQ', 'P001mQGYDT', '0.57094'),
-('H002Ka5NL', 'P0053jRgzz', '0.72658'),
-('H0036qrbi', 'P003FBBKNz', '0.65803'),
-('H004hjy7T', 'P0044kTXLz', '0.57310'),
-('H005XaSNr', 'P002c86ZkE', '0.65803');
 
 -- --------------------------------------------------------
 
@@ -175,21 +165,21 @@ CREATE TABLE `tb_parade` (
 --
 
 INSERT INTO `tb_parade` (`id_parade`, `id_pengguna`, `id_peserta`, `nilai_wjh`, `nilai_bdn`, `nilai_bp`, `nilai_tgn`, `nilai_kk`) VALUES
-('p001QogT9', 'A0032wpbq0', 'P001mQGYDT', '77', '76', '78', '76', '66'),
-('p002EDTMQ', 'A0032wpbq0', 'P0053jRgzz', '77', '78', '80', '72', '74'),
-('p003GjRnX', 'A0032wpbq0', 'P003FBBKNz', '71', '72', '73', '74', '75'),
-('p004gJeKa', 'A0032wpbq0', 'P0044kTXLz', '77', '76', '75', '77', '71'),
-('p005RcTNO', 'A0032wpbq0', 'P002c86ZkE', '77', '76', '78', '76', '67'),
-('p006DC6FO', 'A004oJreti', 'P001mQGYDT', '67', '67', '65', '79', '71'),
-('p0072KUwX', 'A004oJreti', 'P0053jRgzz', '76', '73', '72', '78', '78'),
-('p008pHg2n', 'A004oJreti', 'P003FBBKNz', '76', '71', '72', '78', '76'),
-('p009XweB0', 'A004oJreti', 'P0044kTXLz', '76', '71', '80', '71', '73'),
-('p0109cTLV', 'A004oJreti', 'P002c86ZkE', '72', '72', '71', '79', '77'),
-('p0113rWkA', 'A005Wxb6fq', 'P001mQGYDT', '77', '75', '71', '72', '74'),
-('p012CSUo7', 'A005Wxb6fq', 'P0053jRgzz', '81', '76', '77', '65', '71'),
-('p013EvIRB', 'A005Wxb6fq', 'P003FBBKNz', '76', '71', '73', '72', '74'),
-('p014h1g5Z', 'A005Wxb6fq', 'P0044kTXLz', '77', '73', '71', '74', '78'),
-('p015kKwTL', 'A005Wxb6fq', 'P002c86ZkE', '67', '77', '68', '69', '77');
+('p001MFLsZ', 'A0032wpbq0', 'P0053jRgzz', '75', '74', '72', '73', '76'),
+('p002qhwr4', 'A0032wpbq0', 'P002c86ZkE', '77', '77', '76', '77', '77'),
+('p003Pwfxg', 'A0032wpbq0', 'P0044kTXLz', '77', '78', '77', '77', '77'),
+('p004ly9Gi', 'A0032wpbq0', 'P003FBBKNz', '76', '76', '76', '76', '77'),
+('p005FhMfS', 'A0032wpbq0', 'P001mQGYDT', '77', '77', '76', '76', '78'),
+('p0067zOyI', 'A004oJreti', 'P0053jRgzz', '73', '74', '74', '73', '73'),
+('p007j3m9V', 'A004oJreti', 'P002c86ZkE', '75', '73', '72', '72', '72'),
+('p0082qs9K', 'A004oJreti', 'P0044kTXLz', '78', '77', '78', '79', '79'),
+('p009kExPb', 'A004oJreti', 'P003FBBKNz', '75', '75', '72', '75', '74'),
+('p010OrEz8', 'A004oJreti', 'P001mQGYDT', '75', '77', '76', '75', '76'),
+('p011kuVCp', 'A005Wxb6fq', 'P0053jRgzz', '76', '75', '75', '75', '77'),
+('p01205usT', 'A005Wxb6fq', 'P002c86ZkE', '77', '77', '76', '75', '75'),
+('p013nR9je', 'A005Wxb6fq', 'P0044kTXLz', '76', '76', '77', '77', '77'),
+('p014OJG6q', 'A005Wxb6fq', 'P003FBBKNz', '80', '80', '80', '78', '78'),
+('p015du6Oo', 'A005Wxb6fq', 'P001mQGYDT', '80', '80', '80', '78', '78');
 
 -- --------------------------------------------------------
 
@@ -212,21 +202,21 @@ CREATE TABLE `tb_pbb` (
 --
 
 INSERT INTO `tb_pbb` (`id_pbb`, `id_pengguna`, `id_peserta`, `nilai_sk`, `nilai_gb`, `nilai_gd`, `nilai_ab`) VALUES
-('b001WBg4m', 'A0032wpbq0', 'P001mQGYDT', '76', '74', '73', '77'),
-('b002T5dvP', 'A0032wpbq0', 'P0053jRgzz', '77', '76', '78', '71'),
-('b003zZrM8', 'A0032wpbq0', 'P003FBBKNz', '77', '76', '77', '78'),
-('b004rzl0T', 'A0032wpbq0', 'P0044kTXLz', '76', '74', '75', '77'),
-('b005YPxco', 'A0032wpbq0', 'P002c86ZkE', '77', '75', '78', '73'),
-('b006VPnDw', 'A004oJreti', 'P001mQGYDT', '76', '77', '78', '78'),
-('b007FkSEr', 'A004oJreti', 'P0053jRgzz', '67', '77', '66', '78'),
-('b008IGlKh', 'A004oJreti', 'P003FBBKNz', '77', '76', '72', '80'),
-('b0099T6Lh', 'A004oJreti', 'P0044kTXLz', '77', '76', '72', '74'),
-('b010j5EB3', 'A004oJreti', 'P002c86ZkE', '71', '80', '77', '76'),
-('b011e5omc', 'A005Wxb6fq', 'P001mQGYDT', '67', '68', '68', '71'),
-('b0125n1ON', 'A005Wxb6fq', 'P0053jRgzz', '77', '76', '77', '78'),
-('b013HRVU2', 'A005Wxb6fq', 'P003FBBKNz', '67', '77', '77', '71'),
-('b014XTFxY', 'A005Wxb6fq', 'P0044kTXLz', '71', '71', '71', '71'),
-('b015ebCgx', 'A005Wxb6fq', 'P002c86ZkE', '78', '76', '67', '77');
+('b001Fgw5r', 'A0032wpbq0', 'P0053jRgzz', '78', '77', '78', '77'),
+('b002SP58O', 'A0032wpbq0', 'P002c86ZkE', '77', '75', '80', '77'),
+('b003Ot0jj', 'A0032wpbq0', 'P0044kTXLz', '77', '75', '80', '79'),
+('b004XXAnS', 'A0032wpbq0', 'P003FBBKNz', '77', '72', '73', '76'),
+('b005LwOcD', 'A0032wpbq0', 'P001mQGYDT', '79', '79', '76', '75'),
+('b0061894Q', 'A004oJreti', 'P0053jRgzz', '74', '75', '72', '73'),
+('b0070e7Td', 'A004oJreti', 'P002c86ZkE', '76', '77', '77', '77'),
+('b0085A1Zx', 'A004oJreti', 'P0044kTXLz', '80', '80', '79', '80'),
+('b009xOPPh', 'A004oJreti', 'P003FBBKNz', '76', '77', '77', '76'),
+('b010R728W', 'A004oJreti', 'P001mQGYDT', '75', '77', '75', '79'),
+('b0119G1bf', 'A005Wxb6fq', 'P0053jRgzz', '74', '78', '76', '77'),
+('b012UGYmN', 'A005Wxb6fq', 'P002c86ZkE', '75', '77', '77', '77'),
+('b013pEJsI', 'A005Wxb6fq', 'P0044kTXLz', '75', '76', '73', '75'),
+('b014JdTm3', 'A005Wxb6fq', 'P003FBBKNz', '75', '73', '74', '75'),
+('b015Y9r8R', 'A005Wxb6fq', 'P001mQGYDT', '78', '75', '76', '74');
 
 -- --------------------------------------------------------
 
@@ -273,11 +263,11 @@ CREATE TABLE `tb_pengguna` (
 --
 
 INSERT INTO `tb_pengguna` (`id_pengguna`, `nama`, `keterangan`, `email`, `password`, `id_level`) VALUES
-('A001bnHDs', 'Erik Wahyudi', 'Superadmin', 'erik@gmail.com', '202cb962ac59075b964b07152d234b70', '1'),
-('A002rlZgr3', 'Dewi', 'Admin 1', 'dewi@gmail.com', '202cb962ac59075b964b07152d234b70', '2'),
-('A0032wpbq0', 'Fannisa', 'Dewan Juri', 'fannisa@gmail.com', '202cb962ac59075b964b07152d234b70', '3'),
-('A004oJreti', 'Rani', 'juri 2', 'rani@gmail.com', '202cb962ac59075b964b07152d234b70', '3'),
-('A005Wxb6fq', 'Rika', 'juri 3', 'rika@gmail.com', '202cb962ac59075b964b07152d234b70', '3');
+('A001bnHDs', 'Dewi Taliya', 'Superadmin', 'dewi@gmail.com', '202cb962ac59075b964b07152d234b70', '1'),
+('A002rlZgr3', 'Santi', 'Admin 1', 'santi@gmail.com', '202cb962ac59075b964b07152d234b70', '2'),
+('A0032wpbq0', 'Toni', 'Dewan Juri', 'toni@gmail.com', '202cb962ac59075b964b07152d234b70', '3'),
+('A004oJreti', 'Cipto', 'juri 2', 'cipto@gmail.com', '202cb962ac59075b964b07152d234b70', '3'),
+('A005Wxb6fq', 'Wahyu', 'juri 3', 'wahyu@gmail.com', '202cb962ac59075b964b07152d234b70', '3');
 
 -- --------------------------------------------------------
 
@@ -299,12 +289,12 @@ CREATE TABLE `tb_peserta` (
 -- Dumping data untuk tabel `tb_peserta`
 --
 
-INSERT INTO `tb_peserta` (`id_peserta`, `nama_peserta`, `tgl_lahir`, `asal_sekolah`, `tinggi_bb`, `berat_bb`, `level`) VALUES
-('P001mQGYDT', 'Anam', '2007-04-01', 'SMP N 5 Ponorogo', '172', '65', 'peserta'),
-('P002c86ZkE', 'Udin', '2007-02-01', 'SMPN 2 Balong', '172', '66', 'peserta'),
-('P003FBBKNz', 'Fikran', '2008-06-05', 'SMP N 2 Balong', '175', '73', 'peserta'),
-('P0044kTXLz', 'Sultan', '2009-08-08', 'MTS Ma\'arif Balong', '175', '77', 'peserta'),
-('P0053jRgzz', 'Asarika Nian Mahardi', '2008-07-08', 'SMA N 1 Babadan', '170', '64', 'peserta');
+INSERT INTO `tb_peserta` (`id_peserta`, `nama_peserta`, `asal_sekolah`, `tinggi_bb`, `berat_bb`, `level`) VALUES
+('P001mQGYDT', 'Zulfa Pradiva', 'SMA N 1 Ponorogo', '172', '65', 'peserta'),
+('P002c86ZkE', 'Brilian Jagad', 'SMAN N 3 Ponorogo', '172', '66', 'peserta'),
+('P003FBBKNz', 'Naufal Labiibi', 'SMA N 2 Ponorogo', '175', '73', 'peserta'),
+('P0044kTXLz', 'Erdi Anggara', 'SMA BAKTI', '175', '77', 'peserta'),
+('P0053jRgzz', 'Asarika Nian Mahardi', 'SMA N 1 Babadan', '170', '64', 'peserta');
 
 --
 -- Indexes for dumped tables

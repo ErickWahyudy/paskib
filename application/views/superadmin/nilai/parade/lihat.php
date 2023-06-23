@@ -156,7 +156,7 @@ if($aksi == "lihat"):
                         $total = 0;
                         $total = $total1 + $total2 + $total3;
                         $total = $total / 3;
-                        $total = number_format($total, 2);
+                        $total = number_format($total, 0);
                     ?>
                         <?= $total ?>
                     </td>

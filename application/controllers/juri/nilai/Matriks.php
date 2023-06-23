@@ -121,38 +121,36 @@ class Matriks extends CI_controller
     }
  
 
-     //nilai kriteria tinggi bb
+        //nilai kriteria tinggi bb
       public function NilaiKriteriaTinggiBB($tinggi_bb)
       {
-          // Logika perhitungan nilai kriteria
-          if ($tinggi_bb >= 165 && $tinggi_bb <= 171.9) {
-              $nilai = 1;
-          } elseif ($tinggi_bb >= 172 && $tinggi_bb <= 175.9) {
-              $nilai = 2;
-          } elseif ($tinggi_bb >= 176 && $tinggi_bb <= 190) {
-              $nilai = 3;
-          } else {
-              $nilai = 0; // Nilai default jika berat badan tidak masuk ke dalam rentang yang ditentukan
-          }
-
-          return $nilai;
+        // Logika perhitungan nilai kriteria
+        if ($tinggi_bb >= 165 && $tinggi_bb <= 171) {
+          $nilai = 1;
+        } elseif ($tinggi_bb >= 172 && $tinggi_bb <= 175) {
+          $nilai = 2;
+        } elseif ($tinggi_bb >= 176 && $tinggi_bb <= 180) {
+          $nilai = 3;
+        } else {
+          $nilai = 0; // Nilai default jika berat badan tidak masuk ke dalam rentang yang ditentukan
+        } 
+        return $nilai;
       }
 
       //nilai kriteria berat bb
       public function NilaiKriteriaBeratBB($berat_bb)
       {
-          // Logika perhitungan nilai kriteria
-          if ($berat_bb >= 50 && $berat_bb <= 65) {
-              $nilai = 3;
-          } elseif ($berat_bb >= 64.9 && $berat_bb <= 75) {
-              $nilai = 2;
-          } elseif ($berat_bb >= 74.9 && $berat_bb <= 90) {
-              $nilai = 1;
-          } else {
-              $nilai = 0; // Nilai default jika berat badan tidak masuk ke dalam rentang yang ditentukan
-          }
-
-          return $nilai;
-      }   
+        // Logika perhitungan nilai kriteria
+        if ($berat_bb >= 50 && $berat_bb <= 65) {
+          $nilai = 3;
+        } elseif ($berat_bb >= 66 && $berat_bb <= 75) {
+          $nilai = 2;
+        } elseif ($berat_bb >= 76 && $berat_bb <= 90) {
+          $nilai = 1;
+        } else {
+          $nilai = 0; // Nilai default jika berat badan tidak masuk ke dalam rentang yang ditentukan
+        }
+        return $nilai;
+      } 
 
 }
