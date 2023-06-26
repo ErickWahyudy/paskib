@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 23 Jun 2023 pada 05.39
+-- Waktu pembuatan: 23 Jun 2023 pada 15.46
 -- Versi server: 10.1.38-MariaDB
 -- Versi PHP: 5.6.40
 
@@ -43,7 +43,7 @@ CREATE TABLE `tb_jasmani` (
 
 INSERT INTO `tb_jasmani` (`id_jasmani`, `id_pengguna`, `id_peserta`, `nilai_lari`, `nilai_pushUp`, `nilai_sitUp`) VALUES
 ('j001vwnu5', 'A0032wpbq0', 'P0053jRgzz', '74', '79', '80'),
-('j002sGIkd', 'A0032wpbq0', 'P002c86ZkE', '70', '80', '79'),
+('j002sGIkd', 'A0032wpbq0', 'P002c86ZkE', '74', '80', '79'),
 ('j003T5mD3', 'A0032wpbq0', 'P0044kTXLz', '72', '65', '68'),
 ('j004wW540', 'A0032wpbq0', 'P003FBBKNz', '72', '74', '75'),
 ('j005oB7O1', 'A0032wpbq0', 'P001mQGYDT', '78', '73', '77');
@@ -115,21 +115,21 @@ CREATE TABLE `tb_matriks` (
 --
 
 INSERT INTO `tb_matriks` (`id_matriks`, `id_peserta`, `id_kriteria`, `hasil`, `nilai_kriteria`) VALUES
-('T001Rs1Tb', 'P0053jRgzz', 'K003BNDjht', '78', '3'),
-('T002kKvut', 'P002c86ZkE', 'K003BNDjht', '76', '2'),
-('T003O4v1X', 'P0044kTXLz', 'K003BNDjht', '68', '1'),
-('T004LmKbk', 'P003FBBKNz', 'K003BNDjht', '74', '2'),
-('T0053Zwkn', 'P001mQGYDT', 'K003BNDjht', '76', '2'),
-('T006xOJeB', 'P0053jRgzz', 'K004RHwS3n', '76', '2'),
-('T007JuiVX', 'P002c86ZkE', 'K004RHwS3n', '77', '3'),
-('T008UYbOY', 'P0044kTXLz', 'K004RHwS3n', '77', '3'),
-('T009Hjk3T', 'P003FBBKNz', 'K004RHwS3n', '75', '2'),
-('T010awREO', 'P001mQGYDT', 'K004RHwS3n', '77', '3'),
-('T0114kuo0', 'P0053jRgzz', 'K005ndLkXQ', '74', '2'),
-('T0126WBhJ', 'P002c86ZkE', 'K005ndLkXQ', '76', '2'),
-('T01393h1U', 'P0044kTXLz', 'K005ndLkXQ', '77', '3'),
-('T014iaGn6', 'P003FBBKNz', 'K005ndLkXQ', '77', '3'),
-('T015MhmTT', 'P001mQGYDT', 'K005ndLkXQ', '78', '3');
+('T001ABSTO', 'P0053jRgzz', 'K003BNDjht', '78', '3'),
+('T002qKLvU', 'P002c86ZkE', 'K003BNDjht', '78', '3'),
+('T003y27cW', 'P0044kTXLz', 'K003BNDjht', '68', '1'),
+('T004hlAW8', 'P003FBBKNz', 'K003BNDjht', '74', '2'),
+('T005Gd7US', 'P001mQGYDT', 'K003BNDjht', '76', '2'),
+('T006syFWA', 'P0053jRgzz', 'K004RHwS3n', '76', '2'),
+('T007n4eAu', 'P002c86ZkE', 'K004RHwS3n', '77', '3'),
+('T008J7iGc', 'P0044kTXLz', 'K004RHwS3n', '77', '3'),
+('T009b0K3M', 'P003FBBKNz', 'K004RHwS3n', '75', '2'),
+('T010K6B7b', 'P001mQGYDT', 'K004RHwS3n', '77', '3'),
+('T011xqWed', 'P0053jRgzz', 'K005ndLkXQ', '74', '2'),
+('T012qSicg', 'P002c86ZkE', 'K005ndLkXQ', '76', '2'),
+('T013zzNTL', 'P0044kTXLz', 'K005ndLkXQ', '77', '3'),
+('T014JtnF3', 'P003FBBKNz', 'K005ndLkXQ', '77', '3'),
+('T015clv1X', 'P001mQGYDT', 'K005ndLkXQ', '77', '3');
 
 -- --------------------------------------------------------
 
@@ -278,7 +278,6 @@ INSERT INTO `tb_pengguna` (`id_pengguna`, `nama`, `keterangan`, `email`, `passwo
 CREATE TABLE `tb_peserta` (
   `id_peserta` varchar(15) NOT NULL,
   `nama_peserta` varchar(20) NOT NULL,
-  `tgl_lahir` date NOT NULL,
   `asal_sekolah` varchar(18) NOT NULL,
   `tinggi_bb` varchar(3) NOT NULL,
   `berat_bb` varchar(3) NOT NULL,

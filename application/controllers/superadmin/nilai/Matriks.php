@@ -86,16 +86,19 @@ class Matriks extends CI_controller
         foreach ($weights as $weight) {
             $normalizedWeights[] = $weight / $sumWeights;
         }
-       
 
-        // optimasi nilai (Hasil Optimasi = ∑Wj * Xij) dari matriks normalisasi dan bobot kriteria
+        // Menghitung nilai optimasi
         $results = [];
         for ($i = 0; $i < $numAlternatives; $i++) {
-            $results[$i] = 0;
-            for ($j = 0; $j < $numCriteria; $j++) {
-                $results[$i] += $normalizedWeights[$j] * $normalizedMatrix[$i][$j];
-            }
+            $result = 0;
+            $result += ($normalizedMatrix[$i][0] * $normalizedWeights[0]); // X1.1(max).w1
+            $result += ($normalizedMatrix[$i][2] * $normalizedWeights[2]); // X1.3(max).w3
+            $result += ($normalizedMatrix[$i][3] * $normalizedWeights[3]); // X1.4(max).w4
+            $result += ($normalizedMatrix[$i][4] * $normalizedWeights[4]); // X1.5(max).w5
+            $result -= ($normalizedMatrix[$i][1] * $normalizedWeights[1]); // X1.2(min).w2
+            $results[$i] = $result;
         }
+       
         
       // Tampilkan hasil moora ke view
       $view['peserta'] = $peserta;
@@ -173,23 +176,34 @@ class Matriks extends CI_controller
         }
 
          // Normalisasi matriks kriteria (Xij / √∑Xij^2)
-          $normalizedMatrix = [];
-          for ($i = 0; $i < $numAlternatives; $i++) {
-              $normalizedMatrix[$i] = [];
-              for ($j = 0; $j < $numCriteria; $j++) {
-                  $normalizedMatrix[$i][$j] = $matrix[$i][$j] / sqrt(array_sum(array_column($matrix, $j)));
-              }
-          }
-       
-
-        // optimasi nilai (Hasil Optimasi = ∑Wj * Xij) dari matriks normalisasi dan bobot kriteria
-        $results = [];
-        for ($i = 0; $i < $numAlternatives; $i++) {
-            $results[$i] = 0;
-            for ($j = 0; $j < $numCriteria; $j++) {
-                $results[$i] += $normalizedWeights[$j] * $normalizedMatrix[$i][$j];
+        $normalizedMatrix = [];
+        for ($j = 0; $j < $numCriteria; $j++) {
+            $sumSquared = 0; // Variable to store the sum of squared values for the current column
+            
+            // Calculate the sum of squared values for the current column
+            for ($i = 0; $i < $numAlternatives; $i++) {
+                $sumSquared += pow($matrix[$i][$j], 2);
+            }
+            
+            // Normalize the values in the current column
+            for ($i = 0; $i < $numAlternatives; $i++) {
+                $normalizedMatrix[$i][$j] = $matrix[$i][$j] / sqrt($sumSquared);
             }
         }
+      
+
+        // Menghitung nilai optimasi
+        $results = [];
+        for ($i = 0; $i < $numAlternatives; $i++) {
+            $result = 0;
+            $result += ($normalizedMatrix[$i][0] * $normalizedWeights[0]); // X1.1(max).w1
+            $result += ($normalizedMatrix[$i][2] * $normalizedWeights[2]); // X1.3(max).w3
+            $result += ($normalizedMatrix[$i][3] * $normalizedWeights[3]); // X1.4(max).w4
+            $result += ($normalizedMatrix[$i][4] * $normalizedWeights[4]); // X1.5(max).w5
+            $result -= ($normalizedMatrix[$i][1] * $normalizedWeights[1]); // X1.2(min).w2
+            $results[$i] = $result;
+        }
+
         
       // Tampilkan hasil moora ke view
       $view['peserta'] = $peserta;
@@ -275,9 +289,9 @@ class Matriks extends CI_controller
     $newID = "T"."00".$tambah.$karakter;
         }else if (strlen($tambah) == 2){
         $newID = "T"."0".$tambah.$karakter;
-            }else (strlen($tambah) == 3){
-            $newID = "T".$tambah.$karakter
-            };
+            }else if (strlen($tambah) == 3){
+            $newID = "T".$tambah.$karakter;
+            }
         return $newID;
     }
 

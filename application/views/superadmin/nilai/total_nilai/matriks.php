@@ -14,6 +14,7 @@
                 <th rowspan="2" style="vertical-align: middle;">Nama Peserta</th>
                 <th rowspan="2" style="vertical-align: middle;">Asal Sekolah</th>
                 <th colspan="5" style="text-align: center;"><?= $judul2 ?></th>
+                <th rowspan="2" style="vertical-align: middle;">Total Nilai </th>
             </tr>
             <tr>
                 <?php foreach($view_kriteria as $kriteria): ?>
@@ -37,7 +38,17 @@
                     <?= $nilai['hasil'] ?>
                 </td>
                 <?php endforeach; ?>
-
+                <!-- total nilai -->
+                <?php $total_nilai = $this->m_matriks->view_nilai($peserta['id_peserta']); ?>
+                <?php
+                    $total = 0;
+                    foreach($total_nilai->result_array() as $total_nilai):
+                        $total += $total_nilai['hasil'];
+                    endforeach;
+                ?>
+                <td>
+                    <?= $total ?>
+                </td>
             </tr>
 
             <?php $no++;  endforeach; ?>
@@ -86,8 +97,11 @@
                             <td><?= $no ?></td>
                             <td><?= $peserta['nama_peserta'] ?></td>
                             <td><?= $peserta['asal_sekolah'] ?></td>
-                                <?php foreach ($normalisasi_values as $normalized_value): ?>
-                                <td><?= number_format($normalized_value, 5, '.', '') ?></td>
+                                <?php foreach ($normalisasi_values as $normalized_value): 
+                                    //membulatkan nilai ke atas
+                                    $normalized_value = ceil($normalized_value * 100000) / 100000;
+                                ?>
+                                <td><?= $normalized_value ?></td>
                                 <?php endforeach; ?>
                             <td>
                                 <?php $normalisasi = number_format($normalisasi, 5, '.', ''); ?>

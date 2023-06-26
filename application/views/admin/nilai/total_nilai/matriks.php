@@ -79,12 +79,15 @@
                             $peserta = $nama_peserta[$key];
                             $normalisasi_values = $normalizedMatrix[$key];
                     ?>
-                        <tr>
+                         <tr>
                             <td><?= $no ?></td>
                             <td><?= $peserta['nama_peserta'] ?></td>
                             <td><?= $peserta['asal_sekolah'] ?></td>
-                                <?php foreach ($normalisasi_values as $normalized_value): ?>
-                                <td><?= number_format($normalized_value, 5, '.', '') ?></td>
+                                <?php foreach ($normalisasi_values as $normalized_value): 
+                                    //membulatkan nilai ke atas
+                                    $normalized_value = ceil($normalized_value * 100000) / 100000;
+                                ?>
+                                <td><?= $normalized_value ?></td>
                                 <?php endforeach; ?>
                             <td>
                                 <?php $normalisasi = number_format($normalisasi, 5, '.', ''); ?>

@@ -71,14 +71,6 @@ class Matriks extends CI_controller
         $numCriteria = count($criteria);
         $numAlternatives = count($peserta);
 
-         // Normalisasi matriks kriteria (Xij / √∑Xij^2) 
-         $normalizedMatrix = [];
-         for ($i = 0; $i < $numAlternatives; $i++) {
-             $normalizedMatrix[$i] = [];
-             for ($j = 0; $j < $numCriteria; $j++) {
-                 $normalizedMatrix[$i][$j] = $matrix[$i][$j] / sqrt(array_sum(array_column($matrix, $j)));
-             }
-         }
 
         // Normalisasi bobot
         $sumWeights = array_sum($weights);
@@ -86,15 +78,34 @@ class Matriks extends CI_controller
         foreach ($weights as $weight) {
             $normalizedWeights[] = $weight / $sumWeights;
         }
-       
 
-        // optimasi nilai (Hasil Optimasi = ∑Wj * Xij) dari matriks normalisasi dan bobot kriteria
+         // Normalisasi matriks kriteria (Xij / √∑Xij^2)
+        $normalizedMatrix = [];
+        for ($j = 0; $j < $numCriteria; $j++) {
+            $sumSquared = 0; // Variable to store the sum of squared values for the current column
+            
+            // Calculate the sum of squared values for the current column
+            for ($i = 0; $i < $numAlternatives; $i++) {
+                $sumSquared += pow($matrix[$i][$j], 2);
+            }
+            
+            // Normalize the values in the current column
+            for ($i = 0; $i < $numAlternatives; $i++) {
+                $normalizedMatrix[$i][$j] = $matrix[$i][$j] / sqrt($sumSquared);
+            }
+        }
+      
+
+        // Menghitung nilai optimasi
         $results = [];
         for ($i = 0; $i < $numAlternatives; $i++) {
-            $results[$i] = 0;
-            for ($j = 0; $j < $numCriteria; $j++) {
-                $results[$i] += $normalizedWeights[$j] * $normalizedMatrix[$i][$j];
-            }
+            $result = 0;
+            $result += ($normalizedMatrix[$i][0] * $normalizedWeights[0]); // X1.1(max).w1
+            $result += ($normalizedMatrix[$i][2] * $normalizedWeights[2]); // X1.3(max).w3
+            $result += ($normalizedMatrix[$i][3] * $normalizedWeights[3]); // X1.4(max).w4
+            $result += ($normalizedMatrix[$i][4] * $normalizedWeights[4]); // X1.5(max).w5
+            $result -= ($normalizedMatrix[$i][1] * $normalizedWeights[1]); // X1.2(min).w2
+            $results[$i] = $result;
         }
         
       // Tampilkan hasil moora ke view
@@ -127,69 +138,79 @@ class Matriks extends CI_controller
       $nilai        = $this->m_matriks->view_nilai()->result_array();
       $kriteria     = $this->m_matriks->view_kriteria()->result_array();
       
-        //Perhitungan Moora
-        $criteria = $this->m_kriteria->view()->result_array();
-        $criteria = array_column($criteria, 'kriteria'); // Menggunakan kolom kriteria sebagai kriteria
-        $weights = $this->m_kriteria->view()->result_array();
-        $weights = array_column($weights, 'bobot'); // Menggunakan kolom bobot sebagai bobot
-        
-        
-        // Data matriks nilai
-        $matrix = [];
-        foreach ($peserta as $p) {
-            $nilai = $this->m_matriks->view_nilai($p['id_peserta']); // Misalnya, mengambil data nilai dari model
-            $tinggi_bb = $this->NilaiKriteriaTinggiBB($p['tinggi_bb']);
-            $berat_bb =  $this->NilaiKriteriaBeratBB($p['berat_bb']);
-
-            $nilai_kriteria = [];
-            $nilai_kriteria[] = $tinggi_bb;
-            $nilai_kriteria[] = $berat_bb;
-
-            foreach ($nilai->result_array() as $n) {
-                $nilai_kriteria[] = $n['nilai_kriteria'];
-            }
-
-            $matrix[] = $nilai_kriteria;
-        }
-
-        //jika database kosong maka tampilkan pesan tidak ada data
-        if (empty($nilai)) {
-          $view['pesan'] = 'Tidak ada data';
-        } elseif ($nilai->num_rows() == 0) {
-          $view['pesan'] = 'Tidak ada data';
-        } else {
-  
-
-        // Hitung jumlah kriteria dan alternatif
-        $numCriteria = count($criteria);
-        $numAlternatives = count($peserta);
-
-
-        // Normalisasi bobot
-        $sumWeights = array_sum($weights);
-        $normalizedWeights = [];
-        foreach ($weights as $weight) {
-            $normalizedWeights[] = $weight / $sumWeights;
-        }
-
-         // Normalisasi matriks kriteria (Xij / √∑Xij^2)
-          $normalizedMatrix = [];
-          for ($i = 0; $i < $numAlternatives; $i++) {
-              $normalizedMatrix[$i] = [];
-              for ($j = 0; $j < $numCriteria; $j++) {
-                  $normalizedMatrix[$i][$j] = $matrix[$i][$j] / sqrt(array_sum(array_column($matrix, $j)));
-              }
-          }
+       //Perhitungan Moora
+       $criteria = $this->m_kriteria->view()->result_array();
+       $criteria = array_column($criteria, 'kriteria'); // Menggunakan kolom kriteria sebagai kriteria
+       $weights = $this->m_kriteria->view()->result_array();
+       $weights = array_column($weights, 'bobot'); // Menggunakan kolom bobot sebagai bobot
        
+       
+       // Data matriks nilai
+       $matrix = [];
+       foreach ($peserta as $p) {
+           $nilai = $this->m_matriks->view_nilai($p['id_peserta']); // Misalnya, mengambil data nilai dari model
+           $tinggi_bb = $this->NilaiKriteriaTinggiBB($p['tinggi_bb']);
+           $berat_bb =  $this->NilaiKriteriaBeratBB($p['berat_bb']);
 
-        // optimasi nilai (Hasil Optimasi = ∑Wj * Xij) dari matriks normalisasi dan bobot kriteria
-        $results = [];
-        for ($i = 0; $i < $numAlternatives; $i++) {
-            $results[$i] = 0;
-            for ($j = 0; $j < $numCriteria; $j++) {
-                $results[$i] += $normalizedWeights[$j] * $normalizedMatrix[$i][$j];
-            }
-        }
+           $nilai_kriteria = [];
+           $nilai_kriteria[] = $tinggi_bb;
+           $nilai_kriteria[] = $berat_bb;
+
+           foreach ($nilai->result_array() as $n) {
+               $nilai_kriteria[] = $n['nilai_kriteria'];
+           }
+
+           $matrix[] = $nilai_kriteria;
+       }
+
+       //jika database kosong maka tampilkan pesan tidak ada data
+       if (empty($nilai)) {
+         $view['pesan'] = 'Tidak ada data';
+       } elseif ($nilai->num_rows() == 0) {
+         $view['pesan'] = 'Tidak ada data';
+       } else {
+ 
+
+       // Hitung jumlah kriteria dan alternatif
+       $numCriteria = count($criteria);
+       $numAlternatives = count($peserta);
+
+
+       // Normalisasi bobot
+       $sumWeights = array_sum($weights);
+       $normalizedWeights = [];
+       foreach ($weights as $weight) {
+           $normalizedWeights[] = $weight / $sumWeights;
+       }
+
+        // Normalisasi matriks kriteria (Xij / √∑Xij^2)
+       $normalizedMatrix = [];
+       for ($j = 0; $j < $numCriteria; $j++) {
+           $sumSquared = 0; // Variable to store the sum of squared values for the current column
+           
+           // Calculate the sum of squared values for the current column
+           for ($i = 0; $i < $numAlternatives; $i++) {
+               $sumSquared += pow($matrix[$i][$j], 2);
+           }
+           
+           // Normalize the values in the current column
+           for ($i = 0; $i < $numAlternatives; $i++) {
+               $normalizedMatrix[$i][$j] = $matrix[$i][$j] / sqrt($sumSquared);
+           }
+       }
+     
+
+       // Menghitung nilai optimasi
+       $results = [];
+       for ($i = 0; $i < $numAlternatives; $i++) {
+           $result = 0;
+           $result += ($normalizedMatrix[$i][0] * $normalizedWeights[0]); // X1.1(max).w1
+           $result += ($normalizedMatrix[$i][2] * $normalizedWeights[2]); // X1.3(max).w3
+           $result += ($normalizedMatrix[$i][3] * $normalizedWeights[3]); // X1.4(max).w4
+           $result += ($normalizedMatrix[$i][4] * $normalizedWeights[4]); // X1.5(max).w5
+           $result -= ($normalizedMatrix[$i][1] * $normalizedWeights[1]); // X1.2(min).w2
+           $results[$i] = $result;
+       }
         
       // Tampilkan hasil moora ke view
       $view['peserta'] = $peserta;

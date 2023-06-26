@@ -72,7 +72,7 @@ if ($nilai->num_rows() == 0):
                         }
                     }
                         $total1 = $total1;
-                        $total1 = number_format($total1, 0);
+                        $total1 = number_format($total1, 2);
                     ?>
                     <?= $total1 ?>
                 </td>
@@ -88,7 +88,7 @@ if ($nilai->num_rows() == 0):
                         }
                     }
                         $total2 = $total2;
-                        $total2 = number_format($total2, 0);
+                        $total2 = number_format($total2, 2);
                     ?>
                     <?= $total2 ?>
                 </td>
@@ -104,7 +104,7 @@ if ($nilai->num_rows() == 0):
                         }
                     }
                         $total3 = $total3;
-                        $total3 = number_format($total3, 0);
+                        $total3 = number_format($total3, 2);
                     ?>
                     <?= $total3 ?>
                 </td>
