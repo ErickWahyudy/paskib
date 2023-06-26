@@ -287,7 +287,6 @@ if($this->session->userdata('level') =="1"){
       <li><a href="<?= base_url('superadmin/pengguna/user_superadmin') ?>" class="active"><i class="fa  fa-buysellads"></i> <span>Data superadmin</span></a></li>
  
       <li class="header">OTHER</li>
-      <li><a href="<?= base_url('superadmin/informasi'); ?>"><i class="fa fa-bullhorn"></i> <span>Layanan Informasi</span></a></li>
       <li><a href="<?= base_url('superadmin/profile'); ?>"><i class="fa fa-user"></i> <span>Akun Profile</span></a></li>
       <li><a href="<?= base_url('superadmin/pengaturan'); ?>"><i class="fa fa-gear"></i> <span>Pengaturan</span></a></li>
       

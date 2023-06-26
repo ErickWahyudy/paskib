@@ -163,7 +163,7 @@ $(document).on('submit', '#edit', function(e) {
 });
 </script>
 <?php else: ?>
-    <h3 class="text-center">Nilai sudah disimpan permanen, anda sudah tidak dapat mengubah nilai lagi</h3>
+    <h3 class="text-center">Nilai sudah disimpan permanen, anda tidak dapat mengubah nilai lagi</h3>
 <?php endif; ?>
 <?php endif; ?>
 <?php $this->load->view('template/footer'); ?>

@@ -39,6 +39,5 @@ class Home extends CI_controller
      );
 	 $this->load->view('template/home',$view);
 	}
-
 	
 }
