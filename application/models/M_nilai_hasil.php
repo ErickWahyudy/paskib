@@ -10,11 +10,12 @@ private $table1 = 'tb_nilai_hasil';
 private $table2 = 'tb_peserta';
 
 //nilai_hasil
-public function view($value='')
+public function view($tahun='')
 {
   $this->db->select ('*');
   $this->db->from ($this->table1);
   $this->db->join ($this->table2, 'tb_nilai_hasil.id_peserta = tb_peserta.id_peserta');
+  $this->db->where('tb_nilai_hasil.tahun', $tahun);
   $this->db->order_by('hasil', 'DESC');
   return $this->db->get();
 }

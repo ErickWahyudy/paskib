@@ -1,9 +1,32 @@
 <?php $this->load->view('template/header'); ?>
 
+<?php if($depan == TRUE): 
+      $kode_tahun = date("Y");      
+?>
+<table class="table table-striped">
+    <form action="" method="POST">           
+        <tr>
+            <th>Tahun</th>
+            <td>
+                <input type="number" name="tahun" class="form-control" value="<?= $kode_tahun ?>" placeholder="tahun"
+                    required="">
+            </td>
+        </tr>
+        <tr>
+            <th></th>
+            <td>
+                <input type="submit" name="cari" value="Buka Nilai" class="btn btn-primary">
+            </td>
+        </tr>
+    </form>
+</table>
+
+<?php elseif($depan == FALSE): ?>
+
 <?php 
 if($aksi == "lihat"):
 
-$nilai = $this->m_jasmani->view(); 
+$nilai = $this->m_jasmani->view($tahun); 
 if ($nilai->num_rows() == 0): 
 ?>
 <h1 class="text-center">Belum Ada Nilai Yang Diinputkan</h1>
@@ -48,7 +71,7 @@ if ($nilai->num_rows() == 0):
                 <td><?= $peserta['asal_sekolah'] ?></td>
                 <td><?= $peserta['tinggi_bb'] ?> cm </td>
                 <td><?= $peserta['berat_bb'] ?> kg </td>
-                <?php $nilai = $this->m_jasmani->view_nilai($peserta['id_peserta']); ?>
+                <?php $nilai = $this->m_jasmani->view_nilai($peserta['id_peserta'], $tahun); ?>
                 <?php foreach($nilai->result_array() as $nilai): ?>
                 <?php if ($nilai['id_jasmani'] == $peserta['id_peserta'] && $nilai['id_jasmani'] == NULL): ?>
                 <td colspan="4" style="text-align: center;">Belum dinilai</td>
@@ -62,7 +85,7 @@ if ($nilai->num_rows() == 0):
                 <!-- rata-rata nilai -->
                 <td>
                     <?php
-                    $nilai = $this->m_jasmani->view_nilai($peserta['id_peserta']);
+                    $nilai = $this->m_jasmani->view_nilai($peserta['id_peserta'], $tahun);
                     $total1 = 0;
                     foreach ($nilai->result_array() as $nilai) {
                         if ($nilai['nilai_lari'] == NULL) {
@@ -78,7 +101,7 @@ if ($nilai->num_rows() == 0):
                 </td>
                 <td>
                     <?php
-                    $nilai = $this->m_jasmani->view_nilai($peserta['id_peserta']);
+                    $nilai = $this->m_jasmani->view_nilai($peserta['id_peserta'], $tahun);
                     $total2 = 0;
                     foreach ($nilai->result_array() as $nilai) {
                         if ($nilai['nilai_pushUp'] == NULL) {
@@ -94,7 +117,7 @@ if ($nilai->num_rows() == 0):
                 </td>
                 <td>
                     <?php
-                    $nilai = $this->m_jasmani->view_nilai($peserta['id_peserta']);
+                    $nilai = $this->m_jasmani->view_nilai($peserta['id_peserta'], $tahun);
                     $total3 = 0;
                     foreach ($nilai->result_array() as $nilai) {
                         if ($nilai['nilai_sitUp'] == NULL) {
@@ -124,19 +147,11 @@ if ($nilai->num_rows() == 0):
                             $kriteria = $this->m_kriteria->NilaiKriteriaJasmani($total);
                         ?>
                         <?= $kriteria ?>                        
-                        <input type="hidden" name="id_peserta[]" value="<?= $nilai['id_peserta'] ?>">
-                        <input type="hidden" name="hasil[]" value="<?= $total ?>">
-                        <input type="hidden" name="nilai_kriteria[]" value="<?= $kriteria ?>">
+                    
                     </td>
 
                     <?php $no++;  endforeach; ?>
             </tr>
-            <tr>
-                <td colspan="19" style="text-align: center;">
-                    <button type="submit" class="btn btn-primary btn-md">Simpan Nilai</button>
-                </td>
-            </tr>
-            </form>
         </tbody>
     </table>
 </div>
@@ -148,34 +163,6 @@ if ($nilai->num_rows() == 0):
     ?>
 
 <script>
-//add data
-$(document).ready(function() {
-    $('#add').submit(function(e) {
-        e.preventDefault();
-        $.ajax({
-            url: "<?= site_url('superadmin/nilai/matriks/api_add_jasmani') ?>",
-            type: "POST",
-            data: new FormData(this),
-            processData: false,
-            contentType: false,
-            cache: false,
-            async: false,
-            success: function(data) {
-                $('#add')[0].reset();
-                swal({
-                    title: "Berhasil",
-                    text: "Data berhasil ditambahkan",
-                    type: "success",
-                    showConfirmButton: true,
-                    confirmButtonText: "OKEE",
-                }).then(function() {
-                    location.reload();
-                });
-            }
-        });
-    });
-});
-
 //ajax hapus
 function hapusnilai() {
     swal({
@@ -222,5 +209,5 @@ function hapusnilai() {
 }
 </script>
 
-
+<?php endif; ?>
 <?php $this->load->view('template/footer'); ?>

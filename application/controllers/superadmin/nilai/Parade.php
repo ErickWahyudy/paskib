@@ -28,6 +28,9 @@ class Parade extends CI_controller
     //view nilai
     public function lihat($id_pengguna='', $id_peserta='')
     {
+      if (isset($_POST['cari'])) {
+        $tahun = $this->input->post('tahun');
+
       $data = $this->m_kriteria->view_id('K005ndLkXQ')->row_array();
       $peserta  = $this->m_parade->view_peserta()->result_array();
       $nilai    = $this->m_parade->view_nilai()->result_array();
@@ -43,10 +46,19 @@ class Parade extends CI_controller
                     'nama_nilai3'   =>$data['nama_nilai3'],
                     'nama_nilai4'   =>$data['nama_nilai4'],
                     'nama_nilai5'   =>$data['nama_nilai5'],
-
+                    'depan'         =>FALSE,
+                    'tahun'         =>$tahun,
+                  );
+      $this->load->view('superadmin/nilai/parade/lihat',$view);
+    }else{
+     $data = $this->m_kriteria->view_id('K005ndLkXQ')->row_array();
+     $view = array('judul'          =>'Data Nilai '.$data['kriteria'],
+                   'aksi'           =>'lihat',
+                   'depan'          =>TRUE,
                   );
       $this->load->view('superadmin/nilai/parade/lihat',$view);
     }
+  }
 
     //add nilai
     public function input()
@@ -68,6 +80,9 @@ class Parade extends CI_controller
     //edit nilai
     public function edit($id_pengguna='', $id_peserta='')
     {
+      if (isset($_POST['cari'])) {
+        $tahun = $this->input->post('tahun');
+
       $data = $this->m_kriteria->view_id('K005ndLkXQ')->row_array();
       $peserta  = $this->m_parade->view_peserta()->result_array();
       $nilai    = $this->m_parade->view_nilai()->result_array();
@@ -83,9 +98,19 @@ class Parade extends CI_controller
                       'nama_nilai3' =>$data['nama_nilai3'],
                       'nama_nilai4' =>$data['nama_nilai4'],
                       'nama_nilai5' =>$data['nama_nilai5'],
+                      'depan'        =>FALSE,
+                      'tahun'        =>$tahun,
+                  );
+      $this->load->view('superadmin/nilai/parade/form',$view);
+    }else{
+     $data = $this->m_kriteria->view_id('K005ndLkXQ')->row_array();
+     $view = array('judul'          =>'Data Nilai '.$data['kriteria'],
+                   'aksi'           =>'edit',
+                   'depan'          =>TRUE,
                   );
       $this->load->view('superadmin/nilai/parade/form',$view);
     }
+  }
 
 
     private function acak_id($panjang)
@@ -146,15 +171,18 @@ class Parade extends CI_controller
     } else {
       $aid        =$this->input->post('id_peserta');
       $apengguna  =$this->input->post('id_pengguna');
+      $atahun     = date('Y');
 
       if(!empty($aid)){
         for ($i=0; $i < count($aid); $i++) { 
           $id_peserta = $aid[$i];
-          $id_parade = $this->id_parade_urut();
+          $id_parade  = $this->id_parade_urut();
+          $tahun      = $atahun;
           $SQLinsert = [
             'id_parade'      => $id_parade,
             'id_pengguna'     => $apengguna,
-            'id_peserta'      => $id_peserta
+            'id_peserta'      => $id_peserta,
+            'tahun'           => $tahun
           ];
           $this->m_parade->add($SQLinsert);
         }

@@ -29,11 +29,13 @@ class Nilai_hasil extends CI_controller
     //view nilai
     public function index($value='')
     {
+      if (isset($_POST['cari'])) {
+        $tahun = $this->input->post('tahun');
     
       $peserta      = $this->m_matriks->view_peserta()->result_array();
       $nilai        = $this->m_matriks->view_nilai()->result_array();
       $kriteria     = $this->m_matriks->view_kriteria()->result_array();
-      $view['data'] = $this->m_nilai_hasil->view()->result_array();
+      $view['data'] = $this->m_nilai_hasil->view($tahun)->result_array();
       
         //Perhitungan Moora
         $criteria = $this->m_kriteria->view()->result_array();
@@ -45,7 +47,7 @@ class Nilai_hasil extends CI_controller
         // Data matriks nilai
         $matrix = [];
         foreach ($peserta as $p) {
-            $nilai = $this->m_matriks->view_nilai($p['id_peserta']); // Misalnya, mengambil data nilai dari model
+            $nilai = $this->m_matriks->view_nilai($p['id_peserta'], $tahun); // Misalnya, mengambil data nilai dari model
             $tinggi_bb = $this->NilaiKriteriaTinggiBB($p['tinggi_bb']);
             $berat_bb =  $this->NilaiKriteriaBeratBB($p['berat_bb']);
 
@@ -125,10 +127,18 @@ class Nilai_hasil extends CI_controller
       $view['nama_peserta']         =$peserta;
       $view['view_kriteria']        =$kriteria;
       $view['nilai_peserta']        =$nilai;
-      
+      $view['depan']                =FALSE;
+      $view['tahun']                =$tahun;
                  
       $this->load->view('superadmin/nilai/total_nilai/nilai_hasil',$view);
+    }else{
+      $view['judul']                ='Data Hasil Nilai';
+      $view['judul2']               ='Data Alternatif';
+      $view['depan']                =TRUE;
+
+      $this->load->view('superadmin/nilai/total_nilai/nilai_hasil',$view);
     }
+  }
 
       //nilai kriteria tinggi bb
       public function NilaiKriteriaTinggiBB($tinggi_bb)
@@ -212,6 +222,11 @@ class Nilai_hasil extends CI_controller
         'label' => 'hasil',
         'rules' => 'required'
       ),
+      array(
+        'field' => 'tahun[]',
+        'label' => 'tahun',
+        'rules' => 'required'
+      ),
     );
     $this->form_validation->set_rules($rules);
     if ($this->form_validation->run() == FALSE) {
@@ -222,16 +237,19 @@ class Nilai_hasil extends CI_controller
     }else{
         $aid        =$this->input->post('id_peserta');
         $ahasil     =$this->input->post('hasil');
+        $atahun     =$this->input->post('tahun');
 
         if(!empty($aid)){
           for ($i=0; $i < count($aid); $i++) { 
             $id_peserta       =$aid[$i];
             $hasil            =$ahasil[$i];
+            $tahun            =$atahun[$i];
             $id_nilai         =$this->id_nilai();
             $SQLinsert        =array(
                                     'id_nilai'    =>$id_nilai,
                                     'id_peserta'    =>$id_peserta,
                                     'hasil'         =>$hasil,
+                                    'tahun'         =>$tahun,
                                   );
             $this->m_nilai_hasil->add($SQLinsert);
             }

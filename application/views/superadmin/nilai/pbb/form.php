@@ -99,6 +99,28 @@ $(document).ready(function() {
 <?php 
 elseif($aksi == "edit"):
 ?>
+<?php if($depan == TRUE): 
+      $kode_tahun = date("Y");      
+?>
+<table class="table table-striped">
+    <form action="" method="POST">           
+        <tr>
+            <th>Tahun</th>
+            <td>
+                <input type="number" name="tahun" class="form-control" value="<?= $kode_tahun ?>" placeholder="tahun"
+                    required="">
+            </td>
+        </tr>
+        <tr>
+            <th></th>
+            <td>
+                <input type="submit" name="cari" value="Buka Nilai" class="btn btn-primary">
+            </td>
+        </tr>
+    </form>
+</table>
+
+<?php elseif($depan == FALSE): ?>
 <div class="table-responsive">
     <table id="example1" class="table table-bordered  table-striped">
         <thead>
@@ -141,7 +163,7 @@ elseif($aksi == "edit"):
                 <td><?= $peserta['asal_sekolah'] ?></td>
                 <td><?= $peserta['tinggi_bb'] ?> cm </td>
                 <td><?= $peserta['berat_bb'] ?> kg </td>
-                <?php $nilai = $this->m_pbb->view_nilai($peserta['id_peserta']); ?>
+                <?php $nilai = $this->m_pbb->view_nilai($peserta['id_peserta'], $tahun); ?>
                 <?php foreach($nilai->result_array() as $nilai): ?>
                 <?php if ($nilai['id_pbb'] == $peserta['id_peserta'] && $nilai['id_pbb'] == NULL): ?>
                 <td colspan="4" style="text-align: center;">Belum dinilai</td>
@@ -160,7 +182,7 @@ elseif($aksi == "edit"):
                 <!-- Total Nilai -->
                 <td>
                     <?php
-                    $nilai = $this->m_pbb->view_nilai($peserta['id_peserta']);
+                    $nilai = $this->m_pbb->view_nilai($peserta['id_peserta'], $tahun);
                     $total1 = 0;
                     foreach ($nilai->result_array() as $nilai) {
                         $total1 += $nilai['nilai_sk'];
@@ -170,7 +192,7 @@ elseif($aksi == "edit"):
                 </td>
                 <td>
                     <?php
-                    $nilai = $this->m_pbb->view_nilai($peserta['id_peserta']);
+                    $nilai = $this->m_pbb->view_nilai($peserta['id_peserta'], $tahun);
                     $total2 = 0;
                     foreach ($nilai->result_array() as $nilai) {
                         $total2 += $nilai['nilai_gb'];
@@ -180,7 +202,7 @@ elseif($aksi == "edit"):
                 </td>
                 <td>
                     <?php
-                    $nilai = $this->m_pbb->view_nilai($peserta['id_peserta']);
+                    $nilai = $this->m_pbb->view_nilai($peserta['id_peserta'], $tahun);
                     $total3 = 0;
                     foreach ($nilai->result_array() as $nilai) {
                         $total3 += $nilai['nilai_gd'];
@@ -190,7 +212,7 @@ elseif($aksi == "edit"):
                 </td>
                 <td>
                     <?php
-                    $nilai = $this->m_pbb->view_nilai($peserta['id_peserta']);
+                    $nilai = $this->m_pbb->view_nilai($peserta['id_peserta'], $tahun);
                     $total4 = 0;
                     foreach ($nilai->result_array() as $nilai) {
                         $total4 += $nilai['nilai_ab'];
@@ -208,7 +230,7 @@ elseif($aksi == "edit"):
 <!-- Modal edit data dokter-->
 <?php foreach($view_juri as $nilai): ?>
 <?php foreach($nama_peserta as $peserta): ?>
-<?php $nilai = $this->m_pbb->view_nilai($peserta['id_peserta']); ?>
+<?php $nilai = $this->m_pbb->view_nilai($peserta['id_peserta'], $tahun); ?>
 <?php foreach($nilai->result_array() as $nilai): ?>
 <div class="modal fade" id="edit<?= $nilai['id_pbb'] ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
@@ -383,5 +405,6 @@ function hapusnilai(id_pbb) {
     });
 }
 </script>
+<?php endif; ?>
 <?php endif; ?>
 <?php $this->load->view('template/footer'); ?>

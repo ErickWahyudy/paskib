@@ -66,13 +66,13 @@ if($aksi == "add"):
             checkAllButton.innerHTML = 'Centang Semua';
         }
     }
-    
+
 //add data
 $(document).ready(function() {
     $('#add').submit(function(e) {
         e.preventDefault();
         $.ajax({
-            url: "<?= site_url('superadmin/nilai/parade/api_add') ?>",
+            url: "<?= site_url('admin/nilai/pbb/api_add') ?>",
             type: "POST",
             data: new FormData(this),
             processData: false,
@@ -130,16 +130,15 @@ elseif($aksi == "edit"):
                 <th rowspan="3" style="vertical-align: middle;">Asal Sekolah</th>
                 <th rowspan="3" style="vertical-align: middle;">Tinggi Badan</th>
                 <th rowspan="3" style="vertical-align: middle;">Berat Badan</th>
-                <th colspan="15" style="text-align: center;"><?= $judul ?></th>
+                <th colspan="12" style="text-align: center;"><?= $judul ?></th>
                 <th rowspan="3" style="vertical-align: middle;">Total Nilai <?= $nama_nilai1 ?></th>
                 <th rowspan="3" style="vertical-align: middle;">Total Nilai <?= $nama_nilai2 ?></th>
                 <th rowspan="3" style="vertical-align: middle;">Total Nilai <?= $nama_nilai3 ?></th>
                 <th rowspan="3" style="vertical-align: middle;">Total Nilai <?= $nama_nilai4 ?></th>
-                <th rowspan="3" style="vertical-align: middle;">Total Nilai <?= $nama_nilai5 ?></th>
             </tr>
             <tr>
                 <?php $no=1; foreach($view_juri as $juri): ?>
-                <th colspan="5" style="text-align: center;">
+                <th colspan="4" style="text-align: center;">
                     Penilai <?= $no ?> /
                     <?= $juri['nama'] ?>
                 </th>
@@ -151,7 +150,6 @@ elseif($aksi == "edit"):
                 <th><?= $nama_nilai2 ?></th>
                 <th><?= $nama_nilai3 ?></th>
                 <th><?= $nama_nilai4 ?></th>
-                <th><?= $nama_nilai5 ?></th>
                 <?php endforeach; ?>
             </tr>
         </thead>
@@ -165,19 +163,18 @@ elseif($aksi == "edit"):
                 <td><?= $peserta['asal_sekolah'] ?></td>
                 <td><?= $peserta['tinggi_bb'] ?> cm </td>
                 <td><?= $peserta['berat_bb'] ?> kg </td>
-                <?php $nilai = $this->m_parade->view_nilai($peserta['id_peserta'], $tahun); ?>
+                <?php $nilai = $this->m_pbb->view_nilai($peserta['id_peserta'], $tahun); ?>
                 <?php foreach($nilai->result_array() as $nilai): ?>
-                <?php if ($nilai['id_parade'] == $peserta['id_peserta'] && $nilai['id_parade'] == NULL): ?>
+                <?php if ($nilai['id_pbb'] == $peserta['id_peserta'] && $nilai['id_pbb'] == NULL): ?>
                 <td colspan="4" style="text-align: center;">Belum dinilai</td>
                 <?php else: ?>
-                <td><?= $nilai['nilai_wjh'] ?></td>
-                <td><?= $nilai['nilai_bdn'] ?></td>
-                <td><?= $nilai['nilai_bp'] ?></td>
-                <td><?= $nilai['nilai_tgn'] ?></td>
+                <td><?= $nilai['nilai_sk'] ?></td>
+                <td><?= $nilai['nilai_gb'] ?></td>
+                <td><?= $nilai['nilai_gd'] ?></td>
                 <td>
-                    <?= $nilai['nilai_kk'] ?>
+                    <?= $nilai['nilai_ab'] ?>
                     <a href="" class="btn btn-warning btn-xs" data-toggle="modal"
-                        data-target="#edit<?= $nilai['id_parade'] ?>"><i class="fa fa-edit"></i></a>
+                        data-target="#edit<?= $nilai['id_pbb'] ?>"><i class="fa fa-edit"></i></a>
                 </td>
                 <?php endif; ?>
                 <?php endforeach; ?>
@@ -185,54 +182,45 @@ elseif($aksi == "edit"):
                 <!-- Total Nilai -->
                 <td>
                     <?php
-                    $nilai = $this->m_parade->view_nilai($peserta['id_peserta'], $tahun);
+                    $nilai = $this->m_pbb->view_nilai($peserta['id_peserta'], $tahun);
                     $total1 = 0;
                     foreach ($nilai->result_array() as $nilai) {
-                        $total1 += $nilai['nilai_wjh'];
+                        $total1 += $nilai['nilai_sk'];
                     }
                     ?>
                     <?= $total1 ?>
                 </td>
                 <td>
                     <?php
-                    $nilai = $this->m_parade->view_nilai($peserta['id_peserta'], $tahun);
+                    $nilai = $this->m_pbb->view_nilai($peserta['id_peserta'], $tahun);
                     $total2 = 0;
                     foreach ($nilai->result_array() as $nilai) {
-                        $total2 += $nilai['nilai_bdn'];
+                        $total2 += $nilai['nilai_gb'];
                     }
                     ?>
                     <?= $total2 ?>
                 </td>
                 <td>
                     <?php
-                    $nilai = $this->m_parade->view_nilai($peserta['id_peserta'], $tahun);
+                    $nilai = $this->m_pbb->view_nilai($peserta['id_peserta'], $tahun);
                     $total3 = 0;
                     foreach ($nilai->result_array() as $nilai) {
-                        $total3 += $nilai['nilai_bp'];
+                        $total3 += $nilai['nilai_gd'];
                     }
                     ?>
                     <?= $total3 ?>
                 </td>
                 <td>
                     <?php
-                    $nilai = $this->m_parade->view_nilai($peserta['id_peserta'], $tahun);
+                    $nilai = $this->m_pbb->view_nilai($peserta['id_peserta'], $tahun);
                     $total4 = 0;
                     foreach ($nilai->result_array() as $nilai) {
-                        $total4 += $nilai['nilai_tgn'];
+                        $total4 += $nilai['nilai_ab'];
                     }
                     ?>
                     <?= $total4 ?>
                 </td>
-                <td>
-                    <?php
-                    $nilai = $this->m_parade->view_nilai($peserta['id_peserta'], $tahun);
-                    $total5 = 0;
-                    foreach ($nilai->result_array() as $nilai) {
-                        $total5 += $nilai['nilai_kk'];
-                    }
-                    ?>
-                    <?= $total5 ?>
-                </td>
+
                 <?php $no++;  endforeach; ?>
             </tr>
         </tbody>
@@ -242,9 +230,9 @@ elseif($aksi == "edit"):
 <!-- Modal edit data dokter-->
 <?php foreach($view_juri as $nilai): ?>
 <?php foreach($nama_peserta as $peserta): ?>
-<?php $nilai = $this->m_parade->view_nilai($peserta['id_peserta'], $tahun); ?>
+<?php $nilai = $this->m_pbb->view_nilai($peserta['id_peserta'], $tahun); ?>
 <?php foreach($nilai->result_array() as $nilai): ?>
-<div class="modal fade" id="edit<?= $nilai['id_parade'] ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<div class="modal fade" id="edit<?= $nilai['id_pbb'] ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header bg-purple">
@@ -255,7 +243,7 @@ elseif($aksi == "edit"):
             <div class="modal-body table-responsive">
                 <table class="table table-bordered table-striped">
                     <form id="edit" method="post">
-                        <input type="hidden" name="id_parade" value="<?= $nilai['id_parade'] ?>">
+                        <input type="hidden" name="id_pbb" value="<?= $nilai['id_pbb'] ?>">
                         <tr>
                             <th>Nama Juri</th>
                         </tr>
@@ -280,7 +268,7 @@ elseif($aksi == "edit"):
                         </tr>
                         <tr>
                             <td>
-                                <input type="text" name="nilai_wjh" value="<?= $nilai['nilai_wjh'] ?>"
+                                <input type="text" name="nilai_sk" value="<?= $nilai['nilai_sk'] ?>"
                                     class="form-control" required autocomplete="off">
                             </td>
                         </tr>
@@ -289,7 +277,7 @@ elseif($aksi == "edit"):
                         </tr>
                         <tr>
                             <td>
-                                <input type="text" name="nilai_bdn" value="<?= $nilai['nilai_bdn'] ?>"
+                                <input type="text" name="nilai_gb" value="<?= $nilai['nilai_gb'] ?>"
                                     class="form-control" required autocomplete="off">
                             </td>
                         </tr>
@@ -298,7 +286,7 @@ elseif($aksi == "edit"):
                         </tr>
                         <tr>
                             <td>
-                                <input type="text" name="nilai_bp" value="<?= $nilai['nilai_bp'] ?>"
+                                <input type="text" name="nilai_gd" value="<?= $nilai['nilai_gd'] ?>"
                                     class="form-control" required autocomplete="off">
                             </td>
                         </tr>
@@ -307,16 +295,7 @@ elseif($aksi == "edit"):
                         </tr>
                         <tr>
                             <td>
-                                <input type="text" name="nilai_tgn" value="<?= $nilai['nilai_tgn'] ?>"
-                                    class="form-control" required autocomplete="off">
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>Nilai <?= $nama_nilai5 ?></th>
-                        </tr>
-                        <tr>
-                            <td>
-                                <input type="text" name="nilai_kk" value="<?= $nilai['nilai_kk'] ?>"
+                                <input type="text" name="nilai_ab" value="<?= $nilai['nilai_ab'] ?>"
                                     class="form-control" required autocomplete="off">
                             </td>
                         </tr>
@@ -324,7 +303,7 @@ elseif($aksi == "edit"):
                         <tr>
                             <td>
                                 <input type="submit" name="kirim" value="Simpan" class="btn btn-success"> &nbsp;&nbsp;
-                                <a href="javascript:void(0)" onclick="hapusnilai('<?= $nilai['id_parade'] ?>')"
+                                <a href="javascript:void(0)" onclick="hapusnilai('<?= $nilai['id_pbb'] ?>')"
                                     class="btn btn-danger">Hapus</a>
                             </td>
                         </tr>
@@ -348,14 +327,14 @@ $(document).on('submit', '#edit', function(e) {
 
     $.ajax({
         type: "POST",
-        url: "<?php echo site_url('superadmin/nilai/parade/api_edit/') ?>" + form_data.get('id_parade'),
+        url: "<?php echo site_url('admin/nilai/pbb/api_edit/') ?>" + form_data.get('id_pbb'),
         dataType: "json",
         data: form_data,
         processData: false,
         contentType: false,
         //memanggil swall ketika berhasil
         success: function(data) {
-            $('#edit' + form_data.get('id_parade'));
+            $('#edit' + form_data.get('id_pbb'));
             swal({
                 title: "Berhasil",
                 text: "Data Berhasil Diubah",
@@ -382,7 +361,7 @@ $(document).on('submit', '#edit', function(e) {
 });
 
 //ajax hapus pengeluaran
-function hapusnilai(id_parade) {
+function hapusnilai(id_pbb) {
     swal({
         title: "Apakah Anda Yakin?",
         text: "Data Akan Dihapus",
@@ -397,7 +376,7 @@ function hapusnilai(id_parade) {
         if (result.value) { // Only delete the data if the user clicked on the confirm button
             $.ajax({
                 type: "POST",
-                url: "<?php echo site_url('superadmin/nilai/parade/api_hapus/') ?>" + id_parade,
+                url: "<?php echo site_url('admin/nilai/pbb/api_hapus/') ?>" + id_pbb,
                 dataType: "json",
             }).done(function() {
                 swal({

@@ -1,8 +1,31 @@
 <?php $this->load->view('template/header'); ?>
-<?php $nilai = $this->m_nilai_hasil->view(); ?>
+<?php if($depan == TRUE): 
+      $kode_tahun = date("Y");      
+?>
+<table class="table table-striped">
+    <form action="" method="POST">           
+        <tr>
+            <th>Tahun</th>
+            <td>
+                <input type="number" name="tahun" class="form-control" value="<?= $kode_tahun ?>" placeholder="tahun"
+                    required="">
+            </td>
+        </tr>
+        <tr>
+            <th></th>
+            <td>
+                <input type="submit" name="cari" value="Buka Nilai" class="btn btn-primary">
+            </td>
+        </tr>
+    </form>
+</table>
+
+<?php elseif($depan == FALSE): ?>
+<?php $nilai = $this->m_nilai_hasil->view($tahun); ?>
 <?php if ($nilai->num_rows() == 0): ?>
 <h1 class="text-center">Belum Ada Nilai Yang Ditampilkan</h1>
 <?php else: ?>
+<?= $this->session->flashdata('pesan') ?>
 <div class="table-responsive">
     <table id="example1" class="table table-bordered  table-striped">
         <thead>
@@ -36,7 +59,7 @@
                 <td><?= $peserta['asal_sekolah'] ?></td>
                 <td><?= $peserta['tinggi_bb'] ?> cm </td>
                 <td><?= $peserta['berat_bb'] ?> kg </td>
-                <?php $nilai = $this->m_matriks->view_nilai($peserta['id_peserta']); ?>
+                <?php $nilai = $this->m_matriks->view_nilai($peserta['id_peserta'], $tahun); ?>
                 <?php foreach($nilai->result_array() as $nilai): ?>
                 <td>
                     <?= $nilai['hasil'] ?>
@@ -81,5 +104,52 @@
                 </tbody>
             </table>
 
+            <script>
+            //ajax hapus
+            function hapusnilai() {
+                swal({
+                    title: "Apakah Anda Yakin?",
+                    text: "Data Akan Dihapus",
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "Ya, Hapus!",
+                    cancelButtonText: "Tidak, Batalkan!",
+                    closeOnConfirm: false,
+                    closeOnCancel: true // Set this to true to close the dialog when the cancel button is clicked
+                }).then(function(result) {
+                    if (result.value) { // Only delete the data if the user clicked on the confirm button
+                        $.ajax({
+                            type: "POST",
+                            url: "<?php echo site_url('admin/nilai/nilai_hasil/api_empty_table/') ?>",
+                            dataType: "json",
+                        }).done(function() {
+                            swal({
+                                title: "Berhasil",
+                                text: "Data Berhasil Dihapus",
+                                type: "success",
+                                showConfirmButton: true,
+                                confirmButtonText: "OKEE"
+                            }).then(function() {
+                                location.reload();
+                            });
+                        }).fail(function() {
+                            swal({
+                                title: "Gagal",
+                                text: "Data Gagal Dihapus",
+                                type: "error",
+                                showConfirmButton: true,
+                                confirmButtonText: "OKEE"
+                            }).then(function() {
+                                location.reload();
+                            });
+                        });
+                    } else { // If the user clicked on the cancel button, show a message indicating that the deletion was cancelled
+                        swal("Batal hapus", "Data Tidak Jadi Dihapus", "error");
+                    }
+                });
+            }
+            </script>
+            <?php endif; ?>
             <?php endif; ?>
             <?php $this->load->view('template/footer'); ?>

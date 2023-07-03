@@ -28,9 +28,12 @@ class Pbb extends CI_controller
     //view nnilai
     public function lihat($id_pengguna='', $id_peserta='')
     {
+      if (isset($_POST['cari'])) {
+        $tahun = $this->input->post('tahun');
+
       $data = $this->m_kriteria->view_id('K004RHwS3n')->row_array();
       $peserta  = $this->m_pbb->view_peserta()->result_array();
-      $nilai    = $this->m_pbb->view_nilai()->result_array();
+      $nilai    = $this->m_pbb->view_nilai($tahun)->result_array();
       $juri     = $this->m_pbb->view_juri()->result_array();
 
      $view = array('judul'          =>'Data Nilai '.$data['kriteria'],
@@ -43,48 +46,71 @@ class Pbb extends CI_controller
                     'nama_nilai3'   =>$data['nama_nilai3'],
                     'nama_nilai4'   =>$data['nama_nilai4'],
                     'nama_nilai5'   =>$data['nama_nilai5'],
+                    'depan'         =>FALSE,
+                    'tahun'         =>$tahun,
+                  );
+      $this->load->view('superadmin/nilai/pbb/lihat',$view);
+    }else{
+     $data = $this->m_kriteria->view_id('K004RHwS3n')->row_array();
+     $view = array('judul'          =>'Data Nilai '.$data['kriteria'],
+                   'aksi'           =>'lihat',
+                   'depan'          =>TRUE,
                   );
       $this->load->view('superadmin/nilai/pbb/lihat',$view);
     }
+  }
 
     //add nilai
-public function input()
-{
-  $data = $this->m_kriteria->view_id('K004RHwS3n')->row_array();
- $view = array('judul'          =>'Buat Nilai '.$data['kriteria'],
-               'aksi'           =>'add',
-               'pilih_juri'     =>$this->m_pengguna->viewJuri()->result_array(),
-               'pilih_peserta'  =>$this->m_peserta->view()->result_array(),
-                'nama_nilai1'   =>$data['nama_nilai1'],
-                'nama_nilai2'   =>$data['nama_nilai2'],
-                'nama_nilai3'   =>$data['nama_nilai3'],
-                'nama_nilai4'   =>$data['nama_nilai4'],
-                'nama_nilai5'   =>$data['nama_nilai5'],
-              );
-  $this->load->view('superadmin/nilai/pbb/form',$view);
-}
+    public function input()
+    {
+      $data = $this->m_kriteria->view_id('K004RHwS3n')->row_array();
+    $view = array('judul'          =>'Buat Nilai '.$data['kriteria'],
+                  'aksi'           =>'add',
+                  'pilih_juri'     =>$this->m_pengguna->viewJuri()->result_array(),
+                  'pilih_peserta'  =>$this->m_peserta->view()->result_array(),
+                    'nama_nilai1'   =>$data['nama_nilai1'],
+                    'nama_nilai2'   =>$data['nama_nilai2'],
+                    'nama_nilai3'   =>$data['nama_nilai3'],
+                    'nama_nilai4'   =>$data['nama_nilai4'],
+                    'nama_nilai5'   =>$data['nama_nilai5'],
+                  );
+      $this->load->view('superadmin/nilai/pbb/form',$view);
+    }
 
-//view nnilai
-public function edit($id_pengguna='', $id_peserta='')
-{
-  $data = $this->m_kriteria->view_id('K004RHwS3n')->row_array();
-  $peserta  = $this->m_pbb->view_peserta()->result_array();
-  $nilai    = $this->m_pbb->view_nilai()->result_array();
-  $juri     = $this->m_pbb->view_juri()->result_array();
+  //view nnilai
+  public function edit($id_pengguna='', $id_peserta='')
+  {
+    if (isset($_POST['cari'])) {
+      $tahun = $this->input->post('tahun');
 
- $view = array('judul'          =>'Data Nilai '.$data['kriteria'],
-               'aksi'           =>'edit',
-               'view_juri'      =>$juri,
-               'nama_peserta'   =>$peserta,
-               'data'           =>$nilai,
-                'nama_nilai1'   =>$data['nama_nilai1'],
-                'nama_nilai2'   =>$data['nama_nilai2'],
-                'nama_nilai3'   =>$data['nama_nilai3'],
-                'nama_nilai4'   =>$data['nama_nilai4'],
-                'nama_nilai5'   =>$data['nama_nilai5'],
-              );
-  $this->load->view('superadmin/nilai/pbb/form',$view);
-}
+    $data = $this->m_kriteria->view_id('K004RHwS3n')->row_array();
+    $peserta  = $this->m_pbb->view_peserta()->result_array();
+    $nilai    = $this->m_pbb->view_nilai($tahun )->result_array();
+    $juri     = $this->m_pbb->view_juri()->result_array();
+
+  $view = array('judul'          =>'Data Nilai '.$data['kriteria'],
+                'aksi'           =>'edit',
+                'view_juri'      =>$juri,
+                'nama_peserta'   =>$peserta,
+                'data'           =>$nilai,
+                  'nama_nilai1'   =>$data['nama_nilai1'],
+                  'nama_nilai2'   =>$data['nama_nilai2'],
+                  'nama_nilai3'   =>$data['nama_nilai3'],
+                  'nama_nilai4'   =>$data['nama_nilai4'],
+                  'nama_nilai5'   =>$data['nama_nilai5'],
+                  'depan'         =>FALSE,
+                  'tahun'         =>$tahun,
+                );
+    $this->load->view('superadmin/nilai/pbb/form',$view);
+    }else{
+    $data = $this->m_kriteria->view_id('K004RHwS3n')->row_array();
+    $view = array('judul'          =>'Data Nilai '.$data['kriteria'],
+                  'aksi'           =>'edit',
+                  'depan'          =>TRUE,
+                  );
+      $this->load->view('superadmin/nilai/pbb/form',$view);
+    }
+  }
 
 private function acak_id($panjang)
 {
@@ -144,15 +170,18 @@ public function api_add($value='')
   } else {
     $aid        =$this->input->post('id_peserta');
     $apengguna  =$this->input->post('id_pengguna');
+    $atahun     = date('Y');
 
     if(!empty($aid)){
       for ($i=0; $i < count($aid); $i++) { 
         $id_peserta = $aid[$i];
         $id_pbb = $this->id_pbb_urut();
+        $tahun = $atahun;
         $SQLinsert = [
           'id_pbb'      => $id_pbb,
           'id_pengguna'     => $apengguna,
-          'id_peserta'      => $id_peserta
+          'id_peserta'      => $id_peserta,
+          'tahun'           => $tahun
         ];
         $this->m_pbb->add($SQLinsert);
       }

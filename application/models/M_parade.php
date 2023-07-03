@@ -11,7 +11,7 @@ private $table2 = 'tb_peserta';
 private $table3 = 'tb_pengguna';
 
 //dokter
-public function view_nilai($id_peserta='')
+public function view_nilai($id_peserta='', $tahun='')
 {
   $this->db->select ('*');
   $this->db->from ($this->table3);
@@ -19,6 +19,7 @@ public function view_nilai($id_peserta='')
   $this->db->join ($this->table2, 'tb_parade.id_peserta = tb_peserta.id_peserta');
   $this->db->where('tb_parade.id_peserta', $id_peserta);
   $this->db->where('tb_peserta.id_peserta', $id_peserta);
+  $this->db->where('tb_parade.tahun', $tahun);
   $this->db->order_by('tb_pengguna.id_pengguna', '3', 'ASC');
   return $this->db->get();
 }
@@ -41,10 +42,11 @@ public function view_peserta()
 }
 
 //view
-public function view($value='')
+public function view($tahun='')
 {
   $this->db->select ('*');
   $this->db->from ($this->table1);
+  $this->db->where('tb_parade.tahun', $tahun);
   return $this->db->get();
 }
 

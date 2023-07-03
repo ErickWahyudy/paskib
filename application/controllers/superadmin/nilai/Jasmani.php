@@ -29,9 +29,12 @@ class Jasmani extends CI_controller
      //view nnilai
      public function lihat($id_pengguna='', $id_peserta='')
      {
+      if (isset($_POST['cari'])) {
+        $tahun = $this->input->post('tahun');
+
        $data = $this->m_kriteria->view_id('K003BNDjht')->row_array();
        $peserta  = $this->m_jasmani->view_peserta()->result_array();
-       $nilai    = $this->m_jasmani->view_nilai()->result_array();
+       $nilai    = $this->m_jasmani->view_nilai($tahun)->result_array();
        $juri     = $this->db->limit(1)->get_where('tb_pengguna', ['id_level' => '3'])->result_array();
  
       $view = array('judul'          =>'Data '.$data['kriteria'],
@@ -44,9 +47,19 @@ class Jasmani extends CI_controller
                     'nama_nilai3'    =>$data['nama_nilai3'],
                     'nama_nilai4'    =>$data['nama_nilai4'],
                     'nama_nilai5'    =>$data['nama_nilai5'],
+                    'depan'          =>FALSE,
+                    'tahun'          =>$tahun,
                    );
        $this->load->view('superadmin/nilai/jasmani/lihat',$view);
-     }
+     }else{
+      $data = $this->m_kriteria->view_id('K003BNDjht')->row_array();
+      $view = array('judul'          =>'Data '.$data['kriteria'],
+                    'aksi'           =>'lihat',
+                    'depan'          =>TRUE,
+                   );
+       $this->load->view('superadmin/nilai/jasmani/lihat',$view);
+      }
+    }
 
     //add nilai
     public function input()
@@ -69,9 +82,12 @@ class Jasmani extends CI_controller
     //view nnilai
     public function edit($id_pengguna='', $id_peserta='')
     {
+      if (isset($_POST['cari'])) {
+        $tahun = $this->input->post('tahun');
+
       $data = $this->m_kriteria->view_id('K003BNDjht')->row_array();
       $peserta  = $this->m_jasmani->view_peserta()->result_array();
-      $nilai    = $this->m_jasmani->view_nilai()->result_array();
+      $nilai    = $this->m_jasmani->view_nilai($tahun)->result_array();
       $juri     = $this->m_jasmani->view_juri()->result_array();
 
      $view = array('judul'          =>'Data Nilai '.$data['kriteria'],
@@ -84,8 +100,18 @@ class Jasmani extends CI_controller
                     'nama_nilai3'   =>$data['nama_nilai3'],
                     'nama_nilai4'   =>$data['nama_nilai4'],
                     'nama_nilai5'   =>$data['nama_nilai5'],
+                    'depan'         =>FALSE,
+                    'tahun'         =>$tahun,
                   );
       $this->load->view('superadmin/nilai/jasmani/form',$view);
+    }else{
+      $data = $this->m_kriteria->view_id('K003BNDjht')->row_array();
+      $view = array('judul'          =>'Data Nilai '.$data['kriteria'],
+                    'aksi'           =>'edit',
+                    'depan'          =>TRUE,
+                  );
+      $this->load->view('superadmin/nilai/jasmani/form',$view);
+      }
     }
 
     private function acak_id($panjang)
@@ -146,15 +172,18 @@ class Jasmani extends CI_controller
     } else {
       $aid        =$this->input->post('id_peserta');
       $apengguna  =$this->input->post('id_pengguna');
+      $atahun     = date('Y');
 
       if(!empty($aid)){
         for ($i=0; $i < count($aid); $i++) { 
           $id_peserta = $aid[$i];
           $id_jasmani = $this->id_jasmani_urut();
+          $tahun      = $atahun;
           $SQLinsert = [
             'id_jasmani'      => $id_jasmani,
             'id_pengguna'     => $apengguna,
-            'id_peserta'      => $id_peserta
+            'id_peserta'      => $id_peserta,
+            'tahun'           => $tahun
           ];
           $this->m_jasmani->add($SQLinsert);
         }

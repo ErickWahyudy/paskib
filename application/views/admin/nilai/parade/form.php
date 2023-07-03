@@ -72,7 +72,7 @@ $(document).ready(function() {
     $('#add').submit(function(e) {
         e.preventDefault();
         $.ajax({
-            url: "<?= site_url('superadmin/nilai/parade/api_add') ?>",
+            url: "<?= site_url('admin/nilai/parade/api_add') ?>",
             type: "POST",
             data: new FormData(this),
             processData: false,
@@ -348,7 +348,7 @@ $(document).on('submit', '#edit', function(e) {
 
     $.ajax({
         type: "POST",
-        url: "<?php echo site_url('superadmin/nilai/parade/api_edit/') ?>" + form_data.get('id_parade'),
+        url: "<?php echo site_url('admin/nilai/parade/api_edit/') ?>" + form_data.get('id_parade'),
         dataType: "json",
         data: form_data,
         processData: false,
@@ -397,7 +397,7 @@ function hapusnilai(id_parade) {
         if (result.value) { // Only delete the data if the user clicked on the confirm button
             $.ajax({
                 type: "POST",
-                url: "<?php echo site_url('superadmin/nilai/parade/api_hapus/') ?>" + id_parade,
+                url: "<?php echo site_url('admin/nilai/parade/api_hapus/') ?>" + id_parade,
                 dataType: "json",
             }).done(function() {
                 swal({

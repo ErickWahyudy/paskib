@@ -11,20 +11,22 @@ private $table2 = 'tb_peserta';
 private $table3 = 'tb_kriteria';
 
 //dokter
-public function view_nilai($id_peserta='')
+public function view_nilai($id_peserta='', $tahun='')
 {
   $this->db->select ('*');
   $this->db->from ($this->table3);
   $this->db->join ($this->table1, 'tb_matriks.id_kriteria = tb_kriteria.id_kriteria');
   $this->db->join ($this->table2, 'tb_matriks.id_peserta = tb_peserta.id_peserta');
   $this->db->where('tb_matriks.id_peserta', $id_peserta);
+  $this->db->where('tb_matriks.tahun', $tahun);
   return $this->db->get();
 }
 
-public function view_nilaihasil()
+public function view_nilaihasil($tahun='')
 {
   $this->db->select('*');
   $this->db->from($this->table1);
+  $this->db->where('tahun', $tahun);
   return $this->db->get();
 }
 

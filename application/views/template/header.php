@@ -139,7 +139,7 @@ if($this->session->userdata('level') =="1"){
               <?php if($this->session->userdata('level') == "1"){ ?>
               <li class="user-footer">
                 <div class="pull-left">
-                  <a href="<?= base_url('admin/user_admin') ?>" class="btn btn-default btn-flat">Profile</a>
+                  <a href="<?= base_url('superadmin/user_admin') ?>" class="btn btn-default btn-flat">Profile</a>
                 </div>
                 <div class="pull-right">
                 <a href="javascript:void(0)" onclick="keluar()" class="btn btn-default btn-flat">Keluar</a>
@@ -148,7 +148,7 @@ if($this->session->userdata('level') =="1"){
               <?php }elseif($this->session->userdata('level') == "2"){ ?>
                 <li class="user-footer">
                 <div class="pull-left">
-                  <a href="<?= base_url('dokter/profile') ?>" class="btn btn-default btn-flat">Profile</a>
+                  <a href="<?= base_url('admin/profile') ?>" class="btn btn-default btn-flat">Profile</a>
                 </div>
                 <div class="pull-right">
                 <a href="javascript:void(0)" onclick="keluar()" class="btn btn-default btn-flat">Keluar</a>
@@ -157,7 +157,7 @@ if($this->session->userdata('level') =="1"){
               <?php }elseif($this->session->userdata('level') == "3"){ ?>
                 <li class="user-footer">
                 <div class="pull-left">
-                  <a href="<?= base_url('pasien/profile') ?>" class="btn btn-default btn-flat">Profile</a>
+                  <a href="<?= base_url('juri/profile') ?>" class="btn btn-default btn-flat">Profile</a>
                 </div>
                 <div class="pull-right">
                 <a href="javascript:void(0)" onclick="keluar()" class="btn btn-default btn-flat">Keluar</a>
@@ -228,7 +228,7 @@ if($this->session->userdata('level') =="1"){
           <ul class="treeview-menu active">
               <li class="treeview">
                   <a href="#">
-                    <i class="fa fa-eye"></i> <span>Lihat Nilai</span>
+                    <i class="fa fa-eye"></i> <span>Lihat Penilaian</span>
                     <span class="pull-right-container">
                       <i class="fa fa-angle-left pull-right"></i>
                     </span>
@@ -252,19 +252,7 @@ if($this->session->userdata('level') =="1"){
                   <li><a href="<?= base_url('superadmin/nilai/nilai_hasil') ?>" class="active"><i class="fa fa-circle-o"></i>Hasil Akhir</a></li>
                   </ul>
               </li>
-              <li class="treeview">
-                  <a href="#">
-                    <i class="fa fa-pencil"></i> <span>Input Nilai</span>
-                    <span class="pull-right-container">
-                      <i class="fa fa-angle-left pull-right"></i>
-                    </span>
-                  </a>
-                  <ul class="treeview-menu active">
-                  <li><a href="<?= base_url('superadmin/nilai/jasmani/input') ?>" class="active"><i class="fa fa-circle-o"></i>Jasmani</a></li>
-                  <li><a href="<?= base_url('superadmin/nilai/parade/input') ?>" class="active"><i class="fa fa-circle-o"></i>Parade</a></li>
-                  <li><a href="<?= base_url('superadmin/nilai/pbb/input') ?>" class="active"><i class="fa fa-circle-o"></i>PBB</a></li>
-                  </ul>
-              </li>
+              
               <li class="treeview">
                   <a href="#">
                     <i class="fa fa-edit"></i> <span>Edit Nilai</span>
@@ -302,7 +290,7 @@ if($this->session->userdata('level') =="1"){
           </a>
         </li>
         <li class="header">OLAH DATA</li>
-      <li class="treeview">
+        <li class="treeview">
           <a href="#">
             <i class="fa fa-star"></i> <span>Data Nilai</span>
             <span class="pull-right-container">
@@ -335,7 +323,21 @@ if($this->session->userdata('level') =="1"){
                   <li><a href="<?= base_url('admin/nilai/matriks/matriks') ?>" class="active"><i class="fa fa-circle-o"></i>Matriks</a></li>
                   <li><a href="<?= base_url('admin/nilai/nilai_hasil') ?>" class="active"><i class="fa fa-circle-o"></i>Hasil Akhir</a></li>
                   </ul>
-              </li>            
+              </li>
+              
+              <li class="treeview">
+                  <a href="#">
+                    <i class="fa fa-edit"></i> <span>Penilaian</span>
+                    <span class="pull-right-container">
+                      <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                  </a>
+                  <ul class="treeview-menu active">
+                  <li><a href="<?= base_url('admin/nilai/jasmani/input') ?>" class="active"><i class="fa fa-circle-o"></i>Jasmani</a></li>
+                  <li><a href="<?= base_url('admin/nilai/parade/input') ?>" class="active"><i class="fa fa-circle-o"></i>Parade</a></li>
+                  <li><a href="<?= base_url('admin/nilai/pbb/input') ?>" class="active"><i class="fa fa-circle-o"></i>PBB</a></li>
+                  </ul>
+              </li>
           </ul>
       </li>
       <li><a href="<?= base_url('admin/peserta'); ?>"><i class="fa fa-users"></i> <span>Data Peserta</span></a></li>

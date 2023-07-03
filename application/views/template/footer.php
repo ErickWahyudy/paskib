@@ -56,7 +56,7 @@
   <footer class="main-footer">
     <strong>Copyright &copy; <?php echo date('Y'); ?>
     <?php  $nama_judul = $this->db->get('tb_pengaturan')->row_array(); ?>
-					<a href="https://bit.ly/kassandrahdproduction" target="blank"><?= $nama_judul['nama_judul'] ?></a>.</strong> All rights reserved. APP Version Beta
+					<a href="https://bit.ly/kassandrahdproduction" target="blank"><?= $nama_judul['nama_judul'] ?></a>.</strong> All rights reserved.
     <br><i>Access application with <?php echo "". get_client_browser()."";?>. <?php echo "". get_client_ip()."";?></i>
   </footer>
 

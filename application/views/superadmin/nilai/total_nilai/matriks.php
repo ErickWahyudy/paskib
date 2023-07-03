@@ -1,7 +1,28 @@
 <?php $this->load->view('template/header'); ?>
+<?php if($depan == TRUE): 
+      $kode_tahun = date("Y");      
+?>
+<table class="table table-striped">
+    <form action="" method="POST">           
+        <tr>
+            <th>Tahun</th>
+            <td>
+                <input type="number" name="tahun" class="form-control" value="<?= $kode_tahun ?>" placeholder="tahun"
+                    required="">
+            </td>
+        </tr>
+        <tr>
+            <th></th>
+            <td>
+                <input type="submit" name="cari" value="Buka Nilai" class="btn btn-primary">
+            </td>
+        </tr>
+    </form>
+</table>
 
+<?php elseif($depan == FALSE): ?>
 <div class="table-responsive">
-        <?php $nilai = $this->m_matriks->view_nilaihasil(); ?>
+        <?php $nilai = $this->m_matriks->view_nilaihasil($tahun); ?>
         <?php if ($nilai->num_rows() == 0): ?>
         <h1 class="text-center">Belum Ada Nilai Yang Diinputkan</h1>
         <?php else: ?>
@@ -32,14 +53,14 @@
                 <td><?= $peserta['asal_sekolah'] ?></td>
                 <td><?= $peserta['tinggi_bb'] ?> cm </td>
                 <td><?= $peserta['berat_bb'] ?> kg </td>
-                <?php $nilai = $this->m_matriks->view_nilai($peserta['id_peserta']); ?>
+                <?php $nilai = $this->m_matriks->view_nilai($peserta['id_peserta'], $tahun); ?>
                 <?php foreach($nilai->result_array() as $nilai): ?>
                 <td>
                     <?= $nilai['hasil'] ?>
                 </td>
                 <?php endforeach; ?>
                 <!-- total nilai -->
-                <?php $total_nilai = $this->m_matriks->view_nilai($peserta['id_peserta']); ?>
+                <?php $total_nilai = $this->m_matriks->view_nilai($peserta['id_peserta'], $tahun); ?>
                 <?php
                     $total = 0;
                     foreach($total_nilai->result_array() as $total_nilai):
@@ -92,7 +113,6 @@
                             $peserta = $nama_peserta[$key];
                             $normalisasi_values = $normalizedMatrix[$key];
                     ?>
-                    <form id="add" method="post">
                         <tr>
                             <td><?= $no ?></td>
                             <td><?= $peserta['nama_peserta'] ?></td>
@@ -106,25 +126,12 @@
                             <td>
                                 <?php $normalisasi = number_format($normalisasi, 5, '.', ''); ?>
                                 <?= $normalisasi ?>
-                                <input type="hidden" name="id_peserta[]" value="<?= $peserta['id_peserta'] ?>">
-                                <input type="hidden" name="hasil[]" value="<?= $normalisasi ?>">
                             </td>
                         </tr>
                     <?php 
                         $no++; 
                         endforeach; 
                     ?>
-                    <tr>
-                    <td colspan="9" style="text-align: center;">
-                        <?php $nilai = $this->m_nilai_hasil->view(); ?>
-                            <?php if ($nilai->num_rows() == 0): ?>
-                                <button type="submit" class="btn btn-primary btn-md">Simpan Nilai</button>
-                            <?php else: ?>
-                                <span class="btn btn-success btn-md">Hasil Nilai Sudah Disimpan Permanen</span>
-                            <?php endif; ?>
-                    </td>
-                </tr>
-                </form>
                 </tbody>
             </table>
         </div>
@@ -132,33 +139,6 @@
 <?php endif; ?>
 
 <script>
-//add data
-$(document).ready(function() {
-    $('#add').submit(function(e) {
-        e.preventDefault();
-        $.ajax({
-            url: "<?= site_url('superadmin/nilai/nilai_hasil/api_add') ?>",
-            type: "POST",
-            data: new FormData(this),
-            processData: false,
-            contentType: false,
-            cache: false,
-            async: false,
-            success: function(data) {
-                $('#add')[0].reset();
-                swal({
-                    title: "Berhasil",
-                    text: "Data berhasil ditambahkan",
-                    type: "success",
-                    showConfirmButton: true,
-                    confirmButtonText: "OKEE",
-                }).then(function() {
-                    window.location.href = "<?= site_url('superadmin/nilai/nilai_hasil') ?>";
-                });
-            }
-        });
-    });
-});
 
 //ajax hapus
 function hapusnilai() {
@@ -206,4 +186,5 @@ function hapusnilai() {
 }
 </script>
 
+<?php endif; ?>
 <?php $this->load->view('template/footer'); ?>

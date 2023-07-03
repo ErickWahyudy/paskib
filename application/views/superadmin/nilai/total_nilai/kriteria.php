@@ -1,11 +1,32 @@
 <?php $this->load->view('template/header'); ?>
+<?php if($depan == TRUE): 
+      $kode_tahun = date("Y");      
+?>
+<table class="table table-striped">
+    <form action="" method="POST">
+        <tr>
+            <th>Tahun</th>
+            <td>
+                <input type="number" name="tahun" class="form-control" value="<?= $kode_tahun ?>" placeholder="tahun"
+                    required="">
+            </td>
+        </tr>
+        <tr>
+            <th></th>
+            <td>
+                <input type="submit" name="cari" value="Buka Nilai" class="btn btn-primary">
+            </td>
+        </tr>
+    </form>
+</table>
 
+<?php elseif($depan == FALSE): ?>
 <div class="table-responsive">
-        <?php $nilai = $this->m_matriks->view_nilaihasil(); ?>
-        <?php if ($nilai->num_rows() == 0): ?>
-        <h1 class="text-center">Belum Ada Nilai Yang Diinputkan</h1>
-        <?php else: ?>
-    
+    <?php $nilai = $this->m_matriks->view_nilaihasil($tahun); ?>
+    <?php if ($nilai->num_rows() == 0): ?>
+    <h1 class="text-center">Belum Ada Nilai Yang Diinputkan</h1>
+    <?php else: ?>
+
     <table id="example1" class="table table-bordered  table-striped">
         <thead>
             <tr>
@@ -31,7 +52,7 @@
                 <td><?= $peserta['asal_sekolah'] ?></td>
                 <td><?= $peserta['tinggi_bb'] ?> cm </td>
                 <td><?= $peserta['berat_bb'] ?> kg </td>
-                <?php $nilai = $this->m_matriks->view_nilai($peserta['id_peserta']); ?>
+                <?php $nilai = $this->m_matriks->view_nilai($peserta['id_peserta'], $tahun); ?>
                 <?php foreach($nilai->result_array() as $nilai): ?>
                 <td>
                     <?= $nilai['hasil'] ?>
@@ -39,9 +60,9 @@
                 <?php endforeach; ?>
 
                 <td>
-                    
+
                     <?php
-                    $nilai = $this->m_matriks->view_nilai($peserta['id_peserta']);
+                    $nilai = $this->m_matriks->view_nilai($peserta['id_peserta'], $tahun);
                     $total = 0;
                     foreach ($nilai->result_array() as $nilai) {
                         $total += ($nilai['hasil']);
@@ -90,14 +111,14 @@
                             $peserta = $nama_peserta[$key];
                             $normalisasi_values = $normalizedMatrix[$key];
                         ?>
-                        <tr>
-                            <td><?= $no ?></td>
-                            <td><?= $peserta['nama_peserta'] ?></td>
-                            <td><?= $peserta['asal_sekolah'] ?></td>
-                            <?php foreach ($matrix[$key] as $nilai_kriteria): ?>
-                                <td><?= $nilai_kriteria ?></td>
-                            <?php endforeach; ?>
-                        </tr>
+                    <tr>
+                        <td><?= $no ?></td>
+                        <td><?= $peserta['nama_peserta'] ?></td>
+                        <td><?= $peserta['asal_sekolah'] ?></td>
+                        <?php foreach ($matrix[$key] as $nilai_kriteria): ?>
+                        <td><?= $nilai_kriteria ?></td>
+                        <?php endforeach; ?>
+                    </tr>
                     <?php 
                         $no++; 
                         endforeach; 
@@ -115,7 +136,7 @@
             </div>
         </div>
     </div>
-      
-<?php endif; ?>
 
-<?php $this->load->view('template/footer'); ?>
+    <?php endif; ?>
+    <?php endif; ?>
+    <?php $this->load->view('template/footer'); ?>

@@ -29,6 +29,8 @@ class Matriks extends CI_controller
     //view nilai
     public function kriteria($id_pengguna='', $id_peserta='')
     {
+      if (isset($_POST['cari'])) {
+        $tahun = $this->input->post('tahun');
       
       $peserta      = $this->m_matriks->view_peserta()->result_array();
       $nilai        = $this->m_matriks->view_nilai()->result_array();
@@ -44,7 +46,7 @@ class Matriks extends CI_controller
         // Data matriks nilai
         $matrix = [];
         foreach ($peserta as $p) {
-            $nilai = $this->m_matriks->view_nilai($p['id_peserta']); // Misalnya, mengambil data nilai dari model
+            $nilai = $this->m_matriks->view_nilai($p['id_peserta'], $tahun); // Misalnya, mengambil data nilai dari model
             $tinggi_bb = $this->NilaiKriteriaTinggiBB($p['tinggi_bb']);
             $berat_bb =  $this->NilaiKriteriaBeratBB($p['berat_bb']);
 
@@ -117,14 +119,24 @@ class Matriks extends CI_controller
       $view['view_kriteria']        =$kriteria;
       $view['data']                 =$nilai;
       $view['nilai_peserta']        =$nilai;
-      
+      $view['depan']                =FALSE;
+      $view['tahun']                =$tahun;      
+                 
+      $this->load->view('superadmin/nilai/total_nilai/kriteria',$view);
+    }else{
+      $view['judul']                ='Nilai Kriteria';
+      $view['judul2']               ='Data Alternatif';
+      $view['depan']                =TRUE;
                  
       $this->load->view('superadmin/nilai/total_nilai/kriteria',$view);
     }
+  }
 
     //view nilai
     public function matriks($id_pengguna='', $id_peserta='')
     {
+      if (isset($_POST['cari'])) {
+        $tahun = $this->input->post('tahun');
       
       $peserta      = $this->m_matriks->view_peserta()->result_array();
       $nilai        = $this->m_matriks->view_nilai()->result_array();
@@ -140,7 +152,7 @@ class Matriks extends CI_controller
         // Data matriks nilai
         $matrix = [];
         foreach ($peserta as $p) {
-            $nilai = $this->m_matriks->view_nilai($p['id_peserta']); // Misalnya, mengambil data nilai dari model
+            $nilai = $this->m_matriks->view_nilai($p['id_peserta'], $tahun); // Misalnya, mengambil data nilai dari model
             $tinggi_bb = $this->NilaiKriteriaTinggiBB($p['tinggi_bb']);
             $berat_bb =  $this->NilaiKriteriaBeratBB($p['berat_bb']);
 
@@ -222,10 +234,18 @@ class Matriks extends CI_controller
       $view['view_kriteria']        =$kriteria;
       $view['data']                 =$nilai;
       $view['nilai_peserta']        =$nilai;
-      
+      $view['depan']                =FALSE;
+      $view['tahun']                =$tahun;     
                  
       $this->load->view('superadmin/nilai/total_nilai/matriks',$view);
+    }else{
+      $view['judul']                ='Nilai Matriks';
+      $view['judul2']               ='Data Alternatif';
+      $view['depan']                =TRUE;
+
+      $this->load->view('superadmin/nilai/total_nilai/matriks',$view);
     }
+  }
 
 
       //nilai kriteria tinggi bb
@@ -315,6 +335,11 @@ class Matriks extends CI_controller
         'label' => 'nilai_kriteria',
         'rules' => 'required'
       ),
+      array(
+        'field' => 'tahun[]',
+        'label' => 'tahun',
+        'rules' => 'required'
+      ),
     );
     $this->form_validation->set_rules($rules);
     if ($this->form_validation->run() == FALSE) {
@@ -326,12 +351,14 @@ class Matriks extends CI_controller
         $aid        =$this->input->post('id_peserta');
         $ahasil     =$this->input->post('hasil');
         $anilai     =$this->input->post('nilai_kriteria');
+        $atahun     =$this->input->post('tahun');
 
         if(!empty($aid)){
           for ($i=0; $i < count($aid); $i++) { 
             $id_peserta       =$aid[$i];
             $hasil            =$ahasil[$i];
             $nilai_kriteria   =$anilai[$i];
+            $tahun            =$atahun[$i];
             $id_matriks         =$this->id_matriks();
             $id_kriteria      ='K003BNDjht';
             $SQLinsert        =array(
@@ -340,6 +367,7 @@ class Matriks extends CI_controller
                                     'id_kriteria'   =>$id_kriteria,
                                     'hasil'         =>$hasil,
                                     'nilai_kriteria'=>$nilai_kriteria,
+                                    'tahun'         =>$tahun,
                                   );
             $this->m_matriks->add($SQLinsert);
             }
@@ -356,65 +384,6 @@ class Matriks extends CI_controller
             }
         }
 
-//API add parade
-  public function api_add_parade($value='')
-  {
-    $rules = array(
-      array(
-        'field' => 'id_peserta[]',
-        'label' => 'id_peserta',
-        'rules' => 'required'
-      ),
-      array(
-        'field' => 'hasil[]',
-        'label' => 'hasil',
-        'rules' => 'required'
-      ),
-      array(
-        'field' => 'nilai_kriteria[]',
-        'label' => 'nilai_kriteria',
-        'rules' => 'required'
-      ),
-    );
-    $this->form_validation->set_rules($rules);
-    if ($this->form_validation->run() == FALSE) {
-      $pesan=array(
-        'status'  =>FALSE,
-        'pesan'   =>'Tidak ada data yang di kirim');
-      echo json_encode($pesan);
-    }else{
-        $aid        =$this->input->post('id_peserta');
-        $ahasil     =$this->input->post('hasil');
-        $anilai     =$this->input->post('nilai_kriteria');
-
-        if(!empty($aid)){
-          for ($i=0; $i < count($aid); $i++) { 
-            $id_peserta         =$aid[$i];
-            $hasil              =$ahasil[$i];
-            $nilai_kriteria     =$anilai[$i];
-            $id_matriks           =$this->id_matriks();
-            $id_kriteria        ='K005ndLkXQ';
-            $SQLinsert          =array(
-                                      'id_matriks'    =>$id_matriks,
-                                      'id_peserta'  =>$id_peserta,
-                                      'id_kriteria' =>$id_kriteria,
-                                      'hasil'       =>$hasil,
-                                      'nilai_kriteria'=>$nilai_kriteria,
-                                    );
-            $this->m_matriks->add($SQLinsert);
-            }
-            $pesan=array(
-              'status'  =>TRUE,
-              'pesan'   =>'Berhasil menambahkan data');
-            echo json_encode($pesan);
-            }else{
-                $pesan=array(
-                    'status'  =>FALSE,
-                    'pesan'   =>'Tidak ada data yang di kirim');
-                echo json_encode($pesan);
-                }
-            }
-        }
 
     //API add pbb
   public function api_add_pbb($value='')
@@ -435,6 +404,11 @@ class Matriks extends CI_controller
         'label' => 'nilai_kriteria',
         'rules' => 'required'
       ),
+      array(
+        'field' => 'tahun[]',
+        'label' => 'tahun',
+        'rules' => 'required'
+      ),
     );
     $this->form_validation->set_rules($rules);
     if ($this->form_validation->run() == FALSE) {
@@ -446,12 +420,14 @@ class Matriks extends CI_controller
         $aid        =$this->input->post('id_peserta');
         $ahasil     =$this->input->post('hasil');
         $anilai     =$this->input->post('nilai_kriteria');
+        $atahun     =$this->input->post('tahun');
 
         if(!empty($aid)){
           for ($i=0; $i < count($aid); $i++) { 
             $id_peserta         =$aid[$i];
             $hasil              =$ahasil[$i];
             $nilai_kriteria     =$anilai[$i];
+            $tahun              =$atahun[$i];
             $id_matriks           =$this->id_matriks();
             $id_kriteria        ='K004RHwS3n';
             $SQLinsert          =array(
@@ -460,6 +436,7 @@ class Matriks extends CI_controller
                                       'id_kriteria'   =>$id_kriteria,
                                       'hasil'         =>$hasil,
                                       'nilai_kriteria'=>$nilai_kriteria,
+                                      'tahun'         =>$tahun,
                                     );
             $this->m_matriks->add($SQLinsert);
             }
@@ -476,6 +453,74 @@ class Matriks extends CI_controller
             }
         }
 
+
+        //API add parade
+  public function api_add_parade($value='')
+  {
+    $rules = array(
+      array(
+        'field' => 'id_peserta[]',
+        'label' => 'id_peserta',
+        'rules' => 'required'
+      ),
+      array(
+        'field' => 'hasil[]',
+        'label' => 'hasil',
+        'rules' => 'required'
+      ),
+      array(
+        'field' => 'nilai_kriteria[]',
+        'label' => 'nilai_kriteria',
+        'rules' => 'required'
+      ),
+      array(
+        'field' => 'tahun[]',
+        'label' => 'tahun',
+        'rules' => 'required'
+      ),
+    );
+    $this->form_validation->set_rules($rules);
+    if ($this->form_validation->run() == FALSE) {
+      $pesan=array(
+        'status'  =>FALSE,
+        'pesan'   =>'Tidak ada data yang di kirim');
+      echo json_encode($pesan);
+    }else{
+        $aid        =$this->input->post('id_peserta');
+        $ahasil     =$this->input->post('hasil');
+        $anilai     =$this->input->post('nilai_kriteria');
+        $atahun     =$this->input->post('tahun');
+
+        if(!empty($aid)){
+          for ($i=0; $i < count($aid); $i++) { 
+            $id_peserta         =$aid[$i];
+            $hasil              =$ahasil[$i];
+            $nilai_kriteria     =$anilai[$i];
+            $tahun              =$atahun[$i];
+            $id_matriks         =$this->id_matriks();
+            $id_kriteria        ='K005ndLkXQ';
+            $SQLinsert          =array(
+                                      'id_matriks'    =>$id_matriks,
+                                      'id_peserta'  =>$id_peserta,
+                                      'id_kriteria' =>$id_kriteria,
+                                      'hasil'       =>$hasil,
+                                      'nilai_kriteria'=>$nilai_kriteria,
+                                      'tahun'       =>$tahun,
+                                    );
+            $this->m_matriks->add($SQLinsert);
+            }
+            $pesan=array(
+              'status'  =>TRUE,
+              'pesan'   =>'Berhasil menambahkan data');
+            echo json_encode($pesan);
+            }else{
+                $pesan=array(
+                    'status'  =>FALSE,
+                    'pesan'   =>'Tidak ada data yang di kirim');
+                echo json_encode($pesan);
+                }
+            }
+        }
 
 
      //API hapus
