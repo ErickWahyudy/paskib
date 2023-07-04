@@ -86,6 +86,15 @@ if($aksi == "superadmin"):
                                 </td>
                             </tr>
                             <tr>
+                                <th>Password</th>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input type="password" name="password" class="form-control" placeholder="password"
+                                        autocomplete="off" required="">
+                                </td>
+                            </tr>
+                            <tr>
                                 <th>Level</th>
                             </tr>
                             <tr>
