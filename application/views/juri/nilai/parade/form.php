@@ -2,8 +2,8 @@
 
 <?php 
 if($aksi == "add"):
-
-$nilai = $this->m_matriks->view_nilaihasil();
+$tahun = date('Y');
+$nilai = $this->m_matriks->view_nilaihasil($tahun);
  if ($nilai->num_rows() == 0):
 ?>
 

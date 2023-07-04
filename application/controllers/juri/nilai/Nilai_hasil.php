@@ -29,6 +29,7 @@ class Nilai_hasil extends CI_controller
     //view nilai
     public function index($value='')
     {
+      $tahun        = date('Y');
       $peserta      = $this->m_matriks->view_peserta()->result_array();
       $nilai        = $this->m_matriks->view_nilai()->result_array();
       $kriteria     = $this->m_matriks->view_kriteria()->result_array();
@@ -44,7 +45,7 @@ class Nilai_hasil extends CI_controller
         // Data matriks nilai
         $matrix = [];
         foreach ($peserta as $p) {
-            $nilai = $this->m_matriks->view_nilai($p['id_peserta']); // Misalnya, mengambil data nilai dari model
+            $nilai = $this->m_matriks->view_nilai($p['id_peserta'], $tahun);
             $tinggi_bb = $this->NilaiKriteriaTinggiBB($p['tinggi_bb']);
             $berat_bb =  $this->NilaiKriteriaBeratBB($p['berat_bb']);
 

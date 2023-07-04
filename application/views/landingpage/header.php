@@ -37,6 +37,9 @@
     <link href="<?= base_url('themes/landingpage') ?>/css/style.css" rel="stylesheet">
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    
+    <!-- Favicon -->
+    <link rel="icon" href="<?= base_url('themes') ?>/favicon.ico" type="image/x-icon">
 
    <!-- sweetalert -->
     <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/sweetalert2@7.12.15/dist/sweetalert2.min.css'>

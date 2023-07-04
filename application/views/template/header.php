@@ -47,7 +47,7 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@7.12.15/dist/sweetalert2.all.min.js"></script>
 
   <!-- Favicon -->
-  <link rel="shortcut icon" href="<?= base_url('themes') ?>/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="<?= base_url('themes') ?>/favicon.ico" type="image/x-icon">
  
   <!-- Google Font -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
@@ -378,7 +378,7 @@ if($this->session->userdata('level') =="1"){
                   <li><a href="<?= base_url('juri/nilai/parade/lihat') ?>" class="active"><i class="fa fa-circle-o"></i>Parade</a></li>
                   </ul>
               </li>
-              <li><a href="<?= base_url('juri/nilai/nilai_hasil'); ?>"><i class="fa fa-calculator"></i> <span>Hasil Nilai Total</span></a></li>
+              <li><a href="<?= base_url('juri/nilai/nilai_hasil'); ?>"><i class="fa fa-calculator"></i> <span>Hasil Penilaian</span></a></li>
               <li class="treeview">
                   <a href="#">
                     <i class="fa fa-pencil"></i> <span>Input Nilai</span>

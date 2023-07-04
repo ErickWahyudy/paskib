@@ -23,6 +23,7 @@ class Jasmani extends CI_controller
    $this->load->model('m_kriteria');
    $this->load->model('m_peserta');
    $this->load->model('m_jasmani');
+   $this->load->model('m_matriks');
    $this->load->model('m_pengaturan');
 	}
 

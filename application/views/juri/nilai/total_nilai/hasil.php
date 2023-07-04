@@ -1,5 +1,8 @@
 <?php $this->load->view('template/header'); ?>
-    <?php $nilai = $this->m_nilai_hasil->view(); ?>
+<?php
+$tahun = date('Y');
+?>
+    <?php $nilai = $this->m_nilai_hasil->view($tahun); ?>
         <?php if ($nilai->num_rows() == 0): ?>
         <h1 class="text-center">Proses Perhitungan Nilai Belum Selesai</h1>
         <?php else: ?>
@@ -31,33 +34,17 @@
                             $normalisasi_values = $normalizedMatrix[$key];
                     ?>
                         <tr>
-                            <!-- memberi background warna biru user yang login -->
-                            <?php if ($this->session->userdata('id_peserta') == $peserta['id_peserta']): ?>
-                                <td class="bg-primary"><?= $no ?></td>
-                                <td class="bg-primary"><?= $peserta['nama_peserta'] ?></td>
-                                <td class="bg-primary"><?= $peserta['asal_sekolah'] ?></td>
-                                <td class="bg-primary"><?= $peserta['tinggi_bb'] ?> cm </td>
-                                <td class="bg-primary"><?= $peserta['berat_bb'] ?> kg </td>
-                                <?php $nilai = $this->m_matriks->view_nilai($peserta['id_peserta']); ?>
-                                <?php foreach($nilai->result_array() as $nilai): ?>
-                                <td class="bg-primary">
-                                    <?= $nilai['hasil'] ?>
-                                </td>
-                                <?php endforeach; ?>
-                            <?php else: ?>
                                 <td><?= $no ?></td>
                                 <td><?= $peserta['nama_peserta'] ?></td>
                                 <td><?= $peserta['asal_sekolah'] ?></td>
                                 <td><?= $peserta['tinggi_bb'] ?> cm </td>
                                 <td><?= $peserta['berat_bb'] ?> kg </td>
-                                <?php $nilai = $this->m_matriks->view_nilai($peserta['id_peserta']); ?>
+                                <?php $nilai = $this->m_matriks->view_nilai($peserta['id_peserta'], $tahun); ?>
                                 <?php foreach($nilai->result_array() as $nilai): ?>
                                 <td>
                                     <?= $nilai['hasil'] ?>
                                 </td>
-                                <?php endforeach; ?>
-                            <?php endif; ?>
-                
+                                <?php endforeach; ?>                
                         </tr>
                     <?php 
                         $no++; 

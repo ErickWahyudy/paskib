@@ -2,6 +2,10 @@
 
 <?php 
 if($aksi == "add"):
+    
+    $tahun = date('Y');
+    $nilai = $this->m_matriks->view_nilaihasil($tahun);
+     if ($nilai->num_rows() == 0):
 ?>
 
 <table class="table">
@@ -96,6 +100,9 @@ $(document).ready(function() {
     });
 });
 </script>
+<?php else: ?>
+    <h3 class="text-center">Nilai sudah disimpan permanen, anda tidak dapat menambahkan peserta lagi</h3>
+<?php endif; ?>
 
 <?php 
 elseif($aksi == "edit"):
@@ -379,6 +386,8 @@ function hapusnilai(id_jasmani) {
     });
 }
 </script>
+
 <?php endif; ?>
 <?php endif; ?>
+
 <?php $this->load->view('template/footer'); ?>

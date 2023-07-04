@@ -1,9 +1,30 @@
 <?php $this->load->view('template/header'); ?>
+<?php if($depan == TRUE): 
+      $kode_tahun = date("Y");      
+?>
+<table class="table table-striped">
+    <form action="" method="POST">           
+        <tr>
+            <th>Tahun</th>
+            <td>
+                <input type="number" name="tahun" class="form-control" value="<?= $kode_tahun ?>" placeholder="tahun"
+                    required="">
+            </td>
+        </tr>
+        <tr>
+            <th></th>
+            <td>
+                <input type="submit" name="cari" value="Buka Nilai" class="btn btn-primary">
+            </td>
+        </tr>
+    </form>
+</table>
 
+<?php elseif($depan == FALSE): ?>
 <?php 
 if($aksi == "lihat"):
 
-$nilai = $this->m_jasmani->view(); 
+$nilai = $this->m_jasmani->view($tahun); 
 if ($nilai->num_rows() == 0): 
 ?>
 <h1 class="text-center">Belum Ada Nilai Yang Diinputkan</h1>
@@ -44,7 +65,7 @@ if ($nilai->num_rows() == 0):
                 <td><?= $peserta['asal_sekolah'] ?></td>
                 <td><?= $peserta['tinggi_bb'] ?> cm </td>
                 <td><?= $peserta['berat_bb'] ?> kg </td>
-                <?php $nilai = $this->m_jasmani->view_nilai($peserta['id_peserta']); ?>
+                <?php $nilai = $this->m_jasmani->view_nilai($peserta['id_peserta'], $tahun); ?>
                 <?php foreach($nilai->result_array() as $nilai): ?>
                 <?php if ($nilai['id_jasmani'] == $peserta['id_peserta'] && $nilai['id_jasmani'] == NULL): ?>
                 <td colspan="4" style="text-align: center;">Belum dinilai</td>
@@ -58,7 +79,7 @@ if ($nilai->num_rows() == 0):
                 <!-- rata-rata nilai -->
                 <td>
                     <?php
-                    $nilai = $this->m_jasmani->view_nilai($peserta['id_peserta']);
+                    $nilai = $this->m_jasmani->view_nilai($peserta['id_peserta'], $tahun);
                     $total1 = 0;
                     foreach ($nilai->result_array() as $nilai) {
                         if ($nilai['nilai_lari'] == NULL) {
@@ -74,7 +95,7 @@ if ($nilai->num_rows() == 0):
                 </td>
                 <td>
                     <?php
-                    $nilai = $this->m_jasmani->view_nilai($peserta['id_peserta']);
+                    $nilai = $this->m_jasmani->view_nilai($peserta['id_peserta'], $tahun);
                     $total2 = 0;
                     foreach ($nilai->result_array() as $nilai) {
                         if ($nilai['nilai_pushUp'] == NULL) {
@@ -90,7 +111,7 @@ if ($nilai->num_rows() == 0):
                 </td>
                 <td>
                     <?php
-                    $nilai = $this->m_jasmani->view_nilai($peserta['id_peserta']);
+                    $nilai = $this->m_jasmani->view_nilai($peserta['id_peserta'], $tahun);
                     $total3 = 0;
                     foreach ($nilai->result_array() as $nilai) {
                         if ($nilai['nilai_sitUp'] == NULL) {
@@ -109,7 +130,7 @@ if ($nilai->num_rows() == 0):
                         $total = 0;
                         $total = $total1 + $total2 + $total3;
                         $total = $total / 3;
-                        $total = number_format($total, 2);
+                        $total = number_format($total, 0);
                     ?>
                         <?= $total ?>
                     </td>
@@ -131,5 +152,6 @@ if ($nilai->num_rows() == 0):
 <?php
     endif;
     ?>
+<?php endif; ?>
 
 <?php $this->load->view('template/footer'); ?>

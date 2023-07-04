@@ -295,21 +295,6 @@
     <!-- small box -->
     <div class="small-box bg-primary">
         <div class="inner">
-            <h4>Lihat Nilai Parade</h4><br>
-        </div>
-        <a href="<?= base_url('juri/nilai/parade/lihat') ?>">
-        <div class="icon">
-            <i class="fa fa-gg"></i>
-        </div>
-        </a>
-        <a href="<?= base_url('juri/nilai/parade/lihat') ?>" class="small-box-footer">Lihat Nilai <i class="fa fa-arrow-circle-right"></i></a>
-    </div>
-</div>
-
-<div class="col-lg-4 col-xs-12">
-    <!-- small box -->
-    <div class="small-box bg-primary">
-        <div class="inner">
             <h4>Lihat Nilai PBB</h4><br>
         </div>
         <a href="<?= base_url('juri/nilai/pbb/lihat') ?>">
@@ -323,16 +308,16 @@
 
 <div class="col-lg-4 col-xs-12">
     <!-- small box -->
-    <div class="small-box bg-green">
+    <div class="small-box bg-primary">
         <div class="inner">
-            <h4>Hasil Perhitungan</h4><br>
+            <h4>Lihat Nilai Parade</h4><br>
         </div>
-        <a href="<?= base_url('juri/nilai/nilai_hasil') ?>">
+        <a href="<?= base_url('juri/nilai/parade/lihat') ?>">
         <div class="icon">
-            <i class="fa fa-bar-chart"></i>
+            <i class="fa fa-gg"></i>
         </div>
         </a>
-        <a href="<?= base_url('juri/nilai/nilai_hasil') ?>" class="small-box-footer">Lihat Nilai <i class="fa fa-arrow-circle-right"></i></a>
+        <a href="<?= base_url('juri/nilai/parade/lihat') ?>" class="small-box-footer">Lihat Nilai <i class="fa fa-arrow-circle-right"></i></a>
     </div>
 </div>
 
@@ -355,6 +340,21 @@
     <!-- small box -->
     <div class="small-box bg-yellow">
         <div class="inner">
+            <h4>Input Nilai PBB</h4><br>
+        </div>
+        <a href="<?= base_url('juri/nilai/pbb/input') ?>">
+        <div class="icon">
+            <i class="fa fa-child"></i>
+        </div>
+        </a>
+        <a href="<?= base_url('juri/nilai/pbb/input') ?>" class="small-box-footer">input Nilai <i class="fa fa-arrow-circle-right"></i></a>
+    </div>
+</div>
+
+<div class="col-lg-4 col-xs-12">
+    <!-- small box -->
+    <div class="small-box bg-yellow">
+        <div class="inner">
             <h4>Input Nilai Parade</h4><br>
         </div>
         <a href="<?= base_url('juri/nilai/parade/input') ?>">
@@ -368,16 +368,16 @@
 
 <div class="col-lg-4 col-xs-12">
     <!-- small box -->
-    <div class="small-box bg-yellow">
+    <div class="small-box bg-green">
         <div class="inner">
-            <h4>Input Nilai PBB</h4><br>
+            <h4>Hasil Penilaian</h4><br>
         </div>
-        <a href="<?= base_url('juri/nilai/pbb/input') ?>">
+        <a href="<?= base_url('juri/nilai/nilai_hasil') ?>">
         <div class="icon">
-            <i class="fa fa-child"></i>
+            <i class="fa fa-bar-chart"></i>
         </div>
         </a>
-        <a href="<?= base_url('juri/nilai/pbb/input') ?>" class="small-box-footer">input Nilai <i class="fa fa-arrow-circle-right"></i></a>
+        <a href="<?= base_url('juri/nilai/nilai_hasil') ?>" class="small-box-footer">Lihat Nilai <i class="fa fa-arrow-circle-right"></i></a>
     </div>
 </div>
 

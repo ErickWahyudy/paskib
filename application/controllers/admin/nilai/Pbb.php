@@ -23,6 +23,7 @@ class Pbb extends CI_controller
    $this->load->model('m_kriteria');
    $this->load->model('m_peserta');
    $this->load->model('m_pbb');
+   $this->load->model('m_matriks');
 	}
 
     //view nnilai

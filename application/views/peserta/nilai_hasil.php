@@ -1,5 +1,8 @@
 <?php $this->load->view('peserta/header'); ?>
-    <?php $nilai = $this->m_nilai_hasil->view(); ?>
+<?php
+$tahun = date('Y');
+?>
+    <?php $nilai = $this->m_nilai_hasil->view($tahun); ?>
         <?php if ($nilai->num_rows() == 0): ?>
         <h1 class="text-center">Proses Perhitungan Nilai Belum Selesai</h1>
         <?php else: ?>
@@ -38,7 +41,7 @@
                                 <td class="bg-primary"><?= $peserta['asal_sekolah'] ?></td>
                                 <td class="bg-primary"><?= $peserta['tinggi_bb'] ?> cm </td>
                                 <td class="bg-primary"><?= $peserta['berat_bb'] ?> kg </td>
-                                <?php $nilai = $this->m_matriks->view_nilai($peserta['id_peserta']); ?>
+                                <?php $nilai = $this->m_matriks->view_nilai($peserta['id_peserta'], $tahun); ?>
                                 <?php foreach($nilai->result_array() as $nilai): ?>
                                 <td class="bg-primary">
                                     <?= $nilai['hasil'] ?>
@@ -50,7 +53,7 @@
                                 <td><?= $peserta['asal_sekolah'] ?></td>
                                 <td><?= $peserta['tinggi_bb'] ?> cm </td>
                                 <td><?= $peserta['berat_bb'] ?> kg </td>
-                                <?php $nilai = $this->m_matriks->view_nilai($peserta['id_peserta']); ?>
+                                <?php $nilai = $this->m_matriks->view_nilai($peserta['id_peserta'], $tahun); ?>
                                 <?php foreach($nilai->result_array() as $nilai): ?>
                                 <td>
                                     <?= $nilai['hasil'] ?>

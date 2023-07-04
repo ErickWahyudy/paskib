@@ -46,7 +46,7 @@ class Cari extends CI_controller
      }else{
           $pesan='<script>
                   swal({
-                      title: "Nama / Tgl Lahir Salah Atau Data Anda Tidak Ada",
+                      title: "Nama / Sekolah Salah Atau Data Anda Tidak Ada",
                       type: "error",
                       showConfirmButton: true,
                       confirmButtonText: "OKEE"

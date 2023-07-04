@@ -30,6 +30,9 @@ class Jasmani extends CI_controller
     //view nnilai
     public function lihat($id_pengguna='', $id_peserta='')
     {
+      if (isset($_POST['cari'])) {
+        $tahun = $this->input->post('tahun');
+
       $data = $this->m_kriteria->view_id('K003BNDjht')->row_array();
       $peserta  = $this->m_jasmani->view_peserta()->result_array();
       $nilai    = $this->m_jasmani->view_nilai()->result_array();
@@ -45,9 +48,19 @@ class Jasmani extends CI_controller
                    'nama_nilai3'    =>$data['nama_nilai3'],
                    'nama_nilai4'    =>$data['nama_nilai4'],
                    'nama_nilai5'    =>$data['nama_nilai5'],
+                   'depan'          =>FALSE,
+                   'tahun'          =>$tahun,
+                  );
+      $this->load->view('juri/nilai/jasmani/lihat',$view);
+    }else{
+     $data = $this->m_kriteria->view_id('K003BNDjht')->row_array();
+     $view = array('judul'          =>'Data '.$data['kriteria'],
+                   'aksi'           =>'lihat',
+                   'depan'          =>TRUE,
                   );
       $this->load->view('juri/nilai/jasmani/lihat',$view);
     }
+  }
 
     //add nilai
     public function input()

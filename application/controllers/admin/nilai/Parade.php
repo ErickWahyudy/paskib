@@ -23,6 +23,7 @@ class Parade extends CI_controller
    $this->load->model('m_kriteria');
    $this->load->model('m_peserta');
    $this->load->model('m_parade');
+   $this->load->model('m_matriks');
 	}
 
     //view nilai
