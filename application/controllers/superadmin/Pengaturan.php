@@ -56,6 +56,11 @@ class Pengaturan extends CI_controller
             'field' => 'meta_description',
             'label' => 'meta_description',
             'rules' => 'required'
+          ),
+          array(
+            'field' => 'batas_lulus',
+            'label' => 'batas_lulus',
+            'rules' => 'required'
           )
         );
         $this->form_validation->set_rules($rules);
@@ -68,7 +73,8 @@ class Pengaturan extends CI_controller
           $SQLupdate = [
             'nama_judul'        => $this->input->post('nama_judul'),
             'meta_keywords'     => $this->input->post('meta_keywords'),
-            'meta_description'  => $this->input->post('meta_description')
+            'meta_description'  => $this->input->post('meta_description'),
+            'batas_lulus'       => $this->input->post('batas_lulus')
           ];
           if ($this->m_pengaturan->update($id, $SQLupdate)) {
             $response = [

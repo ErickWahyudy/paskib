@@ -13,6 +13,7 @@
                 <th>Asal Sekolah</th>
                 <th>Tinggi Badan</th>
                 <th>Berat Badan</th>
+                <th>Tahun</th>
                 <th>Aksi</th>
             </tr>
         </thead>
@@ -24,6 +25,7 @@
                 <td><?= $peserta['asal_sekolah'] ?></td>
                 <td><?= $peserta['tinggi_bb'] ?> cm</td>
                 <td><?= $peserta['berat_bb'] ?> kg</td>
+                <td><?= $peserta['tahun'] ?></td>
 
                 <td>
                     <a href="" class="btn btn-warning" data-toggle="modal"
@@ -85,6 +87,14 @@
                                 <td>
                                     <input type="number" name="berat_bb" class="form-control" placeholder="berat badan"
                                         autocomplete="off" required="">
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>Tahun</th>
+                            </tr>
+                            <tr>
+                                <td>
+                                <input type="number" name="tahun" class="form-control" value="<?= date('Y') ?>" placeholder="contoh: 2020" autocomplete="off" required="">
                                 </td>
                             </tr>
 
@@ -178,6 +188,15 @@
                             <tr>
                                 <td>
                                     <input type="number" name="berat_bb" value="<?= $peserta['berat_bb'] ?>"
+                                        class="form-control" required="" autocomplete="off">
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>Tahun</th>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input type="number" name="tahun" value="<?= $peserta['tahun'] ?>"
                                         class="form-control" required="" autocomplete="off">
                                 </td>
                             </tr>

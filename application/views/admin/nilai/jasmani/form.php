@@ -32,6 +32,7 @@ if($aksi == "add"):
                 <th>No</th>
                 <th>Nama</th>
                 <th>Asal Sekolah</th>
+                <th>Tahun Angkatan</th>
                 <th>
                     Aksi
                     <input type="button" value="Centang Semua" id="checkAllButton" onclick="toggleCheckboxes()" class="btn btn-primary btn-xs">
@@ -44,6 +45,9 @@ if($aksi == "add"):
                 <td><?= $no ?></td>
                 <td><?= $peserta['nama_peserta'] ?></td>
                 <td><?= $peserta['asal_sekolah'] ?></td>
+                <td>
+                    <input type="number" name="tahun" value="<?= $peserta['tahun'] ?>" readonly style="border: none; background-color: transparent;">
+                </td>
                 <td>
                     <input type="checkbox" name="id_peserta[]" value="<?= $peserta['id_peserta'] ?>">
                 </td>

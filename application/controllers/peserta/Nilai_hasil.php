@@ -24,11 +24,13 @@ class Nilai_hasil extends CI_controller
    $this->load->model('m_kriteria');
    $this->load->model('m_matriks');
    $this->load->model('m_nilai_hasil');
+   $this->load->model('m_pengaturan');
 	}
 
     //view nilai
     public function index($value='')
     {
+      $pengaturan   = $this->m_pengaturan->view()->row_array();
       $tahun        = date('Y');
       $peserta      = $this->m_matriks->view_peserta()->result_array();
       $nilai        = $this->m_matriks->view_nilai()->result_array();
@@ -125,6 +127,7 @@ class Nilai_hasil extends CI_controller
       $view['nama_peserta']         =$peserta;
       $view['view_kriteria']        =$kriteria;
       $view['nilai_peserta']        =$nilai;
+      $view['batas_lulus']          =$pengaturan['batas_lulus'];
 
       $this->load->view('peserta/nilai_hasil',$view);
     } 

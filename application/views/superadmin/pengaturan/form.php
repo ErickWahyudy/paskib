@@ -19,6 +19,10 @@
                 <td><?= $pengaturan['meta_description'] ?></td>
             </tr>
             <tr>
+                <th>Batas Peserta Lulus</th>
+                <td><?= $pengaturan['batas_lulus'] ?> Peserta</td>
+            </tr>
+            <tr>
                 <th>Aksi</th>
                 <td>
                     <a href="" class="btn btn-warning" data-toggle="modal"
@@ -87,6 +91,15 @@
                                     <input type="text" name="meta_description"
                                         value="<?= $pengaturan['meta_description'] ?>" class="form-control" required
                                         autocomplete="off">
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>Batas Peserta Lulus</th>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input type="number" name="batas_lulus" value="<?= $pengaturan['batas_lulus'] ?>"
+                                        class="form-control" required autocomplete="off">
                                 </td>
                             </tr>
 

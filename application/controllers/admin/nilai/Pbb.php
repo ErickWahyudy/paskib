@@ -171,7 +171,7 @@ public function api_add($value='')
   } else {
     $aid        =$this->input->post('id_peserta');
     $apengguna  =$this->input->post('id_pengguna');
-    $atahun     = date('Y');
+    $atahun     =$this->input->post('tahun');
 
     if(!empty($aid)){
       for ($i=0; $i < count($aid); $i++) { 

@@ -99,6 +99,7 @@ class Peserta extends CI_controller
         'asal_sekolah'          =>$this->input->post('asal_sekolah'),
         'tinggi_bb'             =>$this->input->post('tinggi_bb'),
         'berat_bb'              =>$this->input->post('berat_bb'),
+        'tahun'                 =>$this->input->post('tahun'),
 
       ];
       if ($this->m_peserta->add($SQLinsert)) {
@@ -152,7 +153,8 @@ class Peserta extends CI_controller
             'nama_peserta'        => $this->input->post('nama_peserta'),
             'asal_sekolah'        => $this->input->post('asal_sekolah'),
             'tinggi_bb'           => $this->input->post('tinggi_bb'),
-            'berat_bb'            => $this->input->post('berat_bb')
+            'berat_bb'            => $this->input->post('berat_bb'),
+            'tahun'               => $this->input->post('tahun')
           ];
           if ($this->m_peserta->update($id, $SQLupdate)) {
             $response = [
