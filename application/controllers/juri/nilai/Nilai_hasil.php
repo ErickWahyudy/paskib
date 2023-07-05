@@ -29,9 +29,11 @@ class Nilai_hasil extends CI_controller
     //view nilai
     public function index($value='')
     {
-      $tahun        = date('Y');
-      $peserta      = $this->m_matriks->view_peserta()->result_array();
-      $nilai        = $this->m_matriks->view_nilai()->result_array();
+      if (isset($_POST['cari'])) {
+        $tahun = $this->input->post('tahun');
+        
+      $peserta      = $this->m_matriks->view_peserta($tahun)->result_array();
+      $nilai        = $this->m_matriks->view_nilai($tahun)->result_array();
       $kriteria     = $this->m_matriks->view_kriteria()->result_array();
       $view['data'] = $this->m_nilai_hasil->view()->result_array();
       
@@ -125,9 +127,17 @@ class Nilai_hasil extends CI_controller
       $view['nama_peserta']         =$peserta;
       $view['view_kriteria']        =$kriteria;
       $view['nilai_peserta']        =$nilai;
+      $view['depan']                =FALSE;
+      $view['tahun']                =$tahun;
 
       $this->load->view('juri/nilai/total_nilai/hasil',$view);
-    } 
+    }else{
+      $view['judul']                ='Data Hasil Nilai';
+      $view['judul2']               ='Data Alternatif';
+      $view['depan']                =TRUE;
+      $this->load->view('juri/nilai/total_nilai/hasil',$view);
+    }
+  }
 
         //nilai kriteria tinggi bb
       public function NilaiKriteriaTinggiBB($tinggi_bb)

@@ -32,7 +32,7 @@ class Pbb extends CI_controller
         $tahun = $this->input->post('tahun');
 
       $data = $this->m_kriteria->view_id('K004RHwS3n')->row_array();
-      $peserta  = $this->m_pbb->view_peserta()->result_array();
+      $peserta  = $this->m_pbb->view_peserta($tahun)->result_array();
       $nilai    = $this->m_pbb->view_nilai($tahun)->result_array();
       $juri     = $this->m_pbb->view_juri()->result_array();
 
@@ -84,7 +84,7 @@ class Pbb extends CI_controller
       $tahun = $this->input->post('tahun');
 
     $data = $this->m_kriteria->view_id('K004RHwS3n')->row_array();
-    $peserta  = $this->m_pbb->view_peserta()->result_array();
+    $peserta  = $this->m_pbb->view_peserta($tahun)->result_array();
     $nilai    = $this->m_pbb->view_nilai($tahun )->result_array();
     $juri     = $this->m_pbb->view_juri()->result_array();
 

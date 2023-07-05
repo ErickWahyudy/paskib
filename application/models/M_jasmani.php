@@ -33,10 +33,11 @@ public function view_juri($value='')
   return $this->db->get();
 }
 
-public function view_peserta()
+public function view_peserta($tahun='')
 {
   $this->db->select('*');
   $this->db->from($this->table2);
+  $this->db->where('tb_peserta.tahun', $tahun);
   $this->db->order_by('nama_peserta', 'ASC');
   return $this->db->get();
 }
@@ -72,13 +73,14 @@ public function delete_semua_data()
 }
 
  //untuk juri
- public function view_pesertaNilai($id='')
+ public function view_pesertaNilai($tahun='')
 {
   $id = $this->session->userdata['id_pengguna'];
   $this->db->select('*');
   $this->db->from($this->table1);
   $this->db->join($this->table2, 'tb_jasmani.id_peserta = tb_peserta.id_peserta');
   $this->db->where('tb_jasmani.id_pengguna', $id);
+  $this->db->where('tb_peserta.tahun', $tahun);
   $this->db->order_by('tb_peserta.nama_peserta', 'ASC');
   return $this->db->get();
 }

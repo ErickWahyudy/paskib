@@ -32,8 +32,8 @@ class Parade extends CI_controller
         $tahun = $this->input->post('tahun');
 
       $data = $this->m_kriteria->view_id('K005ndLkXQ')->row_array();
-      $peserta  = $this->m_parade->view_peserta()->result_array();
-      $nilai    = $this->m_parade->view_nilai()->result_array();
+      $peserta  = $this->m_parade->view_peserta($tahun)->result_array();
+      $nilai    = $this->m_parade->view_nilai($tahun)->result_array();
       $juri     = $this->m_parade->view_juri()->result_array();
 
      $view = array('judul'          =>'Data Nilai '.$data['kriteria'],
@@ -84,8 +84,8 @@ class Parade extends CI_controller
         $tahun = $this->input->post('tahun');
 
       $data = $this->m_kriteria->view_id('K005ndLkXQ')->row_array();
-      $peserta  = $this->m_parade->view_peserta()->result_array();
-      $nilai    = $this->m_parade->view_nilai()->result_array();
+      $peserta  = $this->m_parade->view_peserta($tahun)->result_array();
+      $nilai    = $this->m_parade->view_nilai($tahun)->result_array();
       $juri     = $this->m_parade->view_juri()->result_array();
 
      $view = array('judul'          =>'Data Nilai '.$data['kriteria'],

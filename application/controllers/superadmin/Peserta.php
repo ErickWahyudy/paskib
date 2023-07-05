@@ -23,14 +23,25 @@ class Peserta extends CI_controller
 	}
 
     //peserta
-    public function index($value='')
+    public function index($value='', $tahun='')
     {
+      if (isset($_POST['cari'])) {
+        $tahun = $this->input->post('tahun');
+
      $view = array('judul'     =>'Data Paserta',
-                   'data'      =>$this->m_peserta->view()->result_array(),
+                   'data'      =>$this->m_peserta->view($tahun)->result_array(),
+                   'depan'     =>FALSE,
+                   'tahun'     =>$tahun,
                   );
 
       $this->load->view('superadmin/peserta/form',$view);
+    }else{
+     $view = array('judul'     =>'Data Paserta',
+                   'depan'     =>TRUE,
+                  );
+      $this->load->view('superadmin/peserta/form',$view);
     }
+  }
 
     private function acak_id($panjang)
     {
@@ -63,7 +74,6 @@ class Peserta extends CI_controller
               };
        return $newID;
      }
-     
 
   //API add peserta
   public function api_add($value='')

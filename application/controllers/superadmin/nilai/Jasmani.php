@@ -33,7 +33,7 @@ class Jasmani extends CI_controller
         $tahun = $this->input->post('tahun');
 
        $data = $this->m_kriteria->view_id('K003BNDjht')->row_array();
-       $peserta  = $this->m_jasmani->view_peserta()->result_array();
+       $peserta  = $this->m_jasmani->view_peserta($tahun)->result_array();
        $nilai    = $this->m_jasmani->view_nilai($tahun)->result_array();
        $juri     = $this->db->limit(1)->get_where('tb_pengguna', ['id_level' => '3'])->result_array();
  
@@ -86,7 +86,7 @@ class Jasmani extends CI_controller
         $tahun = $this->input->post('tahun');
 
       $data = $this->m_kriteria->view_id('K003BNDjht')->row_array();
-      $peserta  = $this->m_jasmani->view_peserta()->result_array();
+      $peserta  = $this->m_jasmani->view_peserta($tahun)->result_array();
       $nilai    = $this->m_jasmani->view_nilai($tahun)->result_array();
       $juri     = $this->m_jasmani->view_juri()->result_array();
 

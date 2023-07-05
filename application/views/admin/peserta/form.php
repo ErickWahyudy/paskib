@@ -1,5 +1,26 @@
 <?php $this->load->view('template/header'); ?>
+<?php if($depan == TRUE): 
+      $kode_tahun = date("Y");      
+?>
+<table class="table table-striped">
+    <form action="" method="POST">           
+        <tr>
+            <th>Tahun</th>
+            <td>
+                <input type="number" name="tahun" class="form-control" value="<?= $kode_tahun ?>" placeholder="tahun"
+                    required="">
+            </td>
+        </tr>
+        <tr>
+            <th></th>
+            <td>
+                <input type="submit" name="cari" value="Buka Peserta" class="btn btn-primary">
+            </td>
+        </tr>
+    </form>
+</table>
 
+<?php elseif($depan == FALSE): ?>
 <a href="" class="btn btn-primary" data-toggle="modal" data-target="#modalTambahPeserta"><i class="fa fa-plus"></i>
     Tambah</a>
 <br /><br /><br />
@@ -94,7 +115,7 @@
                             </tr>
                             <tr>
                                 <td>
-                                <input type="number" name="tahun" class="form-control" value="<?= date('Y') ?>" placeholder="contoh: 2020" autocomplete="off" required="">
+                                <input type="number" name="tahun" class="form-control" value="<?= $tahun ?>" placeholder="contoh: 2020" readonly>
                                 </td>
                             </tr>
 
@@ -338,5 +359,5 @@
         });
     }
     </script>
-
+    <?php endif; ?>
     <?php $this->load->view('template/footer'); ?>

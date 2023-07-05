@@ -32,8 +32,8 @@ class Nilai_hasil extends CI_controller
       if (isset($_POST['cari'])) {
         $tahun = $this->input->post('tahun');
     
-      $peserta      = $this->m_matriks->view_peserta()->result_array();
-      $nilai        = $this->m_matriks->view_nilai()->result_array();
+      $peserta      = $this->m_matriks->view_peserta($tahun)->result_array();
+      $nilai        = $this->m_matriks->view_nilai($tahun)->result_array();
       $kriteria     = $this->m_matriks->view_kriteria()->result_array();
       $view['data'] = $this->m_nilai_hasil->view($tahun)->result_array();
       

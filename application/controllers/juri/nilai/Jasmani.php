@@ -34,8 +34,8 @@ class Jasmani extends CI_controller
         $tahun = $this->input->post('tahun');
 
       $data = $this->m_kriteria->view_id('K003BNDjht')->row_array();
-      $peserta  = $this->m_jasmani->view_peserta()->result_array();
-      $nilai    = $this->m_jasmani->view_nilai()->result_array();
+      $peserta  = $this->m_jasmani->view_peserta($tahun)->result_array();
+      $nilai    = $this->m_jasmani->view_nilai($tahun)->result_array();
       $juri     = $this->m_jasmani->view_juri()->result_array();
 
      $view = array('judul'          =>'Data '.$data['kriteria'],
@@ -65,6 +65,9 @@ class Jasmani extends CI_controller
     //add nilai
     public function input()
     {
+      if (isset($_POST['cari'])) {
+        $tahun = $this->input->post('tahun');
+
       $data = $this->m_kriteria->view_id('K003BNDjht')->row_array();
       $juri=$this->m_pengguna->view_id_pengguna()->row_array();
 
@@ -72,15 +75,26 @@ class Jasmani extends CI_controller
                    'aksi'           =>'add',
                    'id_pengguna'    =>$juri['id_pengguna'],
                    'nama_juri'      => $juri['nama'],
-                   'pilih_peserta'  =>$this->m_jasmani->view_pesertaNilai()->result_array(),
+                   'pilih_peserta'  =>$this->m_jasmani->view_pesertaNilai($tahun)->result_array(),
                     'nama_nilai1'   =>$data['nama_nilai1'],
                     'nama_nilai2'   =>$data['nama_nilai2'],
                     'nama_nilai3'   =>$data['nama_nilai3'],
                     'nama_nilai4'   =>$data['nama_nilai4'],
                     'nama_nilai5'   =>$data['nama_nilai5'],
+                    'depan'         =>FALSE,
+                    'tahun'         =>$tahun,
                   );
       $this->load->view('juri/nilai/jasmani/form',$view);
+    }else{
+      $data = $this->m_kriteria->view_id('K003BNDjht')->row_array();
+      $juri=$this->m_pengguna->view_id_pengguna()->row_array();
+      $view = array('judul'          =>'Buat Nilai '.$data['kriteria'],
+                    'aksi'           =>'add',
+                    'depan'          =>TRUE,
+                   );
+      $this->load->view('juri/nilai/jasmani/form',$view);
     }
+  }
 
      //API edit
      public function api_edit($id='', $SQLupdate='')

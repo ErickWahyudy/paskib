@@ -32,10 +32,10 @@ class Nilai_hasil extends CI_controller
     {
       $pengaturan   = $this->m_pengaturan->view()->row_array();
       $tahun        = date('Y');
-      $peserta      = $this->m_matriks->view_peserta()->result_array();
-      $nilai        = $this->m_matriks->view_nilai()->result_array();
+      $peserta      = $this->m_matriks->view_peserta($tahun)->result_array();
+      $nilai        = $this->m_matriks->view_nilai($tahun)->result_array();
       $kriteria     = $this->m_matriks->view_kriteria()->result_array();
-      $view['data'] = $this->m_nilai_hasil->view()->result_array();
+      $view['data'] = $this->m_nilai_hasil->view($tahun)->result_array();
       
         //Perhitungan Moora
         $criteria = $this->m_kriteria->view()->result_array();

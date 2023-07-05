@@ -13,11 +13,12 @@ class M_peserta extends CI_model
     private $table1 = 'tb_peserta';
 
 //peserta	
-public function view($value='')
+public function view($tahun='')
 {
     //join table peserta dan periode
     $this->db->select('*');
     $this->db->from($this->table1);
+    $this->db->where('tahun', $tahun);
     $this->db->order_by('nama_peserta');
     return $this->db->get();
 }

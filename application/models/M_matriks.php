@@ -31,15 +31,16 @@ public function view_nilaihasil($tahun='')
 }
 
 
-public function view_peserta()
+public function view_peserta($tahun='')
 {
   $this->db->select('*');
   $this->db->from($this->table2);
+  $this->db->where('tb_peserta.tahun', $tahun);
   $this->db->order_by('nama_peserta', 'ASC');
   return $this->db->get();
 }
 
-public function view_kriteria($value='')
+public function view_kriteria()
 {
   $this->db->select('*');
   $this->db->from($this->table3);

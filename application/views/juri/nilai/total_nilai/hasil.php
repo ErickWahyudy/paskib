@@ -1,7 +1,26 @@
 <?php $this->load->view('template/header'); ?>
-<?php
-$tahun = date('Y');
+<?php if($depan == TRUE): 
+      $kode_tahun = date("Y");      
 ?>
+<table class="table table-striped">
+    <form action="" method="POST">           
+        <tr>
+            <th>Tahun</th>
+            <td>
+                <input type="number" name="tahun" class="form-control" value="<?= $kode_tahun ?>" placeholder="tahun"
+                    required="">
+            </td>
+        </tr>
+        <tr>
+            <th></th>
+            <td>
+                <input type="submit" name="cari" value="Buka Peserta" class="btn btn-primary">
+            </td>
+        </tr>
+    </form>
+</table>
+
+<?php elseif($depan == FALSE): ?>
     <?php $nilai = $this->m_nilai_hasil->view($tahun); ?>
         <?php if ($nilai->num_rows() == 0): ?>
         <h1 class="text-center">Proses Perhitungan Nilai Belum Selesai</h1>
@@ -52,5 +71,6 @@ $tahun = date('Y');
                     ?>
         </tbody>
     </table>
+    <?php endif; ?>
     <?php endif; ?>
     <?php $this->load->view('template/footer'); ?>
