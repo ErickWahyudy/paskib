@@ -23,9 +23,6 @@
 <?php elseif($depan == FALSE): ?>
 <?php 
 if($aksi == "add"):
-$tahun = date('Y');
-$nilai = $this->m_matriks->view_nilaihasil($tahun); 
- if ($nilai->num_rows() == 0): 
  ?>
 
 <table class="table table-striped">
@@ -179,7 +176,6 @@ $(document).on('submit', '#edit', function(e) {
 </script>
 <?php else: ?>
     <h3 class="text-center">Nilai sudah disimpan permanen, anda tidak dapat mengubah nilai lagi</h3>
-<?php endif; ?>
 <?php endif; ?>
 <?php endif; ?>
 <?php $this->load->view('template/footer'); ?>
