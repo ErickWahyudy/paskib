@@ -205,7 +205,7 @@ $(document).ready(function() {
                     showConfirmButton: true,
                     confirmButtonText: "OKEE",
                 }).then(function() {
-                    location.reload();
+                    window.location.href = "<?= site_url('admin/home') ?>";
                 });
             }
         });

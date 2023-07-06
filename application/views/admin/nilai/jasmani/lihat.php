@@ -191,7 +191,7 @@ $(document).ready(function() {
                     showConfirmButton: true,
                     confirmButtonText: "OKEE",
                 }).then(function() {
-                    window.reload();
+                    window.location.href = "<?= site_url('admin/home') ?>";
                 });
             }
         });
