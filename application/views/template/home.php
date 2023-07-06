@@ -51,7 +51,7 @@
     <!-- small box -->
     <div class="small-box bg-green">
         <div class="inner">
-            <h4>Perhitungan Kriteria</h4><br>
+            <h4>Matriks</h4><br>
         </div>
         <a href="<?= base_url('superadmin/nilai/matriks/kriteria') ?>">
         <div class="icon">
@@ -66,7 +66,7 @@
     <!-- small box -->
     <div class="small-box bg-green">
         <div class="inner">
-            <h4>Perhitungan Matriks</h4><br>
+            <h4>Normalisasi & Optimasi</h4><br>
         </div>
         <a href="<?= base_url('superadmin/nilai/matriks/matriks') ?>">
         <div class="icon">
@@ -188,7 +188,7 @@
     <!-- small box -->
     <div class="small-box bg-green">
         <div class="inner">
-            <h4>Perhitungan Kriteria</h4><br>
+            <h4>Matriks</h4><br>
         </div>
         <a href="<?= base_url('admin/nilai/matriks/kriteria') ?>">
         <div class="icon">
@@ -203,7 +203,7 @@
     <!-- small box -->
     <div class="small-box bg-green">
         <div class="inner">
-            <h4>Perhitungan Matriks</h4><br>
+            <h4>Normalisasi & Optimasi</h4><br>
         </div>
         <a href="<?= base_url('admin/nilai/matriks/matriks') ?>">
         <div class="icon">

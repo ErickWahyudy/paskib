@@ -247,8 +247,8 @@ if($this->session->userdata('level') =="1"){
                     </span>
                   </a>
                   <ul class="treeview-menu active">
-                  <li><a href="<?= base_url('superadmin/nilai/matriks/kriteria') ?>" class="active"><i class="fa fa-circle-o"></i>Kriteria</a></li>
-                  <li><a href="<?= base_url('superadmin/nilai/matriks/matriks') ?>" class="active"><i class="fa fa-circle-o"></i>Matriks</a></li>
+                  <li><a href="<?= base_url('superadmin/nilai/matriks/kriteria') ?>" class="active"><i class="fa fa-circle-o"></i>Matriks</a></li>
+                  <li><a href="<?= base_url('superadmin/nilai/matriks/matriks') ?>" class="active"><i class="fa fa-circle-o"></i>Normalisasi & Optimasi</a></li>
                   <li><a href="<?= base_url('superadmin/nilai/nilai_hasil') ?>" class="active"><i class="fa fa-circle-o"></i>Hasil Akhir</a></li>
                   </ul>
               </li>
@@ -319,8 +319,8 @@ if($this->session->userdata('level') =="1"){
                     </span>
                   </a>
                   <ul class="treeview-menu active">
-                  <li><a href="<?= base_url('admin/nilai/matriks/kriteria') ?>" class="active"><i class="fa fa-circle-o"></i>Kriteria</a></li>
-                  <li><a href="<?= base_url('admin/nilai/matriks/matriks') ?>" class="active"><i class="fa fa-circle-o"></i>Matriks</a></li>
+                  <li><a href="<?= base_url('admin/nilai/matriks/kriteria') ?>" class="active"><i class="fa fa-circle-o"></i>Matriks</a></li>
+                  <li><a href="<?= base_url('admin/nilai/matriks/matriks') ?>" class="active"><i class="fa fa-circle-o"></i>Normalisasi & Optimasi</a></li>
                   <li><a href="<?= base_url('admin/nilai/nilai_hasil') ?>" class="active"><i class="fa fa-circle-o"></i>Hasil Akhir</a></li>
                   </ul>
               </li>

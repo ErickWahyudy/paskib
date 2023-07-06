@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.0
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Waktu pembuatan: 03 Jul 2023 pada 16.36
--- Versi server: 10.4.19-MariaDB
--- Versi PHP: 7.3.28
+-- Host: localhost:3306
+-- Waktu pembuatan: 06 Jul 2023 pada 23.34
+-- Versi server: 10.3.38-MariaDB
+-- Versi PHP: 7.4.33
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `paskib`
+-- Database: `kassandr_paskib`
 --
 
 -- --------------------------------------------------------
@@ -35,18 +35,18 @@ CREATE TABLE `tb_jasmani` (
   `nilai_pushUp` varchar(3) NOT NULL,
   `nilai_sitUp` varchar(3) NOT NULL,
   `tahun` year(4) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data untuk tabel `tb_jasmani`
 --
 
 INSERT INTO `tb_jasmani` (`id_jasmani`, `id_pengguna`, `id_peserta`, `nilai_lari`, `nilai_pushUp`, `nilai_sitUp`, `tahun`) VALUES
-('j001vwnu5', 'A0032wpbq0', 'P0053jRgzz', '74', '79', '80', 2023),
-('j002sGIkd', 'A0032wpbq0', 'P002c86ZkE', '74', '80', '79', 2023),
-('j003T5mD3', 'A0032wpbq0', 'P0044kTXLz', '72', '65', '68', 2023),
-('j004wW540', 'A0032wpbq0', 'P003FBBKNz', '72', '74', '75', 2023),
-('j005oB7O1', 'A0032wpbq0', 'P001mQGYDT', '78', '73', '77', 2023);
+('j001UkKfK', 'A0032wpbq0', 'P0053jRgzz', '74', '79', '80', '2023'),
+('j002TrJMi', 'A0032wpbq0', 'P002c86ZkE', '74', '80', '79', '2023'),
+('j003TPBVX', 'A004oJreti', 'P0044kTXLz', '72', '65', '68', '2023'),
+('j0043DJRe', 'A004oJreti', 'P003FBBKNz', '72', '74', '75', '2023'),
+('j0054N0yc', 'A005Wxb6fq', 'P001mQGYDT', '78', '73', '77', '2023');
 
 -- --------------------------------------------------------
 
@@ -63,7 +63,7 @@ CREATE TABLE `tb_kriteria` (
   `nama_nilai3` varchar(15) NOT NULL,
   `nama_nilai4` varchar(15) NOT NULL,
   `nama_nilai5` varchar(15) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data untuk tabel `tb_kriteria`
@@ -85,7 +85,7 @@ INSERT INTO `tb_kriteria` (`id_kriteria`, `kriteria`, `bobot`, `nama_nilai1`, `n
 CREATE TABLE `tb_level` (
   `id_level` varchar(2) NOT NULL,
   `level` varchar(15) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data untuk tabel `tb_level`
@@ -109,28 +109,28 @@ CREATE TABLE `tb_matriks` (
   `hasil` varchar(7) NOT NULL,
   `nilai_kriteria` varchar(2) NOT NULL,
   `tahun` year(4) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data untuk tabel `tb_matriks`
 --
 
 INSERT INTO `tb_matriks` (`id_matriks`, `id_peserta`, `id_kriteria`, `hasil`, `nilai_kriteria`, `tahun`) VALUES
-('T001WmjGb', 'P0053jRgzz', 'K003BNDjht', '78', '3', 2023),
-('T002Buis0', 'P002c86ZkE', 'K003BNDjht', '78', '3', 2023),
-('T003ApRqc', 'P0044kTXLz', 'K003BNDjht', '68', '1', 2023),
-('T004AiLxw', 'P003FBBKNz', 'K003BNDjht', '74', '2', 2023),
-('T005rDnDe', 'P001mQGYDT', 'K003BNDjht', '76', '2', 2023),
-('T006cDAp1', 'P0053jRgzz', 'K004RHwS3n', '76', '2', 2023),
-('T007aigxe', 'P002c86ZkE', 'K004RHwS3n', '77', '3', 2023),
-('T008wuP89', 'P0044kTXLz', 'K004RHwS3n', '77', '3', 2023),
-('T009zurmp', 'P003FBBKNz', 'K004RHwS3n', '75', '2', 2023),
-('T010BEJod', 'P001mQGYDT', 'K004RHwS3n', '77', '3', 2023),
-('T011ARswp', 'P0053jRgzz', 'K005ndLkXQ', '74', '2', 2023),
-('T012iBuX3', 'P002c86ZkE', 'K005ndLkXQ', '75', '2', 2023),
-('T0133wfgc', 'P0044kTXLz', 'K005ndLkXQ', '77', '3', 2023),
-('T014mLh2E', 'P003FBBKNz', 'K005ndLkXQ', '77', '3', 2023),
-('T0153tpwL', 'P001mQGYDT', 'K005ndLkXQ', '77', '3', 2023);
+('T001tE7t3', 'P0053jRgzz', 'K003BNDjht', '78', '3', '2023'),
+('T00298gmv', 'P002c86ZkE', 'K003BNDjht', '78', '3', '2023'),
+('T003vZDER', 'P0044kTXLz', 'K003BNDjht', '68', '1', '2023'),
+('T004Erinz', 'P003FBBKNz', 'K003BNDjht', '74', '2', '2023'),
+('T005ZowrR', 'P001mQGYDT', 'K003BNDjht', '76', '2', '2023'),
+('T006SJdAT', 'P0053jRgzz', 'K004RHwS3n', '76', '2', '2023'),
+('T007prPTb', 'P002c86ZkE', 'K004RHwS3n', '77', '3', '2023'),
+('T008Ul7Tt', 'P0044kTXLz', 'K004RHwS3n', '77', '3', '2023'),
+('T0097wSfC', 'P003FBBKNz', 'K004RHwS3n', '75', '2', '2023'),
+('T010US5FG', 'P001mQGYDT', 'K004RHwS3n', '76', '2', '2023'),
+('T011bEI9S', 'P0053jRgzz', 'K005ndLkXQ', '74', '2', '2023'),
+('T012YYfc0', 'P002c86ZkE', 'K005ndLkXQ', '75', '2', '2023'),
+('T013skdfo', 'P0044kTXLz', 'K005ndLkXQ', '77', '3', '2023'),
+('T014L7McP', 'P003FBBKNz', 'K005ndLkXQ', '77', '3', '2023'),
+('T015IM6a8', 'P001mQGYDT', 'K005ndLkXQ', '77', '3', '2023');
 
 -- --------------------------------------------------------
 
@@ -143,18 +143,18 @@ CREATE TABLE `tb_nilai_hasil` (
   `id_peserta` varchar(15) NOT NULL,
   `hasil` text NOT NULL,
   `tahun` year(4) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data untuk tabel `tb_nilai_hasil`
 --
 
 INSERT INTO `tb_nilai_hasil` (`id_nilai`, `id_peserta`, `hasil`, `tahun`) VALUES
-('H001Hvvf5', 'P0053jRgzz', '0.15025', 2023),
-('H002urHPR', 'P002c86ZkE', '0.29531', 2023),
-('H003XpM36', 'P0044kTXLz', '0.32911', 2023),
-('H0042bWUu', 'P003FBBKNz', '0.27606', 2023),
-('H00537b8p', 'P001mQGYDT', '0.27138', 2023);
+('H001jo0d6', 'P0053jRgzz', '0.15567', '2023'),
+('H002b2VRc', 'P002c86ZkE', '0.30343', '2023'),
+('H003LeOTb', 'P0044kTXLz', '0.33724', '2023'),
+('H004Q5d1A', 'P003FBBKNz', '0.28148', '2023'),
+('H005bS2Zc', 'P001mQGYDT', '0.24299', '2023');
 
 -- --------------------------------------------------------
 
@@ -172,28 +172,28 @@ CREATE TABLE `tb_parade` (
   `nilai_tgn` varchar(3) NOT NULL,
   `nilai_kk` varchar(3) NOT NULL,
   `tahun` year(4) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data untuk tabel `tb_parade`
 --
 
 INSERT INTO `tb_parade` (`id_parade`, `id_pengguna`, `id_peserta`, `nilai_wjh`, `nilai_bdn`, `nilai_bp`, `nilai_tgn`, `nilai_kk`, `tahun`) VALUES
-('p001MFLsZ', 'A0032wpbq0', 'P0053jRgzz', '75', '74', '72', '73', '76', 2023),
-('p002qhwr4', 'A0032wpbq0', 'P002c86ZkE', '77', '77', '76', '77', '77', 2023),
-('p003Pwfxg', 'A0032wpbq0', 'P0044kTXLz', '77', '78', '77', '77', '77', 2023),
-('p004ly9Gi', 'A0032wpbq0', 'P003FBBKNz', '76', '76', '76', '76', '77', 2023),
-('p005FhMfS', 'A0032wpbq0', 'P001mQGYDT', '77', '77', '76', '76', '78', 2023),
-('p0067zOyI', 'A004oJreti', 'P0053jRgzz', '73', '74', '74', '73', '73', 2023),
-('p007j3m9V', 'A004oJreti', 'P002c86ZkE', '75', '73', '72', '72', '72', 2023),
-('p0082qs9K', 'A004oJreti', 'P0044kTXLz', '78', '77', '78', '79', '79', 2023),
-('p009kExPb', 'A004oJreti', 'P003FBBKNz', '75', '75', '72', '75', '74', 2023),
-('p010OrEz8', 'A004oJreti', 'P001mQGYDT', '75', '77', '76', '75', '76', 2023),
-('p011kuVCp', 'A005Wxb6fq', 'P0053jRgzz', '76', '75', '75', '75', '77', 2023),
-('p01205usT', 'A005Wxb6fq', 'P002c86ZkE', '77', '77', '76', '75', '75', 2023),
-('p013nR9je', 'A005Wxb6fq', 'P0044kTXLz', '76', '76', '77', '77', '77', 2023),
-('p014OJG6q', 'A005Wxb6fq', 'P003FBBKNz', '80', '80', '80', '78', '78', 2023),
-('p015du6Oo', 'A005Wxb6fq', 'P001mQGYDT', '80', '80', '80', '78', '78', 2023);
+('p001MFLsZ', 'A0032wpbq0', 'P0053jRgzz', '75', '74', '72', '73', '76', '2023'),
+('p002qhwr4', 'A0032wpbq0', 'P002c86ZkE', '77', '77', '76', '77', '77', '2023'),
+('p003Pwfxg', 'A0032wpbq0', 'P0044kTXLz', '77', '78', '77', '77', '77', '2023'),
+('p004ly9Gi', 'A0032wpbq0', 'P003FBBKNz', '76', '76', '76', '76', '77', '2023'),
+('p005FhMfS', 'A0032wpbq0', 'P001mQGYDT', '77', '77', '76', '76', '78', '2023'),
+('p0067zOyI', 'A004oJreti', 'P0053jRgzz', '73', '74', '74', '73', '73', '2023'),
+('p007j3m9V', 'A004oJreti', 'P002c86ZkE', '75', '73', '72', '72', '72', '2023'),
+('p0082qs9K', 'A004oJreti', 'P0044kTXLz', '78', '77', '78', '79', '79', '2023'),
+('p009kExPb', 'A004oJreti', 'P003FBBKNz', '75', '75', '72', '75', '74', '2023'),
+('p010OrEz8', 'A004oJreti', 'P001mQGYDT', '75', '77', '76', '75', '76', '2023'),
+('p011kuVCp', 'A005Wxb6fq', 'P0053jRgzz', '76', '75', '75', '75', '77', '2023'),
+('p01205usT', 'A005Wxb6fq', 'P002c86ZkE', '77', '77', '76', '75', '75', '2023'),
+('p013nR9je', 'A005Wxb6fq', 'P0044kTXLz', '76', '76', '77', '77', '77', '2023'),
+('p014OJG6q', 'A005Wxb6fq', 'P003FBBKNz', '80', '80', '80', '78', '78', '2023'),
+('p015du6Oo', 'A005Wxb6fq', 'P001mQGYDT', '80', '80', '80', '78', '78', '2023');
 
 -- --------------------------------------------------------
 
@@ -210,28 +210,28 @@ CREATE TABLE `tb_pbb` (
   `nilai_gd` varchar(3) NOT NULL,
   `nilai_ab` varchar(3) NOT NULL,
   `tahun` year(4) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data untuk tabel `tb_pbb`
 --
 
 INSERT INTO `tb_pbb` (`id_pbb`, `id_pengguna`, `id_peserta`, `nilai_sk`, `nilai_gb`, `nilai_gd`, `nilai_ab`, `tahun`) VALUES
-('b001Fgw5r', 'A0032wpbq0', 'P0053jRgzz', '78', '77', '78', '77', 2023),
-('b002SP58O', 'A0032wpbq0', 'P002c86ZkE', '77', '75', '80', '77', 2023),
-('b003Ot0jj', 'A0032wpbq0', 'P0044kTXLz', '77', '75', '80', '79', 2023),
-('b004XXAnS', 'A0032wpbq0', 'P003FBBKNz', '77', '72', '73', '76', 2023),
-('b005LwOcD', 'A0032wpbq0', 'P001mQGYDT', '79', '79', '76', '75', 2023),
-('b0061894Q', 'A004oJreti', 'P0053jRgzz', '74', '75', '72', '73', 2023),
-('b0070e7Td', 'A004oJreti', 'P002c86ZkE', '76', '77', '77', '77', 2023),
-('b0085A1Zx', 'A004oJreti', 'P0044kTXLz', '80', '80', '79', '80', 2023),
-('b009xOPPh', 'A004oJreti', 'P003FBBKNz', '76', '77', '77', '76', 2023),
-('b010R728W', 'A004oJreti', 'P001mQGYDT', '75', '77', '75', '79', 2023),
-('b0119G1bf', 'A005Wxb6fq', 'P0053jRgzz', '74', '78', '76', '77', 2023),
-('b012UGYmN', 'A005Wxb6fq', 'P002c86ZkE', '75', '77', '77', '77', 2023),
-('b013pEJsI', 'A005Wxb6fq', 'P0044kTXLz', '75', '76', '73', '75', 2023),
-('b014JdTm3', 'A005Wxb6fq', 'P003FBBKNz', '75', '73', '74', '75', 2023),
-('b015Y9r8R', 'A005Wxb6fq', 'P001mQGYDT', '78', '75', '76', '74', 2023);
+('b0017hd7e', 'A0032wpbq0', 'P0053jRgzz', '78', '77', '78', '77', '2023'),
+('b002rVFpN', 'A0032wpbq0', 'P002c86ZkE', '75', '75', '80', '77', '2023'),
+('b003fJ23Z', 'A0032wpbq0', 'P0044kTXLz', '77', '75', '80', '79', '2023'),
+('b0049E26w', 'A0032wpbq0', 'P003FBBKNz', '77', '72', '73', '76', '2023'),
+('b005fKrOD', 'A0032wpbq0', 'P001mQGYDT', '77', '77', '76', '75', '2023'),
+('b006lZ2TQ', 'A004oJreti', 'P0053jRgzz', '74', '75', '72', '73', '2023'),
+('b007z9Ljt', 'A004oJreti', 'P002c86ZkE', '76', '77', '77', '77', '2023'),
+('b008N6Oph', 'A004oJreti', 'P0044kTXLz', '80', '80', '79', '80', '2023'),
+('b009zCs2D', 'A004oJreti', 'P003FBBKNz', '76', '77', '77', '76', '2023'),
+('b0106opZC', 'A004oJreti', 'P001mQGYDT', '75', '77', '75', '79', '2023'),
+('b011j13Ub', 'A005Wxb6fq', 'P0053jRgzz', '74', '78', '76', '77', '2023'),
+('b012AXA74', 'A005Wxb6fq', 'P002c86ZkE', '75', '77', '77', '77', '2023'),
+('b0134YFOB', 'A005Wxb6fq', 'P0044kTXLz', '75', '76', '73', '75', '2023'),
+('b014KxO6S', 'A005Wxb6fq', 'P003FBBKNz', '75', '73', '74', '75', '2023'),
+('b015WTOKi', 'A005Wxb6fq', 'P001mQGYDT', '78', '75', '76', '74', '2023');
 
 -- --------------------------------------------------------
 
@@ -244,19 +244,19 @@ CREATE TABLE `tb_pengaturan` (
   `nama_judul` varchar(50) NOT NULL,
   `meta_keywords` text NOT NULL,
   `meta_description` text NOT NULL,
-  `jdwl_praktek` varchar(15) NOT NULL,
+  `batas_lulus` varchar(2) NOT NULL,
   `jam_praktek` time NOT NULL,
   `jdwl_pendaftaran` varchar(50) NOT NULL,
   `akses_pendaftaran` enum('Buka','Tutup') NOT NULL,
   `logo` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data untuk tabel `tb_pengaturan`
 --
 
-INSERT INTO `tb_pengaturan` (`id_pengaturan`, `nama_judul`, `meta_keywords`, `meta_description`, `jdwl_praktek`, `jam_praktek`, `jdwl_pendaftaran`, `akses_pendaftaran`, `logo`) VALUES
-('P1xhDwL', 'PASKIBRAKA  PONOROGO', 'PASKIBRAKA  PONOROGO', 'PASKIBRAKA  PONOROGO', 'Senin ~ Jum\'at', '05:00:00', 'Setiap hari Minggu', 'Buka', 'header_6491dfa58a3f0.png');
+INSERT INTO `tb_pengaturan` (`id_pengaturan`, `nama_judul`, `meta_keywords`, `meta_description`, `batas_lulus`, `jam_praktek`, `jdwl_pendaftaran`, `akses_pendaftaran`, `logo`) VALUES
+('P1xhDwL', 'PASKIBRAKA  PONOROGO', 'PASKIBRAKA  PONOROGO', 'PASKIBRAKA  PONOROGO', '1', '05:00:00', 'Setiap hari Minggu', 'Buka', 'header_6491dfa58a3f0.png');
 
 -- --------------------------------------------------------
 
@@ -271,18 +271,19 @@ CREATE TABLE `tb_pengguna` (
   `email` varchar(20) NOT NULL,
   `password` text NOT NULL,
   `id_level` varchar(2) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data untuk tabel `tb_pengguna`
 --
 
 INSERT INTO `tb_pengguna` (`id_pengguna`, `nama`, `keterangan`, `email`, `password`, `id_level`) VALUES
-('A001bnHDs', 'Erik Wahyudi', 'Superadmin', 'erik@gmail.com', '202cb962ac59075b964b07152d234b70', '1'),
+('A001bnHDs', 'Dewi Taliya', 'Superadmin', 'dewitaliya@gmail.com', '202cb962ac59075b964b07152d234b70', '1'),
 ('A002rlZgr3', 'Dewi', 'Admin 1', 'dewi@gmail.com', '202cb962ac59075b964b07152d234b70', '2'),
 ('A0032wpbq0', 'Fannisa', 'Dewan Juri', 'fannisa@gmail.com', '202cb962ac59075b964b07152d234b70', '3'),
 ('A004oJreti', 'Rani', 'juri 2', 'rani@gmail.com', '202cb962ac59075b964b07152d234b70', '3'),
-('A005Wxb6fq', 'Rika', 'juri 3', 'rika@gmail.com', '202cb962ac59075b964b07152d234b70', '3');
+('A005Wxb6fq', 'Rika', 'juri 3', 'rika@gmail.com', '202cb962ac59075b964b07152d234b70', '3'),
+('A006rLj1vF', 'Jangan Dihapus', 'Ini superadmin', 'penting@gmail.com', '202cb962ac59075b964b07152d234b70', '1');
 
 -- --------------------------------------------------------
 
@@ -296,19 +297,20 @@ CREATE TABLE `tb_peserta` (
   `asal_sekolah` varchar(18) NOT NULL,
   `tinggi_bb` varchar(3) NOT NULL,
   `berat_bb` varchar(3) NOT NULL,
+  `tahun` year(4) NOT NULL,
   `level` varchar(15) NOT NULL DEFAULT 'peserta'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data untuk tabel `tb_peserta`
 --
 
-INSERT INTO `tb_peserta` (`id_peserta`, `nama_peserta`, `asal_sekolah`, `tinggi_bb`, `berat_bb`, `level`) VALUES
-('P001mQGYDT', 'Zulfa Pradiva', 'SMA N 1 Ponorogo', '172', '65', 'peserta'),
-('P002c86ZkE', 'Brilian Jagad', 'SMAN N 3 Ponorogo', '172', '66', 'peserta'),
-('P003FBBKNz', 'Naufal Labiibi', 'SMA N 2 Ponorogo', '175', '73', 'peserta'),
-('P0044kTXLz', 'Erdi Anggara', 'SMA BAKTI', '175', '77', 'peserta'),
-('P0053jRgzz', 'Asarika Nian Mahardi', 'SMA N 1 Babadan', '170', '64', 'peserta');
+INSERT INTO `tb_peserta` (`id_peserta`, `nama_peserta`, `asal_sekolah`, `tinggi_bb`, `berat_bb`, `tahun`, `level`) VALUES
+('P001mQGYDT', 'Zulfa Pradiva', 'SMA N 1 Ponorogo', '172', '65', '2023', 'peserta'),
+('P002c86ZkE', 'Brilian Jagad', 'SMAN N 3 Ponorogo', '172', '66', '2023', 'peserta'),
+('P003FBBKNz', 'Naufal Labiibi', 'SMA N 2 Ponorogo', '175', '73', '2023', 'peserta'),
+('P0044kTXLz', 'Erdi Anggara', 'SMA BAKTI', '175', '77', '2023', 'peserta'),
+('P0053jRgzz', 'Asarika Nian Mahardi', 'SMA N 1 Babadan', '170', '64', '2023', 'peserta');
 
 --
 -- Indexes for dumped tables

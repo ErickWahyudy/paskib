@@ -113,7 +113,7 @@ class Matriks extends CI_controller
       }
  
       //view
-      $view['judul']                ='Nilai Kriteria';
+      $view['judul']                ='Nilai Matriks';
       $view['judul2']               ='Data Alternatif';
       $view['nama_peserta']         =$peserta;
       $view['view_kriteria']        =$kriteria;
@@ -124,7 +124,7 @@ class Matriks extends CI_controller
                  
       $this->load->view('superadmin/nilai/total_nilai/kriteria',$view);
     }else{
-      $view['judul']                ='Nilai Kriteria';
+      $view['judul']                ='Nilai Matriks';
       $view['judul2']               ='Data Alternatif';
       $view['depan']                =TRUE;
                  
@@ -228,7 +228,7 @@ class Matriks extends CI_controller
       }
  
       //view
-      $view['judul']                ='Nilai Matriks';
+      $view['judul']                ='Nilai Normalisasi & Optimasi';
       $view['judul2']               ='Data Alternatif';
       $view['nama_peserta']         =$peserta;
       $view['view_kriteria']        =$kriteria;
@@ -239,7 +239,7 @@ class Matriks extends CI_controller
                  
       $this->load->view('superadmin/nilai/total_nilai/matriks',$view);
     }else{
-      $view['judul']                ='Nilai Matriks';
+      $view['judul']                ='Nilai Normalisasi & Optimasi';
       $view['judul2']               ='Data Alternatif';
       $view['depan']                =TRUE;
 
