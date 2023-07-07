@@ -37,17 +37,22 @@ if($aksi == "add"):
             <th>Nama</th>
             <td>
                 <div class="dropdown">
-                    <button class=" dropdown-toggle form-control" type="button" id="dropdownMenuButton"
+                    <button class="dropdown-toggle form-control" type="button" id="dropdownMenuButton"
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         --Pilih Peserta--
                     </button>
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <input type="text" id="search_peserta" class="form-control" placeholder="Cari Peserta"
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="max-height: 200px; overflow-y: scroll;">
+                        <input type="text" id="search_peserta" class="form-control" placeholder="Ketik Untuk Cari Peserta"
                             autocomplete="off">
-                        <?php foreach ($pilih_peserta as $peserta): ?>
-                        <a class="dropdown-item form-control" href="#"
-                            data-value="<?= $peserta['id_pbb'] ?>"><?= ucfirst($peserta['nama_peserta']) ?></a>
-                        <?php endforeach; ?>
+                        <?php
+                        foreach ($pilih_peserta as $peserta):
+                        ?>
+                            <a class="dropdown-item form-control" href="#" data-value="<?= $peserta['id_pbb'] ?>">
+                                <?= ucfirst($peserta['nama_peserta']) ?>
+                            </a>
+                        <?php
+                        endforeach;
+                        ?>
                     </div>
                 </div>
                 <input type="hidden" name="id_pbb" id="selected_peserta">
