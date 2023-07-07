@@ -132,9 +132,9 @@ elseif($aksi == "edit"):
                 <th rowspan="3" style="vertical-align: middle;">Tinggi Badan</th>
                 <th rowspan="3" style="vertical-align: middle;">Berat Badan</th>
                 <th colspan="3" style="text-align: center;"><?= $judul ?></th>
-                <th rowspan="3" style="vertical-align: middle;">Total Nilai <?= $nama_nilai1 ?></th>
+                <!-- <th rowspan="3" style="vertical-align: middle;">Total Nilai <?= $nama_nilai1 ?></th>
                 <th rowspan="3" style="vertical-align: middle;">Total Nilai <?= $nama_nilai2 ?></th>
-                <th rowspan="3" style="vertical-align: middle;">Total Nilai <?= $nama_nilai3 ?></th>
+                <th rowspan="3" style="vertical-align: middle;">Total Nilai <?= $nama_nilai3 ?></th> -->
             </tr>
             <tr>
                 <th colspan="3" style="text-align: center;">
@@ -173,7 +173,7 @@ elseif($aksi == "edit"):
                 <?php endforeach; ?>
 
                 <!-- Total Nilai -->
-                <td>
+                <!-- <td>
                     <?php
                     $nilai = $this->m_jasmani->view_nilai($peserta['id_peserta'], $tahun);
                     $total1 = 0;
@@ -202,7 +202,7 @@ elseif($aksi == "edit"):
                     }
                     ?>
                     <?= $total3 ?>
-                </td>
+                </td> -->
                 <?php $no++;  endforeach; ?>
             </tr>
         </tbody>

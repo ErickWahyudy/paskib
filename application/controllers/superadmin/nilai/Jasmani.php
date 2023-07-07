@@ -249,6 +249,38 @@ class Jasmani extends CI_controller
          ->set_output(json_encode($response));
      }
 
+      //hapus id
+      //API hapus dokter
+      public function api_hapus($id='')
+      {
+        if(empty($id)){
+          $response = [
+            'status' => false,
+            'message' => 'Data kosong'
+          ];
+        }else{
+          $SQLupdate = [
+           'nilai_lari'      => '',
+           'nilai_pushUp'    => '',
+           'nilai_sitUp'     => ''
+        ];
+        if ($this->m_jasmani->update($id, $SQLupdate)) {
+          $response = [
+            'status' => true,
+            'message' => 'Berhasil mengubah data'
+          ];
+        } else {
+          $response = [
+            'status' => false,
+            'message' => 'Gagal mengubah data'
+          ];
+        }
+      }
+      $this->output
+        ->set_content_type('application/json')
+        ->set_output(json_encode($response));
+    }
+
      //API hapus
      public function api_empty_table($value='')
      {

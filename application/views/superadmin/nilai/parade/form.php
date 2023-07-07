@@ -131,11 +131,11 @@ elseif($aksi == "edit"):
                 <th rowspan="3" style="vertical-align: middle;">Tinggi Badan</th>
                 <th rowspan="3" style="vertical-align: middle;">Berat Badan</th>
                 <th colspan="15" style="text-align: center;"><?= $judul ?></th>
-                <th rowspan="3" style="vertical-align: middle;">Total Nilai <?= $nama_nilai1 ?></th>
+                <!-- <th rowspan="3" style="vertical-align: middle;">Total Nilai <?= $nama_nilai1 ?></th>
                 <th rowspan="3" style="vertical-align: middle;">Total Nilai <?= $nama_nilai2 ?></th>
                 <th rowspan="3" style="vertical-align: middle;">Total Nilai <?= $nama_nilai3 ?></th>
                 <th rowspan="3" style="vertical-align: middle;">Total Nilai <?= $nama_nilai4 ?></th>
-                <th rowspan="3" style="vertical-align: middle;">Total Nilai <?= $nama_nilai5 ?></th>
+                <th rowspan="3" style="vertical-align: middle;">Total Nilai <?= $nama_nilai5 ?></th> -->
             </tr>
             <tr>
                 <?php $no=1; foreach($view_juri as $juri): ?>
@@ -183,7 +183,7 @@ elseif($aksi == "edit"):
                 <?php endforeach; ?>
 
                 <!-- Total Nilai -->
-                <td>
+                <!-- <td>
                     <?php
                     $nilai = $this->m_parade->view_nilai($peserta['id_peserta'], $tahun);
                     $total1 = 0;
@@ -232,7 +232,7 @@ elseif($aksi == "edit"):
                     }
                     ?>
                     <?= $total5 ?>
-                </td>
+                </td> -->
                 <?php $no++;  endforeach; ?>
             </tr>
         </tbody>

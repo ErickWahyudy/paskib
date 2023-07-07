@@ -67,6 +67,13 @@ public function update($id='',$SQLupdate){
   return $this->db-> update($this->table1, $SQLupdate);
 }
 
+//delete id
+public function delete($id=''){
+  $this->db->where('id_parade', $id);
+  return $this->db-> delete($this->table1);
+}
+
+//delete semua
 public function delete_semua_data()
 {
   $this->db->empty_table($this->table1);

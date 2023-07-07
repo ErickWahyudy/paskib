@@ -254,6 +254,39 @@ public function api_add($value='')
      ->set_output(json_encode($response));
  }
 
+  //hapus id
+  //API hapus dokter
+  public function api_hapus($id='')
+  {
+    if(empty($id)){
+      $response = [
+        'status' => false,
+        'message' => 'Data kosong'
+      ];
+    }else{
+      $SQLupdate = [
+        'nilai_sk'        =>'',
+        'nilai_gb'        =>'',
+        'nilai_gd'        =>'',
+        'nilai_ab'        =>''
+     ];
+     if ($this->m_pbb->update($id, $SQLupdate)) {
+      $response = [
+        'status' => true,
+        'message' => 'Berhasil mengubah data'
+      ];
+    } else {
+      $response = [
+        'status' => false,
+        'message' => 'Gagal mengubah data'
+      ];
+    }
+  }
+  $this->output
+    ->set_content_type('application/json')
+    ->set_output(json_encode($response));
+}
+
   //API hapus
   public function api_empty_table($value='')
   {
