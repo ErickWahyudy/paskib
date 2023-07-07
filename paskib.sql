@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Waktu pembuatan: 06 Jul 2022 pada 23.34
+-- Waktu pembuatan: 06 Jul 2023 pada 23.34
 -- Versi server: 10.3.38-MariaDB
 -- Versi PHP: 7.4.33
 
@@ -42,11 +42,11 @@ CREATE TABLE `tb_jasmani` (
 --
 
 INSERT INTO `tb_jasmani` (`id_jasmani`, `id_pengguna`, `id_peserta`, `nilai_lari`, `nilai_pushUp`, `nilai_sitUp`, `tahun`) VALUES
-('j001UkKfK', 'A0032wpbq0', 'P0053jRgzz', '74', '79', '80', '2022'),
-('j002TrJMi', 'A0032wpbq0', 'P002c86ZkE', '74', '80', '79', '2022'),
-('j003TPBVX', 'A004oJreti', 'P0044kTXLz', '72', '65', '68', '2022'),
-('j0043DJRe', 'A004oJreti', 'P003FBBKNz', '72', '74', '75', '2022'),
-('j0054N0yc', 'A005Wxb6fq', 'P001mQGYDT', '78', '73', '77', '2022');
+('j001UkKfK', 'A0032wpbq0', 'P0053jRgzz', '74', '79', '80', '2023'),
+('j002TrJMi', 'A0032wpbq0', 'P002c86ZkE', '74', '80', '79', '2023'),
+('j003TPBVX', 'A004oJreti', 'P0044kTXLz', '72', '65', '68', '2023'),
+('j0043DJRe', 'A004oJreti', 'P003FBBKNz', '72', '74', '75', '2023'),
+('j0054N0yc', 'A005Wxb6fq', 'P001mQGYDT', '78', '73', '77', '2023');
 
 -- --------------------------------------------------------
 
@@ -116,21 +116,21 @@ CREATE TABLE `tb_matriks` (
 --
 
 INSERT INTO `tb_matriks` (`id_matriks`, `id_peserta`, `id_kriteria`, `hasil`, `nilai_kriteria`, `tahun`) VALUES
-('T001tE7t3', 'P0053jRgzz', 'K003BNDjht', '78', '3', '2022'),
-('T00298gmv', 'P002c86ZkE', 'K003BNDjht', '78', '3', '2022'),
-('T003vZDER', 'P0044kTXLz', 'K003BNDjht', '68', '1', '2022'),
-('T004Erinz', 'P003FBBKNz', 'K003BNDjht', '74', '2', '2022'),
-('T005ZowrR', 'P001mQGYDT', 'K003BNDjht', '76', '2', '2022'),
-('T006SJdAT', 'P0053jRgzz', 'K004RHwS3n', '76', '2', '2022'),
-('T007prPTb', 'P002c86ZkE', 'K004RHwS3n', '77', '3', '2022'),
-('T008Ul7Tt', 'P0044kTXLz', 'K004RHwS3n', '77', '3', '2022'),
-('T0097wSfC', 'P003FBBKNz', 'K004RHwS3n', '75', '2', '2022'),
-('T010US5FG', 'P001mQGYDT', 'K004RHwS3n', '76', '2', '2022'),
-('T011bEI9S', 'P0053jRgzz', 'K005ndLkXQ', '74', '2', '2022'),
-('T012YYfc0', 'P002c86ZkE', 'K005ndLkXQ', '75', '2', '2022'),
-('T013skdfo', 'P0044kTXLz', 'K005ndLkXQ', '77', '3', '2022'),
-('T014L7McP', 'P003FBBKNz', 'K005ndLkXQ', '77', '3', '2022'),
-('T015IM6a8', 'P001mQGYDT', 'K005ndLkXQ', '77', '3', '2022');
+('T001tE7t3', 'P0053jRgzz', 'K003BNDjht', '78', '3', '2023'),
+('T00298gmv', 'P002c86ZkE', 'K003BNDjht', '78', '3', '2023'),
+('T003vZDER', 'P0044kTXLz', 'K003BNDjht', '68', '1', '2023'),
+('T004Erinz', 'P003FBBKNz', 'K003BNDjht', '74', '2', '2023'),
+('T005ZowrR', 'P001mQGYDT', 'K003BNDjht', '76', '2', '2023'),
+('T006SJdAT', 'P0053jRgzz', 'K004RHwS3n', '76', '2', '2023'),
+('T007prPTb', 'P002c86ZkE', 'K004RHwS3n', '77', '3', '2023'),
+('T008Ul7Tt', 'P0044kTXLz', 'K004RHwS3n', '77', '3', '2023'),
+('T0097wSfC', 'P003FBBKNz', 'K004RHwS3n', '75', '2', '2023'),
+('T010US5FG', 'P001mQGYDT', 'K004RHwS3n', '76', '2', '2023'),
+('T011bEI9S', 'P0053jRgzz', 'K005ndLkXQ', '74', '2', '2023'),
+('T012YYfc0', 'P002c86ZkE', 'K005ndLkXQ', '75', '2', '2023'),
+('T013skdfo', 'P0044kTXLz', 'K005ndLkXQ', '77', '3', '2023'),
+('T014L7McP', 'P003FBBKNz', 'K005ndLkXQ', '77', '3', '2023'),
+('T015IM6a8', 'P001mQGYDT', 'K005ndLkXQ', '77', '3', '2023');
 
 -- --------------------------------------------------------
 
@@ -150,11 +150,11 @@ CREATE TABLE `tb_nilai_hasil` (
 --
 
 INSERT INTO `tb_nilai_hasil` (`id_nilai`, `id_peserta`, `hasil`, `tahun`) VALUES
-('H001jo0d6', 'P0053jRgzz', '0.15567', '2022'),
-('H002b2VRc', 'P002c86ZkE', '0.30343', '2022'),
-('H003LeOTb', 'P0044kTXLz', '0.33724', '2022'),
-('H004Q5d1A', 'P003FBBKNz', '0.28148', '2022'),
-('H005bS2Zc', 'P001mQGYDT', '0.24299', '2022');
+('H001jo0d6', 'P0053jRgzz', '0.15567', '2023'),
+('H002b2VRc', 'P002c86ZkE', '0.30343', '2023'),
+('H003LeOTb', 'P0044kTXLz', '0.33724', '2023'),
+('H004Q5d1A', 'P003FBBKNz', '0.28148', '2023'),
+('H005bS2Zc', 'P001mQGYDT', '0.24299', '2023');
 
 -- --------------------------------------------------------
 
@@ -179,21 +179,21 @@ CREATE TABLE `tb_parade` (
 --
 
 INSERT INTO `tb_parade` (`id_parade`, `id_pengguna`, `id_peserta`, `nilai_wjh`, `nilai_bdn`, `nilai_bp`, `nilai_tgn`, `nilai_kk`, `tahun`) VALUES
-('p001MFLsZ', 'A0032wpbq0', 'P0053jRgzz', '75', '74', '72', '73', '76', '2022'),
-('p002qhwr4', 'A0032wpbq0', 'P002c86ZkE', '77', '77', '76', '77', '77', '2022'),
-('p003Pwfxg', 'A0032wpbq0', 'P0044kTXLz', '77', '78', '77', '77', '77', '2022'),
-('p004ly9Gi', 'A0032wpbq0', 'P003FBBKNz', '76', '76', '76', '76', '77', '2022'),
-('p005FhMfS', 'A0032wpbq0', 'P001mQGYDT', '77', '77', '76', '76', '78', '2022'),
-('p0067zOyI', 'A004oJreti', 'P0053jRgzz', '73', '74', '74', '73', '73', '2022'),
-('p007j3m9V', 'A004oJreti', 'P002c86ZkE', '75', '73', '72', '72', '72', '2022'),
-('p0082qs9K', 'A004oJreti', 'P0044kTXLz', '78', '77', '78', '79', '79', '2022'),
-('p009kExPb', 'A004oJreti', 'P003FBBKNz', '75', '75', '72', '75', '74', '2022'),
-('p010OrEz8', 'A004oJreti', 'P001mQGYDT', '75', '77', '76', '75', '76', '2022'),
-('p011kuVCp', 'A005Wxb6fq', 'P0053jRgzz', '76', '75', '75', '75', '77', '2022'),
-('p01205usT', 'A005Wxb6fq', 'P002c86ZkE', '77', '77', '76', '75', '75', '2022'),
-('p013nR9je', 'A005Wxb6fq', 'P0044kTXLz', '76', '76', '77', '77', '77', '2022'),
-('p014OJG6q', 'A005Wxb6fq', 'P003FBBKNz', '80', '80', '80', '78', '78', '2022'),
-('p015du6Oo', 'A005Wxb6fq', 'P001mQGYDT', '80', '80', '80', '78', '78', '2022');
+('p001MFLsZ', 'A0032wpbq0', 'P0053jRgzz', '75', '74', '72', '73', '76', '2023'),
+('p002qhwr4', 'A0032wpbq0', 'P002c86ZkE', '77', '77', '76', '77', '77', '2023'),
+('p003Pwfxg', 'A0032wpbq0', 'P0044kTXLz', '77', '78', '77', '77', '77', '2023'),
+('p004ly9Gi', 'A0032wpbq0', 'P003FBBKNz', '76', '76', '76', '76', '77', '2023'),
+('p005FhMfS', 'A0032wpbq0', 'P001mQGYDT', '77', '77', '76', '76', '78', '2023'),
+('p0067zOyI', 'A004oJreti', 'P0053jRgzz', '73', '74', '74', '73', '73', '2023'),
+('p007j3m9V', 'A004oJreti', 'P002c86ZkE', '75', '73', '72', '72', '72', '2023'),
+('p0082qs9K', 'A004oJreti', 'P0044kTXLz', '78', '77', '78', '79', '79', '2023'),
+('p009kExPb', 'A004oJreti', 'P003FBBKNz', '75', '75', '72', '75', '74', '2023'),
+('p010OrEz8', 'A004oJreti', 'P001mQGYDT', '75', '77', '76', '75', '76', '2023'),
+('p011kuVCp', 'A005Wxb6fq', 'P0053jRgzz', '76', '75', '75', '75', '77', '2023'),
+('p01205usT', 'A005Wxb6fq', 'P002c86ZkE', '77', '77', '76', '75', '75', '2023'),
+('p013nR9je', 'A005Wxb6fq', 'P0044kTXLz', '76', '76', '77', '77', '77', '2023'),
+('p014OJG6q', 'A005Wxb6fq', 'P003FBBKNz', '80', '80', '80', '78', '78', '2023'),
+('p015du6Oo', 'A005Wxb6fq', 'P001mQGYDT', '80', '80', '80', '78', '78', '2023');
 
 -- --------------------------------------------------------
 
@@ -217,21 +217,21 @@ CREATE TABLE `tb_pbb` (
 --
 
 INSERT INTO `tb_pbb` (`id_pbb`, `id_pengguna`, `id_peserta`, `nilai_sk`, `nilai_gb`, `nilai_gd`, `nilai_ab`, `tahun`) VALUES
-('b0017hd7e', 'A0032wpbq0', 'P0053jRgzz', '78', '77', '78', '77', '2022'),
-('b002rVFpN', 'A0032wpbq0', 'P002c86ZkE', '75', '75', '80', '77', '2022'),
-('b003fJ23Z', 'A0032wpbq0', 'P0044kTXLz', '77', '75', '80', '79', '2022'),
-('b0049E26w', 'A0032wpbq0', 'P003FBBKNz', '77', '72', '73', '76', '2022'),
-('b005fKrOD', 'A0032wpbq0', 'P001mQGYDT', '77', '77', '76', '75', '2022'),
-('b006lZ2TQ', 'A004oJreti', 'P0053jRgzz', '74', '75', '72', '73', '2022'),
-('b007z9Ljt', 'A004oJreti', 'P002c86ZkE', '76', '77', '77', '77', '2022'),
-('b008N6Oph', 'A004oJreti', 'P0044kTXLz', '80', '80', '79', '80', '2022'),
-('b009zCs2D', 'A004oJreti', 'P003FBBKNz', '76', '77', '77', '76', '2022'),
-('b0106opZC', 'A004oJreti', 'P001mQGYDT', '75', '77', '75', '79', '2022'),
-('b011j13Ub', 'A005Wxb6fq', 'P0053jRgzz', '74', '78', '76', '77', '2022'),
-('b012AXA74', 'A005Wxb6fq', 'P002c86ZkE', '75', '77', '77', '77', '2022'),
-('b0134YFOB', 'A005Wxb6fq', 'P0044kTXLz', '75', '76', '73', '75', '2022'),
-('b014KxO6S', 'A005Wxb6fq', 'P003FBBKNz', '75', '73', '74', '75', '2022'),
-('b015WTOKi', 'A005Wxb6fq', 'P001mQGYDT', '78', '75', '76', '74', '2022');
+('b0017hd7e', 'A0032wpbq0', 'P0053jRgzz', '78', '77', '78', '77', '2023'),
+('b002rVFpN', 'A0032wpbq0', 'P002c86ZkE', '75', '75', '80', '77', '2023'),
+('b003fJ23Z', 'A0032wpbq0', 'P0044kTXLz', '77', '75', '80', '79', '2023'),
+('b0049E26w', 'A0032wpbq0', 'P003FBBKNz', '77', '72', '73', '76', '2023'),
+('b005fKrOD', 'A0032wpbq0', 'P001mQGYDT', '77', '77', '76', '75', '2023'),
+('b006lZ2TQ', 'A004oJreti', 'P0053jRgzz', '74', '75', '72', '73', '2023'),
+('b007z9Ljt', 'A004oJreti', 'P002c86ZkE', '76', '77', '77', '77', '2023'),
+('b008N6Oph', 'A004oJreti', 'P0044kTXLz', '80', '80', '79', '80', '2023'),
+('b009zCs2D', 'A004oJreti', 'P003FBBKNz', '76', '77', '77', '76', '2023'),
+('b0106opZC', 'A004oJreti', 'P001mQGYDT', '75', '77', '75', '79', '2023'),
+('b011j13Ub', 'A005Wxb6fq', 'P0053jRgzz', '74', '78', '76', '77', '2023'),
+('b012AXA74', 'A005Wxb6fq', 'P002c86ZkE', '75', '77', '77', '77', '2023'),
+('b0134YFOB', 'A005Wxb6fq', 'P0044kTXLz', '75', '76', '73', '75', '2023'),
+('b014KxO6S', 'A005Wxb6fq', 'P003FBBKNz', '75', '73', '74', '75', '2023'),
+('b015WTOKi', 'A005Wxb6fq', 'P001mQGYDT', '78', '75', '76', '74', '2023');
 
 -- --------------------------------------------------------
 
@@ -306,11 +306,11 @@ CREATE TABLE `tb_peserta` (
 --
 
 INSERT INTO `tb_peserta` (`id_peserta`, `nama_peserta`, `asal_sekolah`, `tinggi_bb`, `berat_bb`, `tahun`, `level`) VALUES
-('P001mQGYDT', 'Zulfa Pradiva', 'SMA N 1 Ponorogo', '172', '65', '2022', 'peserta'),
-('P002c86ZkE', 'Brilian Jagad', 'SMAN N 3 Ponorogo', '172', '66', '2022', 'peserta'),
-('P003FBBKNz', 'Naufal Labiibi', 'SMA N 2 Ponorogo', '175', '73', '2022', 'peserta'),
-('P0044kTXLz', 'Erdi Anggara', 'SMA BAKTI', '175', '77', '2022', 'peserta'),
-('P0053jRgzz', 'Asarika Nian Mahardi', 'SMA N 1 Babadan', '170', '64', '2022', 'peserta');
+('P001mQGYDT', 'Zulfa Pradiva', 'SMA N 1 Ponorogo', '172', '65', '2023', 'peserta'),
+('P002c86ZkE', 'Brilian Jagad', 'SMAN N 3 Ponorogo', '172', '66', '2023', 'peserta'),
+('P003FBBKNz', 'Naufal Labiibi', 'SMA N 2 Ponorogo', '175', '73', '2023', 'peserta'),
+('P0044kTXLz', 'Erdi Anggara', 'SMA BAKTI', '175', '77', '2023', 'peserta'),
+('P0053jRgzz', 'Asarika Nian Mahardi', 'SMA N 1 Babadan', '170', '64', '2023', 'peserta');
 
 --
 -- Indexes for dumped tables

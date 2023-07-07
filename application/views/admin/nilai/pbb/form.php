@@ -34,6 +34,9 @@ if($aksi == "add"):
                 <select name="id_pengguna" class="form-control" required="">
                     <option value="">--Pilih Juri--</option>
                     <?php foreach($pilih_juri as $juri): ?>
+                        <!-- Jika id_pengguna sudah ada di tabel pbb, maka tidak ditampilkan -->
+                        <?php $juri_pbb = $this->db->get_where('tb_pbb', ['id_pengguna' => $juri['id_pengguna']])->row_array(); ?>
+                        <?php if(!empty($juri_pbb)) continue; ?>
                     <option value="<?= $juri['id_pengguna'] ?>">
                         <?= ucfirst($juri['nama']) ?>
                     </option>

@@ -154,9 +154,17 @@ if ($nilai->num_rows() == 0):
                     <?php $no++;  endforeach; ?>
             </tr>
             <tr>
+                 <!-- Jika id_kriteria sudah ada di tabel matriks, maka tidak ditampilkan -->
+                <?php $matriks = $this->db->get_where('tb_matriks', ['id_kriteria' => 'K003BNDjht'])->row_array(); ?>
+                <?php if(empty($matriks)): ?>
                 <td colspan="19" style="text-align: center;">
                     <button type="submit" class="btn btn-primary btn-md">Simpan Nilai</button>
                 </td>
+                <?php else: ?>
+                <td colspan="19" style="text-align: center;">
+                    <p class="btn btn-success btn-md">Nilai Sudah Disimpan</p>
+                </td>
+                <?php endif; ?>
             </tr>
             </form>
         </tbody>
@@ -191,7 +199,7 @@ $(document).ready(function() {
                     showConfirmButton: true,
                     confirmButtonText: "OKEE",
                 }).then(function() {
-                    window.location.href = "<?= site_url('admin/home') ?>";
+                    location.reload();
                 });
             }
         });
