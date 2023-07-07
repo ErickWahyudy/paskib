@@ -59,18 +59,22 @@ if($aksi == "add"):
         </thead>
         <tbody>
         <?php $no=1; foreach($pilih_peserta as $peserta): ?>
-            <tr>
-                <td><?= $no ?></td>
-                <td><?= $peserta['nama_peserta'] ?></td>
-                <td><?= $peserta['asal_sekolah'] ?></td>
-                <td>
-                    <input type="number" name="tahun" value="<?= $peserta['tahun'] ?>" readonly style="border: none; background-color: transparent;">
-                </td>
-                <td>
-                    <input type="checkbox" name="id_peserta[]" value="<?= $peserta['id_peserta'] ?>">
-                </td>
-            </tr>
-            <?php $no++; endforeach; ?>
+        <!-- Jika id_peserta sudah ada di tabel jasmani, maka tidak ditampilkan -->
+        <?php $peserta_jasmani = $this->db->get_where('tb_jasmani', ['id_peserta' => $peserta['id_peserta']])->row_array(); ?>
+        <?php if(!empty($peserta_jasmani)) continue; ?>
+        <tr>
+            <td><?= $no ?></td>
+            <td><?= $peserta['nama_peserta'] ?></td>
+            <td><?= $peserta['asal_sekolah'] ?></td>
+            <td>
+                <input type="number" name="tahun" value="<?= $peserta['tahun'] ?>" readonly style="border: none; background-color: transparent;">
+            </td>
+            <td>
+                <input type="checkbox" name="id_peserta[]" value="<?= $peserta['id_peserta'] ?>">
+            </td>
+        </tr>
+        <?php $no++; endforeach; ?>
+
         </tbody>
     </table>
     
