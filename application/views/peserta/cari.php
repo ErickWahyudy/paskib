@@ -63,12 +63,14 @@
       <div class="form-group has-feedback">
         <select name="asal_sekolah" class="form-control" required="">
           <option value="">--Pilih Sekolah--</option>
-          <?php $sekolah = $this->db->get('tb_peserta')->result_array(); ?>
-           <?php foreach($sekolah as $sklh): ?>
+          <?php
+          $sekolah = $this->db->distinct()->select('asal_sekolah')->get('tb_peserta')->result_array();
+          foreach($sekolah as $sklh):
+          ?>
             <option value="<?= $sklh['asal_sekolah'] ?>">
-             <?= ucfirst($sklh['asal_sekolah']) ?>
+              <?= ucfirst($sklh['asal_sekolah']) ?>
             </option>
-           <?php endforeach; ?>	
+          <?php endforeach; ?>	
         </select>
       </div>
       <div class="row">
