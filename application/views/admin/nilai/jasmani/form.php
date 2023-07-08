@@ -60,7 +60,7 @@ if($aksi == "add"):
         <tbody>
         <?php $no=1; foreach($pilih_peserta as $peserta): ?>
         <!-- Jika id_peserta sudah ada di tabel jasmani, maka tidak ditampilkan -->
-        <?php $peserta_jasmani = $this->db->get_where('tb_jasmani', ['id_peserta' => $peserta['id_peserta']])->row_array(); ?>
+        <?php $peserta_jasmani = $this->db->get_where('tb_jasmani', ['id_peserta' => $peserta['id_peserta'], 'tahun' => $tahun])->row_array(); ?>
         <?php if(!empty($peserta_jasmani)) continue; ?>
         <tr>
             <td><?= $no ?></td>

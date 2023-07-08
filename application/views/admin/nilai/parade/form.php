@@ -35,7 +35,7 @@ if($aksi == "add"):
                     <option value="">--Pilih Juri--</option>
                     <?php foreach($pilih_juri as $juri): ?>
                     <!-- Jika id_pengguna sudah ada di tabel pbb, maka tidak ditampilkan -->
-                    <?php $juri_parade = $this->db->get_where('tb_parade', ['id_pengguna' => $juri['id_pengguna']])->row_array(); ?>
+                    <?php $juri_parade = $this->db->get_where('tb_parade', ['id_pengguna' => $juri['id_pengguna'], 'tahun' => $tahun])->row_array(); ?>
                     <?php if(!empty($juri_parade)) continue; ?>
                     <option value="<?= $juri['id_pengguna'] ?>">
                         <?= ucfirst($juri['nama']) ?>
