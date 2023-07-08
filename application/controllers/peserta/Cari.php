@@ -59,7 +59,7 @@ class Cari extends CI_controller
 }else{ 
   $data = $this->m_pengaturan->view()->row_array();
   $x = array(
-  	          'judul' =>'Login Aplikasi',
+  	          'judul' =>'Lihat Hasil Nilai',
               'nama_judul'        =>$data['nama_judul'],
               'meta_keywords'     =>$data['meta_keywords'],
               'meta_description'  =>$data['meta_description'],

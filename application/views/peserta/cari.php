@@ -64,7 +64,7 @@
         <select name="asal_sekolah" class="form-control" required="">
           <option value="">--Pilih Sekolah--</option>
           <?php
-          $sekolah = $this->db->distinct()->select('asal_sekolah')->get('tb_peserta')->result_array();
+          $sekolah = $this->db->distinct()->select('asal_sekolah')->order_by('asal_sekolah', 'ASC')->get('tb_peserta')->result_array();
           foreach($sekolah as $sklh):
           ?>
             <option value="<?= $sklh['asal_sekolah'] ?>">
