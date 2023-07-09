@@ -70,7 +70,7 @@ public function input()
   $data = $this->m_kriteria->view_id('K004RHwS3n')->row_array();
   $juri=$this->m_pengguna->view_id_pengguna()->row_array();
 
- $view = array('judul'          =>'Buat Nilai '.$data['kriteria'],
+ $view = array('judul'          =>'Masukkan Nilai '.$data['kriteria'],
                'aksi'           =>'add',
                'id_pengguna'    =>$juri['id_pengguna'],
                'nama_juri'      =>$juri['nama'],
@@ -86,7 +86,7 @@ public function input()
   $this->load->view('juri/nilai/pbb/form',$view);
 }else{
   $data = $this->m_kriteria->view_id('K004RHwS3n')->row_array();
-  $view = array('judul'          =>'Buat Nilai '.$data['kriteria'],
+  $view = array('judul'          =>'Masukkan Nilai '.$data['kriteria'],
                 'aksi'           =>'add',
                 'depan'          =>TRUE,
                );

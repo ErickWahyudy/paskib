@@ -30,6 +30,12 @@ if($aksi == "lihat"):
     <h1 class="text-center">Belum Ada Nilai Yang Diinputkan</h1>
     
     <?php else: ?>
+<div class="alert alert-info alert-dismissible">
+    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+    <h4>
+        <i class="icon fa fa-info"></i> <?= $judul ?> Tahun <?= $tahun ?>
+    </h4>
+</div>
 <div class="table-responsive">
     <table id="" class="table table-bordered  table-striped">
         <thead>

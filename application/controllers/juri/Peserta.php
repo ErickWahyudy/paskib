@@ -25,11 +25,22 @@ class Peserta extends CI_controller
     //peserta
     public function index($value='')
     {
+      if (isset($_POST['cari'])) {
+        $tahun = $this->input->post('tahun');
+
      $view = array('judul'     =>'Data Paserta',
-                   'data'      =>$this->m_peserta->view()->result_array(),
+                   'data'      =>$this->m_peserta->view($tahun)->result_array(),
+                   'depan'     =>FALSE,
+                   'tahun'     =>$tahun,
                   );
 
       $this->load->view('juri/peserta/form',$view);
+    }else{
+     $view = array('judul'     =>'Data Paserta',
+                   'depan'     =>TRUE,
+                  );
+      $this->load->view('juri/peserta/form',$view);
     }
+  }
 
 }

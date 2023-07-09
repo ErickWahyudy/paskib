@@ -30,6 +30,12 @@ if($aksi == "lihat"):
     <h1 class="text-center">Belum Ada Nilai Yang Diinputkan</h1>
     
     <?php else: ?>
+<div class="alert alert-info alert-dismissible">
+    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+    <h4>
+        <i class="icon fa fa-info"></i> <?= $judul ?> Tahun <?= $tahun ?>
+    </h4>
+</div>
         <a href="javascript:void(0)" onclick="hapusnilai()" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i> Hapus
     Semua Nilai</a>
 <div class="table-responsive">

@@ -21,6 +21,12 @@
 </table>
 
 <?php elseif($depan == FALSE): ?>
+<div class="alert alert-info alert-dismissible">
+    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+    <h4>
+        <i class="icon fa fa-info"></i> <?= $judul ?> Tahun <?= $tahun ?>
+    </h4>
+</div>
 <a href="" class="btn btn-primary" data-toggle="modal" data-target="#modalTambahPeserta"><i class="fa fa-plus"></i>
     Tambah</a>
 <br /><br /><br />

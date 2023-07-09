@@ -38,7 +38,7 @@ class Jasmani extends CI_controller
       $nilai    = $this->m_jasmani->view_nilai($tahun)->result_array();
       $juri     = $this->m_jasmani->view_juri()->result_array();
 
-     $view = array('judul'          =>'Data '.$data['kriteria'],
+     $view = array('judul'          =>'Data Nilai '.$data['kriteria'],
                    'aksi'           =>'lihat',
                    'view_juri'      =>$juri,
                    'nama_peserta'   =>$peserta,
@@ -54,7 +54,7 @@ class Jasmani extends CI_controller
       $this->load->view('juri/nilai/jasmani/lihat',$view);
     }else{
      $data = $this->m_kriteria->view_id('K003BNDjht')->row_array();
-     $view = array('judul'          =>'Data '.$data['kriteria'],
+     $view = array('judul'          =>'Data Nilai '.$data['kriteria'],
                    'aksi'           =>'lihat',
                    'depan'          =>TRUE,
                   );
@@ -71,7 +71,7 @@ class Jasmani extends CI_controller
       $data = $this->m_kriteria->view_id('K003BNDjht')->row_array();
       $juri=$this->m_pengguna->view_id_pengguna()->row_array();
 
-     $view = array('judul'          =>'Buat Nilai '.$data['kriteria'],
+     $view = array('judul'          =>'Masukkan Nilai '.$data['kriteria'],
                    'aksi'           =>'add',
                    'id_pengguna'    =>$juri['id_pengguna'],
                    'nama_juri'      => $juri['nama'],
@@ -88,7 +88,7 @@ class Jasmani extends CI_controller
     }else{
       $data = $this->m_kriteria->view_id('K003BNDjht')->row_array();
       $juri=$this->m_pengguna->view_id_pengguna()->row_array();
-      $view = array('judul'          =>'Buat Nilai '.$data['kriteria'],
+      $view = array('judul'          =>'Masukkan Nilai '.$data['kriteria'],
                     'aksi'           =>'add',
                     'depan'          =>TRUE,
                    );

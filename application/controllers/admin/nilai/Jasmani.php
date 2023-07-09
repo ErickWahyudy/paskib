@@ -38,7 +38,7 @@ class Jasmani extends CI_controller
        $nilai    = $this->m_jasmani->view_nilai($tahun)->result_array();
        $juri     = $this->db->limit(1)->get_where('tb_pengguna', ['id_level' => '3'])->result_array();
  
-      $view = array('judul'          =>'Data '.$data['kriteria'],
+      $view = array('judul'          =>'Data Nilai '.$data['kriteria'],
                     'aksi'           =>'lihat',
                     'view_juri'      =>$juri,
                     'nama_peserta'   =>$peserta,
@@ -54,7 +54,7 @@ class Jasmani extends CI_controller
        $this->load->view('admin/nilai/jasmani/lihat',$view);
      }else{
       $data = $this->m_kriteria->view_id('K003BNDjht')->row_array();
-      $view = array('judul'          =>'Data '.$data['kriteria'],
+      $view = array('judul'          =>'Data Nilai '.$data['kriteria'],
                     'aksi'           =>'lihat',
                     'depan'          =>TRUE,
                    );

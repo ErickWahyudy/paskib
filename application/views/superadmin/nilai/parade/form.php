@@ -121,6 +121,12 @@ elseif($aksi == "edit"):
 </table>
 
 <?php elseif($depan == FALSE): ?>
+<div class="alert alert-info alert-dismissible">
+    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+    <h4>
+        <i class="icon fa fa-info"></i> <?= $judul ?> Tahun <?= $tahun ?>
+    </h4>
+</div>
 <div class="table-responsive">
     <table id="example1" class="table table-bordered  table-striped">
         <thead>
