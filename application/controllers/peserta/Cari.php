@@ -25,9 +25,10 @@ class Cari extends CI_controller
       
       $nama=$this->input->post('nama_peserta');
       $asal_sekolah = $this->input->post('asal_sekolah');
+      $tahun = $this->input->post('tahun');
      
      //cek data login
-      $peserta   = $this->Login_m->Peserta($nama,$asal_sekolah);
+      $peserta   = $this->Login_m->Peserta($nama,$asal_sekolah,$tahun);
 
      if($peserta->num_rows() > 0 ){
         $DataPeserta=$peserta->row_array();
@@ -37,6 +38,7 @@ class Cari extends CI_controller
             'nama_peserta'      => $DataPeserta['nama_peserta'],
             'tgl_lahir'         => $DataPeserta['tgl_lahir'],
             'asal_sekolah'      => $DataPeserta['asal_sekolah'],
+            'tahun'             => $DataPeserta['tahun'],
             'level'             => 'peserta',
           );        
      $this->session->set_userdata($sessionPeserta);
@@ -46,7 +48,7 @@ class Cari extends CI_controller
      }else{
           $pesan='<script>
                   swal({
-                      title: "Nama / Sekolah Salah Atau Data Anda Tidak Ada",
+                      title: "Nama / Sekolah / Tahun Salah Atau Data Anda Tidak Ada",
                       type: "error",
                       showConfirmButton: true,
                       confirmButtonText: "OKEE"

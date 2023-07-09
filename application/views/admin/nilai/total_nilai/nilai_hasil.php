@@ -3,7 +3,7 @@
       $kode_tahun = date("Y");      
 ?>
 <table class="table table-striped">
-    <form action="" method="POST">           
+    <form action="" method="POST">
         <tr>
             <th>Tahun</th>
             <td>

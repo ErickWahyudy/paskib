@@ -73,6 +73,10 @@
           <?php endforeach; ?>	
         </select>
       </div>
+      <div class="form-group has-feedback">
+        <input type="number" class="form-control" name="tahun" placeholder="Tahun" required="" value="<?= date('Y') ?>" autocomplete="off">
+        <span class="glyphicon glyphicon-calendar form-control-feedback"></span>
+      </div>
       <div class="row">
         <!-- /.col -->
         <div class="box-footer">

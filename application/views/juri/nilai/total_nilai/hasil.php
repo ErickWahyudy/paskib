@@ -32,7 +32,7 @@
     </h4>
 </div>
             <div class="table-responsive">
-    <table id="example1" class="table table-bordered  table-striped">
+    <table id="" class="table table-bordered  table-striped">
         <thead>
             <tr>
                 <th class="col-xs-1" rowspan="2" style="vertical-align: middle;">Rangking</th>

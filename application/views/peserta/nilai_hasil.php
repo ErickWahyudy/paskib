@@ -1,13 +1,13 @@
 <?php $this->load->view('peserta/header'); ?>
 <?php
-$tahun = date('Y');
+$tahun = $this->session->userdata('tahun');
 ?>
     <?php $nilai = $this->m_nilai_hasil->view($tahun); ?>
         <?php if ($nilai->num_rows() == 0): ?>
         <h1 class="text-center">Proses Perhitungan Nilai Belum Selesai</h1>
         <?php else: ?>
             <div class="table-responsive">
-    <table id="example1" class="table table-bordered  table-striped">
+    <table id="" class="table table-bordered  table-striped">
         <thead>
             <tr>
                 <th class="col-xs-1" rowspan="2" style="vertical-align: middle;">Rangking</th>

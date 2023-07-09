@@ -30,8 +30,9 @@ class Nilai_hasil extends CI_controller
     //view nilai
     public function index($value='')
     {
+      $tahun = $this->session->userdata('tahun');
+      
       $pengaturan   = $this->m_pengaturan->view()->row_array();
-      $tahun        = date('Y');
       $peserta      = $this->m_matriks->view_peserta($tahun)->result_array();
       $nilai        = $this->m_matriks->view_nilai($tahun)->result_array();
       $kriteria     = $this->m_matriks->view_kriteria()->result_array();
