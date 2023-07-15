@@ -99,14 +99,28 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <?php $no=1; foreach($data as $nilai): ?>
-                    <tr>
-                        <td><?= $no ?></td>
-                        <td><?= $nilai['nama_peserta'] ?></td>
-                        <td><?= $nilai['asal_sekolah'] ?></td>
-                        <td><?= $nilai['hasil'] ?></td>
-                    </tr>
-                    <?php $no++; endforeach; ?>
+                   <?php 
+                        $no = 1;
+                        // Mengurutkan array berdasarkan nilai $results secara descending
+                        // arsort($results);
+
+                        foreach ($results as $key => $normalisasi): 
+                            $peserta = $nama_peserta[$key];
+                            $normalisasi_values = $normalizedMatrix[$key];
+                    ?>
+                        <tr>
+                            <td><?= $no ?></td>
+                            <td><?= $peserta['nama_peserta'] ?></td>
+                            <td><?= $peserta['asal_sekolah'] ?></td>
+                            <td>
+                                <?php $normalisasi = number_format($normalisasi, 5, '.', ''); ?>
+                                <?= $normalisasi ?>
+                            </td>
+                        </tr>
+                    <?php 
+                        $no++; 
+                        endforeach; 
+                    ?>
                 </tbody>
             </table>
 
