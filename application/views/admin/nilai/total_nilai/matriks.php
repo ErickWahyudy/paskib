@@ -88,7 +88,7 @@
 <!-- general form elements -->
 <div class="box box-success">
     <div class="box-header with-border">
-        <h3 class="box-title">Hasil Normalisasi & Optimasi <?= $judul ?></h3>
+        <h3 class="box-title">Hasil Normalisasi & Optimasi</h3>
         <div class="table-responsive">
             <table id="" class="table table-bordered table-striped">
                 <thead>
@@ -96,7 +96,7 @@
                         <th rowspan="2" style="vertical-align: middle;">No</th>
                         <th rowspan="2" style="vertical-align: middle;">Nama Peserta</th>
                         <th rowspan="2" style="vertical-align: middle;">Asal Sekolah</th>
-                        <th colspan="5" style="text-align: center;"><?= $judul ?> Hasil Normalisasi</th>
+                        <th colspan="5" style="text-align: center;">Hasil Normalisasi</th>
                         <th rowspan="2" style="vertical-align: middle;">Hasil Optimasi</th>
                     </tr>
                     <tr>
