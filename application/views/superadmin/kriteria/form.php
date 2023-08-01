@@ -132,10 +132,6 @@
                                     <button type="button" class="btn btn-default" data-dismiss="modal">Kembali</button>
                                     &nbsp;&nbsp;
                                     <input type="submit" name="kirim" value="Simpan" class="btn btn-success">
-                                    &nbsp;&nbsp;
-                                    <a href="javascript:void(0)"
-                                        onclick="hapuskriteria('<?= $kriteria['id_kriteria'] ?>')"
-                                        class="btn btn-danger">Hapus</a>
                                 </td>
                             </tr>
 
@@ -232,50 +228,6 @@
         });
     });
 
-    //ajax hapus kriteria
-    function hapuskriteria(id_kriteria) {
-        swal({
-            title: "Apakah Anda Yakin?",
-            text: "Data Akan Dihapus",
-            type: "warning",
-            showCancelButton: true,
-            confirmButtonColor: "#DD6B55",
-            confirmButtonText: "Ya, Hapus!",
-            cancelButtonText: "Tidak, Batalkan!",
-            closeOnConfirm: false,
-            closeOnCancel: true // Set this to true to close the dialog when the cancel button is clicked
-        }).then(function(result) {
-            if (result.value) { // Only delete the data if the user clicked on the confirm button
-                $.ajax({
-                    type: "POST",
-                    url: "<?php echo site_url('superadmin/kriteria/api_hapus/') ?>" + id_kriteria,
-                    dataType: "json",
-                }).done(function() {
-                    swal({
-                        title: "Berhasil",
-                        text: "Data Berhasil Dihapus",
-                        type: "success",
-                        showConfirmButton: true,
-                        confirmButtonText: "OKEE"
-                    }).then(function() {
-                        location.reload();
-                    });
-                }).fail(function() {
-                    swal({
-                        title: "Gagal",
-                        text: "Data Gagal Dihapus",
-                        type: "error",
-                        showConfirmButton: true,
-                        confirmButtonText: "OKEE"
-                    }).then(function() {
-                        location.reload();
-                    });
-                });
-            } else { // If the user clicked on the cancel button, show a message indicating that the deletion was cancelled
-                swal("Batal hapus", "Data Tidak Jadi Dihapus", "error");
-            }
-        });
-    }
     </script>
 
     <?php $this->load->view('template/footer'); ?>

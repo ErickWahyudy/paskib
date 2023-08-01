@@ -86,32 +86,5 @@ class Kriteria extends CI_controller
           ->set_content_type('application/json')
           ->set_output(json_encode($response));
       }
-
-      
-      //API hapus kriteria
-      public function api_hapus($id='')
-      {
-        if(empty($id)){
-          $response = [
-            'status' => false,
-            'message' => 'Data kosong'
-          ];
-        }else{
-          if ($this->m_kriteria->delete($id)) {
-            $response = [
-              'status' => true,
-              'message' => 'Berhasil menghapus data'
-            ];
-          } else {
-            $response = [
-              'status' => false,
-              'message' => 'Gagal menghapus data'
-            ];
-          }
-        }
-        $this->output
-          ->set_content_type('application/json')
-          ->set_output(json_encode($response));
-      }
 	
 }
